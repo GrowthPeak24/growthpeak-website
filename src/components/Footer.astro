@@ -1,0 +1,76 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { site, nav, services } from '../data/site';
+
+const year = new Date().getFullYear();
+const socials = [
+  { key: 'facebook', label: 'Facebook', href: site.social.facebook },
+  { key: 'instagram', label: 'Instagram', href: site.social.instagram },
+  { key: 'linkedin', label: 'LinkedIn', href: site.social.linkedin },
+  { key: 'x', label: 'X', href: site.social.x },
+].filter((s) => s.href);
+---
+<footer class="bg-brand-footer text-slate-300">
+  <div class="container py-16 grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+    <div class="lg:col-span-2 max-w-sm">
+      <Logo variant="light" />
+      <p class="mt-4 text-sm leading-relaxed text-slate-400">
+        {site.description}
+      </p>
+      {socials.length > 0 && (
+        <div class="mt-6 flex gap-3">
+          {socials.map((s) => (
+            <a
+              href={s.href}
+              class="grid place-items-center w-10 h-10 rounded-full bg-white/5 hover:bg-brand-cyan hover:text-brand-navy transition-colors"
+              aria-label={s.label}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span class="text-xs font-ui font-semibold">{s.label.charAt(0)}</span>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <div>
+      <h2 class="font-heading font-semibold text-white text-sm uppercase tracking-wider">Company</h2>
+      <ul class="mt-4 space-y-3 text-sm">
+        {nav.map((item) => (
+          <li><a href={item.href} class="hover:text-brand-cyan transition-colors">{item.label}</a></li>
+        ))}
+        <li><a href="#lead-magnet" class="hover:text-brand-cyan transition-colors">Free Audit</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="font-heading font-semibold text-white text-sm uppercase tracking-wider">Services</h2>
+      <ul class="mt-4 space-y-3 text-sm">
+        {services.items.map((s) => (
+          <li><a href="#services" class="hover:text-brand-cyan transition-colors">{s.name}</a></li>
+        ))}
+      </ul>
+      <div class="mt-6 space-y-2 text-sm">
+        {site.email && (
+          <a href={`mailto:${site.email}`} class="flex items-center gap-2 hover:text-brand-cyan transition-colors">
+            <Icon name="mail" class="w-4 h-4 shrink-0" />{site.email}
+          </a>
+        )}
+        {site.phone && (
+          <a href={`tel:${site.phone}`} class="flex items-center gap-2 hover:text-brand-cyan transition-colors">
+            <Icon name="phone" class="w-4 h-4 shrink-0" />{site.phone}
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div class="container py-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500">
+      <p>&copy; {year} {site.name}. All rights reserved.</p>
+      <p>Local SEO • Google Business Profile • Web Design</p>
+    </div>
+  </div>
+</footer>

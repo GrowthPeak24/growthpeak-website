@@ -1,0 +1,64 @@
+---
+import Icon from './Icon.astro';
+import { hero } from '../data/site';
+
+const titleParts = hero.highlight
+  ? hero.title.split(hero.highlight)
+  : [hero.title];
+---
+<section class="relative overflow-hidden bg-hero-gradient text-white">
+  <!-- decorative glow -->
+  <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+    <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-brand-cyan/20 blur-3xl"></div>
+    <div class="absolute bottom-0 -left-24 w-96 h-96 rounded-full bg-brand-blue/20 blur-3xl"></div>
+  </div>
+
+  <div class="container relative section pt-16 lg:pt-24">
+    <div class="max-w-3xl mx-auto text-center animate-fade-up">
+      <p class="eyebrow text-brand-cyan">{hero.eyebrow}</p>
+      <h1 class="mt-4 text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1.1]">
+        {titleParts[0]}
+        {hero.highlight && <span class="text-brand-cyan">{hero.highlight}</span>}
+        {titleParts[1]}
+      </h1>
+      <p class="mt-6 text-lg lg:text-xl text-slate-200 leading-relaxed max-w-2xl mx-auto">
+        {hero.subtitle}
+      </p>
+
+      <div class="mt-9 flex flex-col sm:flex-row gap-4 justify-center">
+        <a href={hero.primaryCta.href} class="btn-primary">
+          {hero.primaryCta.label}
+          <Icon name="arrow" class="w-5 h-5" />
+        </a>
+        <a href={hero.secondaryCta.href} class="btn-secondary">{hero.secondaryCta.label}</a>
+      </div>
+
+      <ul class="mt-10 flex flex-wrap justify-center gap-3 font-ui text-sm">
+        {hero.trustSignals.map((signal) => (
+          <li class="flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-slate-200 backdrop-blur-sm">
+            <Icon name="check" class="w-4 h-4 text-brand-green shrink-0" />
+            {signal}
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="mt-14 max-w-3xl mx-auto">
+      <img
+        src="/assets/hero-visual.png"
+        alt="Local ranking dashboard showing a top Google Maps listing, a rising search-visibility chart, and a #1 ranking badge"
+        class="w-full h-auto"
+        width="1599"
+        height="1194"
+        loading="eager"
+      />
+    </div>
+  </div>
+
+  <!-- bottom wave -->
+  <div class="relative" aria-hidden="true">
+    <svg class="w-full h-12 lg:h-20 text-white" viewBox="0 0 1440 100" preserveAspectRatio="none" fill="currentColor">
+      <path d="M0,64 C360,120 1080,0 1440,56 L1440,100 L0,100 Z" />
+    </svg>
+  </div>
+</section>

@@ -1,0 +1,30 @@
+---
+import { faq } from '../data/site';
+---
+<section id="faq" class="section bg-brand-light scroll-mt-20">
+  <div class="container">
+    <div class="max-w-2xl mx-auto text-center">
+      <p class="eyebrow">{faq.eyebrow}</p>
+      <h2 class="mt-3 text-3xl lg:text-4xl font-bold">{faq.title}</h2>
+      <p class="mt-4 text-slate-600 text-lg leading-relaxed">{faq.subtitle}</p>
+    </div>
+
+    <div class="mt-12 max-w-3xl mx-auto space-y-4">
+      {faq.items.map((item, i) => (
+        <details class="group rounded-xl bg-white border border-slate-100 shadow-card overflow-hidden" open={i === 0}>
+          <summary class="flex items-center justify-between gap-4 cursor-pointer list-none p-5 lg:p-6 font-ui font-semibold text-brand-navy">
+            <span>{item.q}</span>
+            <span class="grid place-items-center w-8 h-8 rounded-full bg-brand-light text-brand-blue shrink-0 transition-transform group-open:rotate-45" aria-hidden="true">
+              <svg viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+            </span>
+          </summary>
+          <div class="px-5 lg:px-6 pb-6 -mt-1 text-slate-600 leading-relaxed">
+            {item.a}
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

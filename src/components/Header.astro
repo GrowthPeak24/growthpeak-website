@@ -1,0 +1,100 @@
+---
+import Logo from './Logo.astro';
+import { nav, hero } from '../data/site';
+---
+<div id="mobile-menu-backdrop" class="lg:hidden hidden fixed inset-x-0 top-16 bottom-0 z-40 bg-brand-navy/50" aria-hidden="true"></div>
+
+<header id="site-header" class="fixed top-0 inset-x-0 z-50 bg-white/90 backdrop-blur border-b border-slate-100 transition-shadow">
+  <nav class="container flex items-center justify-between h-16 lg:h-20" aria-label="Primary">
+    <Logo />
+
+    <ul class="hidden lg:flex items-center gap-8 font-ui font-medium text-brand-navy">
+      {nav.map((item) => (
+        <li>
+          <a href={item.href} class="relative text-sm hover:text-brand-blue transition-colors after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-brand-cyan hover:after:w-full after:transition-all">
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <a href={hero.primaryCta.href} class="hidden lg:inline-flex btn-primary !py-2.5 !px-6 text-sm">
+      {hero.primaryCta.label}
+    </a>
+
+    <button
+      id="menu-toggle"
+      type="button"
+      class="lg:hidden inline-flex items-center justify-center w-11 h-11 -mr-2 text-brand-navy"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="4" y1="7" x2="20" y2="7" /><line x1="4" y1="12" x2="20" y2="12" /><line x1="4" y1="17" x2="20" y2="17" />
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="lg:hidden hidden relative border-t border-slate-100 bg-white">
+    <ul class="container flex flex-col py-4 font-ui font-medium">
+      {nav.map((item) => (
+        <li>
+          <a href={item.href} class="block py-3 text-brand-navy hover:text-brand-blue" data-menu-link>
+            {item.label}
+          </a>
+        </li>
+      ))}
+      <li class="pt-2">
+        <a href={hero.primaryCta.href} class="btn-primary w-full" data-menu-link>{hero.primaryCta.label}</a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const backdrop = document.getElementById('mobile-menu-backdrop');
+  const header = document.getElementById('site-header');
+
+  const openMenu = () => {
+    menu?.classList.remove('hidden');
+    backdrop?.classList.remove('hidden');
+    document.body.classList.add('overflow-hidden');
+    toggle?.setAttribute('aria-expanded', 'true');
+    toggle?.setAttribute('aria-label', 'Close menu');
+  };
+
+  const closeMenu = () => {
+    menu?.classList.add('hidden');
+    backdrop?.classList.add('hidden');
+    document.body.classList.remove('overflow-hidden');
+    toggle?.setAttribute('aria-expanded', 'false');
+    toggle?.setAttribute('aria-label', 'Open menu');
+  };
+
+  toggle?.addEventListener('click', () => {
+    if (menu?.classList.contains('hidden')) openMenu();
+    else closeMenu();
+  });
+
+  backdrop?.addEventListener('click', closeMenu);
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeMenu();
+  });
+
+  document.querySelectorAll('[data-menu-link]').forEach((link) => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Elevate header shadow on scroll.
+  const onScroll = () => {
+    if (window.scrollY > 8) header?.classList.add('shadow-md');
+    else header?.classList.remove('shadow-md');
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+</script>

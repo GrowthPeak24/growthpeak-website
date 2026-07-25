@@ -1,0 +1,30 @@
+---
+interface Props {
+  class?: string;
+  variant?: 'light' | 'dark';
+}
+const { class: className = '', variant = 'dark' } = Astro.props;
+
+// `dark` variant (default) = for light backgrounds → real logo artwork (public/assets/logo.png).
+// `light` variant = for dark backgrounds (footer) → same artwork on a white card, since the
+// artwork has an opaque white background and navy tones that vanish directly on a dark footer.
+---
+{variant === 'dark' ? (
+  <a
+    href="/"
+    class={`inline-flex items-center ${className}`}
+    aria-label="GrowthPeak Digital home"
+  >
+    <img src="/assets/logo.png" alt="GrowthPeak Digital" class="h-11 lg:h-12 w-auto" width="600" height="435" />
+  </a>
+) : (
+  <a
+    href="/"
+    class={`inline-flex items-center ${className}`}
+    aria-label="GrowthPeak Digital home"
+  >
+    <span class="inline-flex items-center rounded-lg bg-white px-3 py-2">
+      <img src="/assets/logo.png" alt="GrowthPeak Digital" class="h-9 w-auto" width="600" height="435" />
+    </span>
+  </a>
+)}

@@ -1,0 +1,61 @@
+@import '@fontsource/montserrat/400.css';
+@import '@fontsource/montserrat/600.css';
+@import '@fontsource/montserrat/700.css';
+@import '@fontsource/montserrat/800.css';
+@import '@fontsource/lato/400.css';
+@import '@fontsource/lato/700.css';
+@import '@fontsource/poppins/500.css';
+@import '@fontsource/poppins/600.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply font-body text-brand-navy bg-white antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-heading text-brand-navy;
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand-cyan ring-offset-2 ring-offset-white rounded-sm;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 font-ui font-semibold rounded-full px-7 py-3.5 text-base transition-all duration-200 focus-visible:ring-offset-transparent;
+  }
+
+  .btn-primary {
+    @apply btn bg-brand-cyan text-brand-navy shadow-[0_8px_20px_-6px_rgba(0,212,255,0.6)] hover:-translate-y-0.5 hover:shadow-[0_14px_28px_-8px_rgba(0,212,255,0.7)];
+  }
+
+  .btn-secondary {
+    @apply btn border-2 border-white/70 text-white hover:bg-white hover:text-brand-navy;
+  }
+
+  .btn-outline {
+    @apply btn border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white;
+  }
+
+  .section {
+    @apply py-20 lg:py-28;
+  }
+
+  .eyebrow {
+    @apply font-ui font-semibold uppercase tracking-[0.2em] text-sm text-brand-blue;
+  }
+}
