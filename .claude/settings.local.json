@@ -70,7 +70,14 @@
       "Bash(netstat -ano)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://[::1]:4321/ --max-time 5)",
       "Bash(taskkill //F //PID 19540)",
-      "Bash(curl -s -o /dev/null -w \"HTTP:%{http_code} TIME:%{time_total}\\\\n\" http://[::1]:4321/ --max-time 15)"
+      "Bash(curl -s -o /dev/null -w \"HTTP:%{http_code} TIME:%{time_total}\\\\n\" http://[::1]:4321/ --max-time 15)",
+      "Bash(node -e \"try{require.resolve\\(''''sharp''''\\);console.log\\(''''sharp: yes''''\\)}catch\\(e\\){console.log\\(''''sharp: no''''\\)}\")",
+      "Bash(node -e \"try{require.resolve\\(''''jimp''''\\);console.log\\(''''jimp: yes''''\\)}catch\\(e\\){console.log\\(''''jimp: no''''\\)}\")",
+      "Bash(mkdir -p .tmp_favicon)",
+      "Bash(rm -f public/apple-touch-icon.png)",
+      "Bash(rm -rf .tmp_favicon)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:4321/ --max-time 10)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:4321/ --max-time 15)"
     ]
   }
 }
