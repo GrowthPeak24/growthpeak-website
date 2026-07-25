@@ -65,7 +65,12 @@
       "Bash(curl -sS --ssl-revoke-best-effort -o \"$TEMP/hero-v3-b.png\" \"https://d8j0ntlcm91z4.cloudfront.net/user_3BAWJEcUMslg4OJ1VT7y0xz8861/hf_20260724_223426_621f5df5-5045-47ea-8d3e-ac1ce30a1f8f.png\")",
       "Bash(cygpath -w \"$TEMP/hero-v3-a.png\")",
       "Bash(cygpath -w \"$TEMP/hero-v3-b.png\")",
-      "Bash(node scripts/process-hero-v3.cjs)"
+      "Bash(node scripts/process-hero-v3.cjs)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:4321/ --max-time 5)",
+      "Bash(netstat -ano)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://[::1]:4321/ --max-time 5)",
+      "Bash(taskkill //F //PID 19540)",
+      "Bash(curl -s -o /dev/null -w \"HTTP:%{http_code} TIME:%{time_total}\\\\n\" http://[::1]:4321/ --max-time 15)"
     ]
   }
 }
