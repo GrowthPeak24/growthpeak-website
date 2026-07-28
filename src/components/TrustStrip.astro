@@ -1,0 +1,56 @@
+---
+import { trustStrip } from '../data/site';
+
+// TODO(placeholder): these are generated monogram marks standing in for real
+// client logos. Swap for actual logo assets (or remove this section) before
+// launch. See the `trustStrip` note in src/data/site.ts.
+---
+<section class="border-b border-slate-100 bg-white py-10 lg:py-14" aria-label="Clients">
+  <div class="container">
+    <div class="flex flex-col gap-8 lg:flex-row lg:items-center lg:gap-14">
+      <p
+        class="max-w-[24ch] shrink-0 font-ui text-sm leading-relaxed text-slate-500 lg:border-r lg:border-slate-200 lg:pr-14"
+        data-reveal
+        data-reveal-index="0"
+      >
+        {trustStrip.label}
+      </p>
+
+      <ul class="flex flex-wrap items-center gap-x-10 gap-y-6 lg:flex-1 lg:justify-between">
+        {trustStrip.logos.map((logo, i) => (
+          <li data-reveal data-reveal-index={i}>
+            <span class="sr-only">{logo.name}</span>
+            <svg
+              viewBox="0 0 64 48"
+              class="h-11 w-auto text-slate-500 transition-colors duration-300 hover:text-brand-blue"
+              fill="none"
+              aria-hidden="true"
+            >
+              <rect x="1" y="1" width="62" height="46" rx="10" stroke="currentColor" stroke-width="1.5" opacity="0.4" />
+              <path
+                d="M14 33 24 19l6 8 5-6 9 12"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                opacity="0.35"
+              />
+              <text
+                x="32"
+                y="30"
+                text-anchor="middle"
+                fill="currentColor"
+                font-family="Montserrat, sans-serif"
+                font-size="17"
+                font-weight="800"
+                letter-spacing="-0.5"
+              >
+                {logo.initials}
+              </text>
+            </svg>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>

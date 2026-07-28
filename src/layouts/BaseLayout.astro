@@ -17,10 +17,16 @@ const { title, description, includeFaqSchema } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#0b2545" />
     <Seo title={title} description={description} includeFaqSchema={includeFaqSchema} />
+    <!-- Set before first paint so revealed elements never flash their visible
+         state. Anything without JS keeps the fully-visible baseline. -->
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
   </head>
   <body>
     <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-3 focus:left-3 focus:btn-primary">
@@ -33,3 +39,67 @@ const { title, description, includeFaqSchema } = Astro.props;
     <Footer />
   </body>
 </html>
+
+<script>
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+
+  // --- Scroll reveal (IntersectionObserver, never a scroll listener) ---------
+  const revealTargets = document.querySelectorAll<HTMLElement>('[data-reveal]');
+
+  if (reduceMotion.matches) {
+    revealTargets.forEach((el) => el.classList.add('is-revealed'));
+  } else {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-revealed');
+          observer.unobserve(entry.target);
+        });
+      },
+      { rootMargin: '0px 0px -12% 0px', threshold: 0.12 },
+    );
+
+    revealTargets.forEach((el, i) => {
+      // Stagger only within a group, so long lists never feel slow.
+      const index = Number(el.dataset.revealIndex ?? i % 4);
+      el.style.setProperty('--reveal-delay', `${Math.min(index, 5) * 70}ms`);
+      observer.observe(el);
+    });
+  }
+
+  // --- Cursor spotlight -----------------------------------------------------
+  if (finePointer.matches) {
+    document.querySelectorAll<HTMLElement>('.spotlight').forEach((card) => {
+      card.addEventListener('pointermove', (event) => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mx', `${event.clientX - rect.left}px`);
+        card.style.setProperty('--my', `${event.clientY - rect.top}px`);
+      });
+    });
+  }
+
+  // --- Magnetic CTAs --------------------------------------------------------
+  if (finePointer.matches && !reduceMotion.matches) {
+    document.querySelectorAll<HTMLElement>('.magnetic').forEach((el) => {
+      const strength = 0.28;
+      const max = 10;
+
+      el.addEventListener('pointermove', (event) => {
+        const rect = el.getBoundingClientRect();
+        const x = (event.clientX - (rect.left + rect.width / 2)) * strength;
+        const y = (event.clientY - (rect.top + rect.height / 2)) * strength;
+        el.style.setProperty('--magnet-x', `${Math.max(-max, Math.min(max, x))}px`);
+        el.style.setProperty('--magnet-y', `${Math.max(-max, Math.min(max, y))}px`);
+      });
+
+      const reset = () => {
+        el.style.setProperty('--magnet-x', '0px');
+        el.style.setProperty('--magnet-y', '0px');
+      };
+      el.addEventListener('pointerleave', reset);
+      el.addEventListener('blur', reset, true);
+    });
+  }
+</script>

@@ -4,20 +4,31 @@ import { finalCta } from '../data/site';
 ---
 <section class="section bg-white">
   <div class="container">
-    <div class="relative overflow-hidden rounded-3xl bg-hero-gradient text-white px-8 py-14 lg:px-16 lg:py-20 text-center">
+    <div class="relative overflow-hidden rounded-2xl bg-hero-gradient px-8 py-14 text-white lg:px-14 lg:py-16">
       <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div class="absolute -top-16 -right-16 w-72 h-72 rounded-full bg-brand-cyan/20 blur-3xl"></div>
-        <div class="absolute -bottom-16 -left-16 w-72 h-72 rounded-full bg-brand-blue/20 blur-3xl"></div>
+        <div class="absolute -right-20 -top-24 h-80 w-80 rounded-full bg-brand-cyan/20 blur-3xl"></div>
+        <div class="absolute -bottom-24 -left-20 h-80 w-80 rounded-full bg-brand-blue/25 blur-3xl"></div>
       </div>
-      <div class="relative max-w-2xl mx-auto">
-        <h2 class="text-3xl lg:text-4xl font-bold text-white">{finalCta.title}</h2>
-        <p class="mt-4 text-lg text-slate-200 leading-relaxed">{finalCta.subtitle}</p>
-        <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-          <a href={finalCta.primaryCta.href} class="btn-primary">
-            {finalCta.primaryCta.label}
-            <Icon name="arrow" class="w-5 h-5" />
-          </a>
-          <a href={finalCta.secondaryCta.href} class="btn-secondary">{finalCta.secondaryCta.label}</a>
+
+      <!-- Copy left, single action right. One CTA, matching the header and hero. -->
+      <div class="relative grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-12">
+        <div class="lg:col-span-7">
+          <h2 class="section-title text-white" data-reveal data-reveal-index="0">
+            {finalCta.title}
+          </h2>
+          <p class="mt-5 max-w-[52ch] text-lg leading-relaxed text-slate-200" data-reveal data-reveal-index="1">
+            {finalCta.subtitle}
+          </p>
+        </div>
+
+        <div class="lg:col-span-5 lg:justify-self-end" data-reveal data-reveal-index="2">
+          <span class="magnetic inline-flex">
+            <a href={finalCta.primaryCta.href} class="btn-primary">
+              {finalCta.primaryCta.label}
+              <Icon name="arrow" class="w-5 h-5" />
+            </a>
+          </span>
+          <p class="mt-4 font-ui text-sm text-slate-300">{finalCta.reassurance}</p>
         </div>
       </div>
     </div>

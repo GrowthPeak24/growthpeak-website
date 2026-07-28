@@ -2,26 +2,29 @@
 import Icon from './Icon.astro';
 import { whyUs } from '../data/site';
 ---
-<section id="why-us" class="section bg-brand-light scroll-mt-20">
+<section id="why-us" class="section bg-white scroll-mt-24">
   <div class="container">
-    <div class="max-w-2xl mx-auto text-center">
-      <p class="eyebrow">{whyUs.eyebrow}</p>
-      <h2 class="mt-3 text-3xl lg:text-4xl font-bold">{whyUs.title}</h2>
-      <p class="mt-4 text-slate-600 text-lg leading-relaxed">{whyUs.subtitle}</p>
-    </div>
+    <div class="grid gap-12 lg:grid-cols-12 lg:gap-16">
+      <!-- Sticky-free asymmetric header column -->
+      <div class="lg:col-span-5">
+        <h2 class="section-title" data-reveal data-reveal-index="0">{whyUs.title}</h2>
+        <p class="section-lede" data-reveal data-reveal-index="1">{whyUs.subtitle}</p>
+      </div>
 
-    <div class="mt-14 grid gap-6 sm:grid-cols-2">
-      {whyUs.points.map((point) => (
-        <div class="group flex gap-5 rounded-2xl bg-white p-7 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300">
-          <div class="grid place-items-center w-12 h-12 rounded-xl bg-brand-navy text-brand-cyan shrink-0 transition-transform duration-300 group-hover:scale-110">
-            <Icon name={point.icon} class="w-6 h-6" />
-          </div>
-          <div>
-            <h3 class="text-lg font-bold">{point.title}</h3>
-            <p class="mt-2 text-slate-600 leading-relaxed">{point.text}</p>
-          </div>
+      <!-- 2x2 grid built from rules and whitespace, no icon-in-circle tiles. -->
+      <div class="lg:col-span-7">
+        <div class="grid gap-x-12 gap-y-10 sm:grid-cols-2">
+          {whyUs.points.map((point, i) => (
+            <div class="border-t border-slate-200 pt-6" data-reveal data-reveal-index={i}>
+              <h3 class="flex items-center gap-3 text-lg font-bold leading-tight">
+                <Icon name={point.icon} class="h-5 w-5 shrink-0 text-brand-blue" />
+                {point.title}
+              </h3>
+              <p class="mt-3 leading-relaxed text-slate-600">{point.text}</p>
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
     </div>
   </div>
 </section>

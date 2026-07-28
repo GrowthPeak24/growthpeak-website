@@ -1,6 +1,6 @@
 // ---------------------------------------------------------------------------
 // Single source of truth for all site copy & content.
-// Edit text here to update the whole site. (Rewritten/improved copy — review me.)
+// Edit text here to update the whole site.
 // ---------------------------------------------------------------------------
 
 export const site = {
@@ -24,6 +24,7 @@ export const site = {
 
 export const nav = [
   { label: 'Services', href: '#services' },
+  { label: 'Results', href: '#results' },
   { label: 'Why Us', href: '#why-us' },
   { label: 'Process', href: '#process' },
   { label: 'FAQ', href: '#faq' },
@@ -31,12 +32,14 @@ export const nav = [
 
 export const hero = {
   eyebrow: 'Local SEO • GBP • Web Design',
-  title: 'Get Found by Local Customers Who Are Ready to Buy',
+  title: 'Get Found by Local Customers Ready to Buy',
   highlight: 'Ready to Buy',
+  // Hard cap: 20 words. Keep it short enough to read in one glance.
   subtitle:
-    'We help local businesses climb the Google Map Pack, turn a Google Business Profile into a lead machine, and build websites that actually turn visitors into customers.',
-  primaryCta: { label: 'Get Started', href: '#lead-magnet' },
-  secondaryCta: { label: 'Get a Free Audit', href: '#lead-magnet' },
+    'We put local businesses at the top of the Map Pack and turn those clicks into booked jobs.',
+  primaryCta: { label: 'Get My Free Audit', href: '#lead-magnet' },
+  // Secondary is a different intent (learn) so it never competes with the primary CTA.
+  secondaryCta: { label: 'See how it works', href: '#process' },
   trustSignals: [
     'Local SEO specialists',
     'Google Business Profile experts',
@@ -44,8 +47,26 @@ export const hero = {
   ],
 };
 
+// ---------------------------------------------------------------------------
+// TRUST STRIP
+// TODO(placeholder): these are generated monogram marks standing in for real
+// client logos. Replace `initials`/`name` with actual clients (and swap in real
+// logo files) before launch, or delete the section if none can be named.
+// ---------------------------------------------------------------------------
+export const trustStrip = {
+  label: 'Trusted by local businesses across service, retail, and healthcare',
+  logos: [
+    { initials: 'NR', name: 'Northridge Plumbing' },
+    { initials: 'CV', name: 'Cedar Valley Dental' },
+    { initials: 'HM', name: 'Harbor Motors' },
+    { initials: 'BW', name: 'Bright Wave Roofing' },
+    { initials: 'LP', name: 'Lakeside Physio' },
+  ],
+};
+
+// Eyebrows are deliberately rationed across the page (hero + lead magnet only)
+// so they read as accents rather than a repeating template.
 export const services = {
-  eyebrow: 'What We Do',
   title: 'Everything You Need to Dominate Local Search',
   subtitle:
     'Three focused services that work together to put your business in front of nearby customers and turn those clicks into booked jobs.',
@@ -89,8 +110,43 @@ export const services = {
   ],
 };
 
+// ---------------------------------------------------------------------------
+// RESULTS
+// TODO(mock data): every figure below is illustrative, NOT a real client result.
+// Publishing invented performance claims is a false-advertising risk. Replace
+// with verified numbers (and keep the client's permission on file) or remove
+// the <Results /> section from src/pages/index.astro before launch.
+// ---------------------------------------------------------------------------
+export const results = {
+  title: 'What Growth Looks Like in the First 90 Days',
+  subtitle:
+    'A snapshot of the outcomes we build toward: more visibility, more calls, and a site that converts.',
+  disclaimer: 'Illustrative figures. Replace with verified client results before launch.',
+  stats: [
+    { value: '3.4x', label: 'More calls from Google Maps', detail: 'Typical lift once a profile is fully optimized and reviewed.' },
+    { value: '#1', label: 'Map Pack position targeted', detail: 'The goal for your primary service keyword in your core area.' },
+    { value: '92', label: 'Average PageSpeed score', detail: 'What we build to on mobile, because speed moves rankings.' },
+    { value: '30d', label: 'First visible movement', detail: 'How quickly profile visibility usually starts to shift.' },
+  ],
+  cases: [
+    {
+      industry: 'Home services',
+      headline: 'From invisible to the top three in the Map Pack',
+      text: 'A rebuilt Google Business Profile plus local citations moved a plumbing company into the Map Pack for its main service area.',
+      metric: '+184%',
+      metricLabel: 'direction requests',
+    },
+    {
+      industry: 'Dental practice',
+      headline: 'A faster site that books more appointments',
+      text: 'A conversion-focused rebuild with click-to-call and online booking turned existing traffic into a steady stream of appointments.',
+      metric: '+61%',
+      metricLabel: 'form submissions',
+    },
+  ],
+};
+
 export const whyUs = {
-  eyebrow: 'Why GrowthPeak',
   title: 'A Growth Partner Built Around Your Business',
   subtitle:
     'We keep it simple: real results, straight communication, and decisions that protect your bottom line.',
@@ -119,28 +175,24 @@ export const whyUs = {
 };
 
 export const process = {
-  eyebrow: 'How It Works',
   title: 'Your Path to Page One',
   subtitle: 'A proven process that takes you from first audit to a steady stream of leads.',
+  // Verb-first labels. Step numbers are intentionally gone as a design device.
   steps: [
     {
-      number: '01',
-      title: 'Free Audit',
+      title: 'Audit',
       text: 'We analyze your website, Google Business Profile, and local rankings to find your biggest growth opportunities.',
     },
     {
-      number: '02',
-      title: 'Custom Strategy',
+      title: 'Strategize',
       text: 'You get a tailored roadmap that puts the highest-impact actions first.',
     },
     {
-      number: '03',
-      title: 'Build & Optimize',
-      text: 'We get to work: optimizing your profile, improving your site, and building your local authority.',
+      title: 'Build',
+      text: 'We optimize your profile, improve your site, and build your local authority.',
     },
     {
-      number: '04',
-      title: 'Grow & Report',
+      title: 'Report',
       text: 'You watch rankings, calls, and leads climb, with clear monthly reports showing exactly what we did.',
     },
   ],
@@ -158,8 +210,8 @@ export const leadMagnet = {
     'A prioritized list of quick wins',
   ],
   form: {
-    subject: 'New Free Audit Request — GrowthPeak Digital',
-    submitLabel: 'Send Me My Free Audit',
+    subject: 'New Free Audit Request | GrowthPeak Digital',
+    submitLabel: 'Get My Free Audit',
     successTitle: 'Request received!',
     successMessage:
       "Thanks, we've got your details and will send your personalized audit shortly. Keep an eye on your inbox.",
@@ -173,7 +225,6 @@ export const leadMagnet = {
 };
 
 export const faq = {
-  eyebrow: 'Questions',
   title: 'Frequently Asked Questions',
   subtitle: 'Everything you need to know before getting started.',
   items: [
@@ -208,6 +259,8 @@ export const finalCta = {
   title: 'Ready to Peak Your Local Growth?',
   subtitle:
     'Let\u2019s get your business in front of more local customers. Start with a free audit and see the opportunity before you commit to anything.',
-  primaryCta: { label: 'Get Started', href: '#lead-magnet' },
-  secondaryCta: { label: 'Get a Free Audit', href: '#lead-magnet' },
+  // Single CTA on purpose: the page has one conversion goal, so the closing
+  // section does not offer a competing second action.
+  primaryCta: { label: 'Get My Free Audit', href: '#lead-magnet' },
+  reassurance: 'Free, no obligation, and no long-term contract.',
 };

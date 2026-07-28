@@ -6,59 +6,82 @@ const titleParts = hero.highlight
   ? hero.title.split(hero.highlight)
   : [hero.title];
 ---
-<section class="relative overflow-hidden bg-hero-gradient text-white">
-  <!-- decorative glow -->
+<!-- Asymmetric 7/5 split. min-h uses dvh minus the fixed header so the hero
+     fills the viewport without the iOS address-bar jump h-screen causes. -->
+<section
+  class="relative overflow-hidden bg-hero-gradient text-white
+         min-h-[calc(100dvh-4rem)] lg:min-h-[calc(100dvh-5rem)] flex items-center"
+>
   <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-    <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-brand-cyan/20 blur-3xl"></div>
-    <div class="absolute bottom-0 -left-24 w-96 h-96 rounded-full bg-brand-blue/20 blur-3xl"></div>
+    <div class="absolute -top-32 right-[-10%] w-[36rem] h-[36rem] rounded-full bg-brand-cyan/20 blur-3xl"></div>
+    <div class="absolute bottom-[-20%] left-[-15%] w-[32rem] h-[32rem] rounded-full bg-brand-blue/25 blur-3xl"></div>
   </div>
 
-  <div class="container relative section pt-16 lg:pt-24">
-    <div class="max-w-3xl mx-auto text-center animate-fade-up">
-      <p class="eyebrow text-brand-cyan">{hero.eyebrow}</p>
-      <h1 class="mt-4 text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1.1]">
-        {titleParts[0]}
-        {hero.highlight && <span class="text-brand-cyan">{hero.highlight}</span>}
-        {titleParts[1]}
-      </h1>
-      <p class="mt-6 text-lg lg:text-xl text-slate-200 leading-relaxed max-w-2xl mx-auto">
-        {hero.subtitle}
-      </p>
+  <div class="container relative w-full py-12 lg:py-20">
+    <div class="grid items-center gap-12 lg:grid-cols-12 lg:gap-10 xl:gap-16">
+      <!-- Copy: 7 columns, left-aligned, deliberately off-centre -->
+      <div class="lg:col-span-7">
+        <p class="eyebrow text-brand-cyan" data-reveal data-reveal-index="0">{hero.eyebrow}</p>
 
-      <div class="mt-9 flex flex-col sm:flex-row gap-4 justify-center">
-        <a href={hero.primaryCta.href} class="btn-primary">
-          {hero.primaryCta.label}
-          <Icon name="arrow" class="w-5 h-5" />
-        </a>
-        <a href={hero.secondaryCta.href} class="btn-secondary">{hero.secondaryCta.label}</a>
+        <h1
+          class="mt-5 font-extrabold text-white text-[2.125rem] sm:text-[2.75rem] xl:text-5xl leading-[1.08] tracking-tight text-balance"
+          data-reveal
+          data-reveal-index="1"
+        >
+          {titleParts[0]}
+          {hero.highlight && <span class="text-brand-cyan">{hero.highlight}</span>}
+          {titleParts[1]}
+        </h1>
+
+        <p
+          class="mt-6 text-lg xl:text-xl text-slate-200 leading-relaxed max-w-[46ch]"
+          data-reveal
+          data-reveal-index="2"
+        >
+          {hero.subtitle}
+        </p>
+
+        <div class="mt-9 flex flex-col sm:flex-row sm:items-center gap-4" data-reveal data-reveal-index="3">
+          <span class="magnetic inline-flex">
+            <a href={hero.primaryCta.href} class="btn-primary w-full sm:w-auto">
+              {hero.primaryCta.label}
+              <Icon name="arrow" class="w-5 h-5" />
+            </a>
+          </span>
+          <a
+            href={hero.secondaryCta.href}
+            class="font-ui font-semibold text-white/80 hover:text-white underline decoration-brand-cyan/50 decoration-2 underline-offset-[6px] hover:decoration-brand-cyan transition-colors px-1 py-2 text-center sm:text-left"
+          >
+            {hero.secondaryCta.label}
+          </a>
+        </div>
+
+        <ul
+          class="mt-8 flex flex-wrap gap-x-6 gap-y-3 font-ui text-sm text-slate-300 lg:mt-10"
+          data-reveal
+          data-reveal-index="4"
+        >
+          {hero.trustSignals.map((signal) => (
+            <li class="flex items-center gap-2.5">
+              <Icon name="check" class="w-4 h-4 text-brand-green shrink-0" />
+              {signal}
+            </li>
+          ))}
+        </ul>
       </div>
 
-      <ul class="mt-10 flex flex-wrap justify-center gap-3 font-ui text-sm">
-        {hero.trustSignals.map((signal) => (
-          <li class="flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-slate-200 backdrop-blur-sm">
-            <Icon name="check" class="w-4 h-4 text-brand-green shrink-0" />
-            {signal}
-          </li>
-        ))}
-      </ul>
+      <!-- Visual: 5 columns, bleeds slightly wider than its track -->
+      <div class="lg:col-span-5" data-reveal data-reveal-index="2">
+        <img
+          src="/assets/hero-visual.png"
+          alt="Local ranking dashboard showing a top Google Maps listing, a rising search-visibility chart, and a #1 ranking badge"
+          class="w-full h-auto max-w-[34rem] mx-auto lg:max-w-none lg:scale-105 origin-left"
+          width="1599"
+          height="1194"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
     </div>
-
-    <div class="mt-14 max-w-3xl mx-auto">
-      <img
-        src="/assets/hero-visual.png"
-        alt="Local ranking dashboard showing a top Google Maps listing, a rising search-visibility chart, and a #1 ranking badge"
-        class="w-full h-auto"
-        width="1599"
-        height="1194"
-        loading="eager"
-      />
-    </div>
-  </div>
-
-  <!-- bottom wave -->
-  <div class="relative" aria-hidden="true">
-    <svg class="w-full h-12 lg:h-20 text-white" viewBox="0 0 1440 100" preserveAspectRatio="none" fill="currentColor">
-      <path d="M0,64 C360,120 1080,0 1440,56 L1440,100 L0,100 Z" />
-    </svg>
   </div>
 </section>

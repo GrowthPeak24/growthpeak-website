@@ -7,20 +7,23 @@ const f = leadMagnet.form.fields;
 // before a key is added; replace via .env (PUBLIC_WEB3FORMS_KEY) before launch.
 const ACCESS_KEY = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? 'YOUR_WEB3FORMS_ACCESS_KEY';
 ---
-<section id="lead-magnet" class="section bg-brand-navy text-white scroll-mt-20">
-  <div class="container">
-    <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
+<section id="lead-magnet" class="section relative overflow-hidden bg-brand-navy text-white scroll-mt-24">
+  <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+    <div class="absolute -top-40 right-[-10%] h-[34rem] w-[34rem] rounded-full bg-brand-blue/20 blur-3xl"></div>
+  </div>
+
+  <div class="container relative">
+    <div class="grid gap-12 lg:grid-cols-12 lg:items-start lg:gap-16">
       <!-- Left: pitch -->
-      <div>
+      <div class="lg:col-span-5">
         <p class="eyebrow text-brand-cyan">{leadMagnet.eyebrow}</p>
-        <h2 class="mt-3 text-3xl lg:text-4xl font-bold text-white">{leadMagnet.title}</h2>
-        <p class="mt-4 text-slate-300 text-lg leading-relaxed">{leadMagnet.subtitle}</p>
-        <ul class="mt-8 space-y-3">
+        <!-- One step down from the page title scale: this headline is long. -->
+        <h2 class="section-title mt-4 text-white lg:text-4xl">{leadMagnet.title}</h2>
+        <p class="mt-5 max-w-[52ch] text-lg leading-relaxed text-slate-300">{leadMagnet.subtitle}</p>
+        <ul class="mt-9 space-y-4 border-t border-white/15 pt-8">
           {leadMagnet.benefits.map((benefit) => (
             <li class="flex items-start gap-3">
-              <span class="grid place-items-center w-6 h-6 rounded-full bg-brand-green/20 text-brand-green shrink-0 mt-0.5">
-                <Icon name="check" class="w-4 h-4" />
-              </span>
+              <Icon name="check" class="mt-1 h-4 w-4 shrink-0 text-brand-green" />
               <span class="text-slate-200">{benefit}</span>
             </li>
           ))}
@@ -28,8 +31,12 @@ const ACCESS_KEY = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? 'YOUR_WEB3FORMS_ACCES
       </div>
 
       <!-- Right: form card -->
-      <div class="rounded-2xl bg-white p-7 lg:p-9 shadow-2xl text-brand-navy">
-        <form id="lead-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
+      <div class="rounded-2xl bg-white p-7 text-brand-navy shadow-2xl lg:col-span-7 lg:p-10">
+        <form id="lead-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-4" aria-labelledby="lead-form-heading">
+          <p id="lead-form-heading" class="border-b border-slate-200 pb-5 font-ui text-sm font-semibold uppercase tracking-[0.14em] text-slate-500">
+            Request your audit
+          </p>
+
           <input type="hidden" name="access_key" value={ACCESS_KEY} />
           <input type="hidden" name="subject" value={leadMagnet.form.subject} />
           <input type="hidden" name="from_name" value="GrowthPeak Digital Website" />
@@ -39,25 +46,25 @@ const ACCESS_KEY = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? 'YOUR_WEB3FORMS_ACCES
           <div>
             <label for="name" class="block text-sm font-ui font-semibold mb-1.5">{f.name.label}</label>
             <input type="text" id="name" name="name" required placeholder={f.name.placeholder}
-              class="w-full rounded-lg border border-slate-200 px-4 py-3 focus:border-brand-blue focus:ring-2 focus:ring-brand-cyan/40 outline-none transition" />
+              class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-brand-navy placeholder:text-slate-400 outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/50 focus:ring-offset-0" />
           </div>
 
           <div>
             <label for="email" class="block text-sm font-ui font-semibold mb-1.5">{f.email.label}</label>
             <input type="email" id="email" name="email" required placeholder={f.email.placeholder}
-              class="w-full rounded-lg border border-slate-200 px-4 py-3 focus:border-brand-blue focus:ring-2 focus:ring-brand-cyan/40 outline-none transition" />
+              class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-brand-navy placeholder:text-slate-400 outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/50 focus:ring-offset-0" />
           </div>
 
           <div class="grid sm:grid-cols-2 gap-4">
             <div>
               <label for="business" class="block text-sm font-ui font-semibold mb-1.5">{f.business.label}</label>
               <input type="text" id="business" name="business" placeholder={f.business.placeholder}
-                class="w-full rounded-lg border border-slate-200 px-4 py-3 focus:border-brand-blue focus:ring-2 focus:ring-brand-cyan/40 outline-none transition" />
+                class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-brand-navy placeholder:text-slate-400 outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/50 focus:ring-offset-0" />
             </div>
             <div>
               <label for="website" class="block text-sm font-ui font-semibold mb-1.5">{f.website.label}</label>
               <input type="text" id="website" name="website" placeholder={f.website.placeholder}
-                class="w-full rounded-lg border border-slate-200 px-4 py-3 focus:border-brand-blue focus:ring-2 focus:ring-brand-cyan/40 outline-none transition" />
+                class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-brand-navy placeholder:text-slate-400 outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/50 focus:ring-offset-0" />
             </div>
           </div>
 
@@ -67,7 +74,7 @@ const ACCESS_KEY = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? 'YOUR_WEB3FORMS_ACCES
           </button>
 
           <p id="form-error" class="hidden text-sm text-red-600 text-center" role="alert"></p>
-          <p class="text-xs text-slate-400 text-center">We respect your privacy. No spam, ever.</p>
+          <p class="text-center text-xs text-slate-500">We respect your privacy. No spam, ever.</p>
         </form>
 
         <!-- Success state -->

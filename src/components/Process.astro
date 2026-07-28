@@ -1,32 +1,28 @@
 ---
 import { process } from '../data/site';
 ---
-<section id="process" class="section bg-white scroll-mt-20">
+<section id="process" class="section bg-brand-light scroll-mt-24">
   <div class="container">
-    <div class="max-w-2xl mx-auto text-center">
-      <p class="eyebrow">{process.eyebrow}</p>
-      <h2 class="mt-3 text-3xl lg:text-4xl font-bold">{process.title}</h2>
-      <p class="mt-4 text-slate-600 text-lg leading-relaxed">{process.subtitle}</p>
+    <div class="grid gap-6 lg:grid-cols-12 lg:items-end">
+      <h2 class="section-title lg:col-span-6" data-reveal data-reveal-index="0">
+        {process.title}
+      </h2>
+      <p class="section-lede mt-0 lg:col-span-6 lg:mb-1" data-reveal data-reveal-index="1">
+        {process.subtitle}
+      </p>
     </div>
 
-    <ol class="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+    <!-- Verb-first labels carry the hierarchy. A single rule ties the steps
+         together in place of numbered badges. -->
+    <ol class="mt-14 grid gap-y-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8">
       {process.steps.map((step, i) => (
-        <li class="relative rounded-2xl border border-slate-100 bg-white p-7 shadow-card">
-          {i < process.steps.length - 1 && (
-            <span
-              class="hidden lg:grid absolute top-1/2 -right-8 z-10 w-8 h-8 -translate-y-1/2 place-items-center text-brand-blue/30"
-              aria-hidden="true"
-            >
-              <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="4" y1="12" x2="20" y2="12" /><polyline points="14 6 20 12 14 18" />
-              </svg>
-            </span>
-          )}
-          <span class="font-heading font-extrabold text-5xl bg-brand-gradient bg-clip-text text-transparent leading-none">
-            {step.number}
-          </span>
-          <h3 class="mt-4 text-lg font-bold">{step.title}</h3>
-          <p class="mt-2 text-slate-600 leading-relaxed text-sm">{step.text}</p>
+        <li class="relative pt-8" data-reveal data-reveal-index={i}>
+          <span class="absolute inset-x-0 top-0 h-px bg-slate-300/70" aria-hidden="true"></span>
+          <span class="absolute left-0 top-0 h-px w-12 bg-brand-blue" aria-hidden="true"></span>
+          <h3 class="font-heading text-2xl font-extrabold tracking-tight lg:text-3xl">
+            {step.title}
+          </h3>
+          <p class="mt-3 leading-relaxed text-slate-600">{step.text}</p>
         </li>
       ))}
     </ol>
