@@ -24,7 +24,6 @@ export const site = {
 
 export const nav = [
   { label: 'Services', href: '#services' },
-  { label: 'Results', href: '#results' },
   { label: 'Why Us', href: '#why-us' },
   { label: 'Process', href: '#process' },
   { label: 'FAQ', href: '#faq' },
@@ -44,23 +43,6 @@ export const hero = {
     'Local SEO specialists',
     'Google Business Profile experts',
     'Conversion-focused web design',
-  ],
-};
-
-// ---------------------------------------------------------------------------
-// TRUST STRIP
-// TODO(placeholder): these are generated monogram marks standing in for real
-// client logos. Replace `initials`/`name` with actual clients (and swap in real
-// logo files) before launch, or delete the section if none can be named.
-// ---------------------------------------------------------------------------
-export const trustStrip = {
-  label: 'Trusted by local businesses across service, retail, and healthcare',
-  logos: [
-    { initials: 'NR', name: 'Northridge Plumbing' },
-    { initials: 'CV', name: 'Cedar Valley Dental' },
-    { initials: 'HM', name: 'Harbor Motors' },
-    { initials: 'BW', name: 'Bright Wave Roofing' },
-    { initials: 'LP', name: 'Lakeside Physio' },
   ],
 };
 

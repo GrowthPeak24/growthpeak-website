@@ -5,7 +5,13 @@ import { leadMagnet } from '../data/site';
 const f = leadMagnet.form.fields;
 // Web3Forms access key from env. Falls back to a placeholder so the build works
 // before a key is added; replace via .env (PUBLIC_WEB3FORMS_KEY) before launch.
-const ACCESS_KEY = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? 'YOUR_WEB3FORMS_ACCESS_KEY';
+const PLACEHOLDER_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY';
+const ACCESS_KEY = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? PLACEHOLDER_KEY;
+if (ACCESS_KEY === PLACEHOLDER_KEY) {
+  console.warn(
+    '[LeadMagnet] PUBLIC_WEB3FORMS_KEY is not set. The lead form will render but every submission will fail in production. Configure it in .env (local) and in the deploy environment (e.g., Vercel project env vars) before launch.',
+  );
+}
 ---
 <section id="lead-magnet" class="section relative overflow-hidden bg-brand-navy text-white scroll-mt-24">
   <div class="pointer-events-none absolute inset-0" aria-hidden="true">
@@ -77,12 +83,14 @@ const ACCESS_KEY = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? 'YOUR_WEB3FORMS_ACCES
           <p class="text-center text-xs text-slate-500">We respect your privacy. No spam, ever.</p>
         </form>
 
-        <!-- Success state -->
-        <div id="lead-success" class="hidden text-center py-6">
+        <!-- Success state. role=status + aria-live=polite so the announcement
+             reaches screen-reader users when the form is swapped out; the
+             heading also takes focus programmatically for keyboard users. -->
+        <div id="lead-success" class="hidden text-center py-6" role="status" aria-live="polite">
           <div class="grid place-items-center w-14 h-14 rounded-full bg-brand-green/15 text-brand-green mx-auto">
             <Icon name="check" class="w-8 h-8" />
           </div>
-          <h3 class="mt-4 text-xl font-bold">{leadMagnet.form.successTitle}</h3>
+          <h3 id="lead-success-title" tabindex="-1" class="mt-4 text-xl font-bold outline-none">{leadMagnet.form.successTitle}</h3>
           <p class="mt-2 text-slate-600">{leadMagnet.form.successMessage}</p>
         </div>
       </div>
@@ -121,6 +129,10 @@ const ACCESS_KEY = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? 'YOUR_WEB3FORMS_ACCES
         form.classList.add('hidden');
         success?.classList.remove('hidden');
         success?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // Move focus to the success heading so keyboard/screen-reader users
+        // land on the confirmation instead of the now-hidden submit button.
+        const successTitle = document.getElementById('lead-success-title');
+        successTitle?.focus({ preventScroll: true });
       } else {
         throw new Error(json.message || 'Something went wrong.');
       }

@@ -19,20 +19,20 @@ This is a single-page **Astro + Tailwind CSS** static marketing site (output: `"
 
 ### Content is centralized, not scattered per-component
 
-**`src/data/site.ts`** is the single source of truth for all copy: nav links, hero text, trust-strip logos, service descriptions, results stats/case studies, "why us" points, process steps, lead-magnet copy/field labels, FAQ items, and final CTA text, plus site-wide settings (`site.email`, `site.phone`, `site.social`, canonical URL). Every section component imports its content from this file rather than hardcoding text. When asked to change copy, edit `site.ts`, not the component markup.
+**`src/data/site.ts`** is the single source of truth for all copy: nav links, hero text, service descriptions, "why us" points, process steps, lead-magnet copy/field labels, FAQ items, and final CTA text, plus site-wide settings (`site.email`, `site.phone`, `site.social`, canonical URL). The `results` export (case-study stats/copy) also lives here but is not currently rendered — see the placeholder note below. Every section component imports its content from this file rather than hardcoding text. When asked to change copy, edit `site.ts`, not the component markup.
 
 Two content rules are enforced deliberately and will look like bugs if "fixed" casually:
 
-- **Eyebrows are rationed.** Only `hero` and `leadMagnet` carry an `eyebrow` field. Services / Results / WhyUs / Process / FAQ intentionally have none, so the label reads as an accent rather than a repeating template.
+- **Eyebrows are rationed.** Only `hero` and `leadMagnet` carry an `eyebrow` field. Services / WhyUs / Process / FAQ intentionally have none, so the label reads as an accent rather than a repeating template.
 - **One CTA intent.** The primary CTA label is `Get My Free Audit` everywhere (header, hero, lead-magnet submit, final CTA). The hero's secondary CTA points at `#process` (a *learn* action), and `finalCta` has no secondary CTA at all, so nothing competes with the single conversion goal.
 
 ### Placeholder content that must not ship as-is
 
-`trustStrip` (fake client names rendered as generated monogram marks) and `results` (invented stats and case studies) are **illustrative placeholders**, flagged with `TODO` comments in both `site.ts` and their components. Publishing invented performance claims on a live commercial site is a false-advertising risk. Replace with verified figures and real client permission, or delete `<TrustStrip />` / `<Results />` from `src/pages/index.astro` before launch.
+`src/components/Results.astro` (with the `results` export in `site.ts`) contains invented stats and case-study figures, flagged with `TODO` comments in both files. It is currently **not** rendered in `src/pages/index.astro` for exactly this reason — publishing invented performance claims on a live commercial site is a false-advertising risk. Do not re-add `<Results />` to the page (or its nav entry to `nav` in `site.ts`) until every figure has been replaced with a verified client result and the client's permission is on file. An earlier `trustStrip` placeholder (fake client monogram logos) was removed entirely — component file and data export both gone.
 
 ### Page assembly
 
-`src/pages/index.astro` is the only page. It wraps everything in `src/layouts/BaseLayout.astro` and stacks section components in order: `Hero → TrustStrip → Services → Results → WhyUs → Process → LeadMagnet → FAQ → CTA`. Section backgrounds alternate deliberately (white → light → white → light → navy → white) so no two adjacent sections share a surface. `BaseLayout` renders `Header`/`Footer` around the slot and pulls in `src/styles/global.css` and `Seo.astro` (meta tags, canonical, OG/Twitter tags, and JSON-LD — `LocalBusiness` always, `FAQPage` only when `includeFaqSchema` is passed).
+`src/pages/index.astro` is the only page. It wraps everything in `src/layouts/BaseLayout.astro` and stacks section components in order: `Hero → Services → WhyUs → Process → LeadMagnet → FAQ → CTA`. Section backgrounds alternate deliberately (navy → white → white → light → navy → white → white) so no two adjacent sections share a surface. `BaseLayout` renders `Header`/`Footer` around the slot and pulls in `src/styles/global.css` and `Seo.astro` (meta tags, canonical, OG/Twitter tags, and JSON-LD — `LocalBusiness` always, `FAQPage` only when `includeFaqSchema` is passed).
 
 ### Motion and interaction (`BaseLayout.astro` + `global.css`)
 
@@ -53,13 +53,9 @@ Colors have fixed roles across the page: **`brand-blue` is the single UI accent*
 
 Corner radii follow one documented system: **pill** (`rounded-full`) for buttons, **16px** (`rounded-2xl`) for cards and panels, **8px** (`rounded-lg`) for form inputs. `global.css` also defines `.section-title` and `.section-lede` so every section header shares one type scale.
 
-### Design tokens live in `tailwind.config.mjs`
-
-Brand colors (`brand.green/blue/cyan/navy/light/footer`) and font families (`heading` = Montserrat, `body` = Lato, `ui` = Poppins) are Tailwind theme extensions — always reference them as Tailwind classes (e.g. `text-brand-navy`, `font-heading`) rather than raw hex/font values in components.
-
 ### Lead magnet form (`src/components/LeadMagnet.astro`)
 
-Submits client-side via `fetch` to Web3Forms (`https://api.web3forms.com/submit`), using an access key read from `PUBLIC_WEB3FORMS_KEY` (set in `.env`, gitignored — see `.env.example`). Includes a honeypot field for spam, an inline `<script>` handling async submit/loading/success/error states, and a native `action`/`method` fallback so the form still works without JS. Any change to form fields must stay in sync with the labels/placeholders defined in `leadMagnet.form.fields` in `site.ts`.
+Submits client-side via `fetch` to Web3Forms (`https://api.web3forms.com/submit`), using an access key read from `PUBLIC_WEB3FORMS_KEY` (set in `.env`, gitignored — see `.env.example`). If the env var is unset, the frontmatter falls back to a placeholder string and logs a build-time `console.warn` so a broken form doesn't ship silently; the key must be configured in the deploy environment (e.g., Vercel project env vars) before launch. Includes a honeypot field for spam, an inline `<script>` handling async submit/loading/success/error states, and a native `action`/`method` fallback so the form still works without JS. The success panel is a `role="status" aria-live="polite"` region, and its heading takes programmatic focus (`tabindex="-1"` + `.focus()`) after a successful submit so screen-reader and keyboard users get the confirmation instead of landing on the now-hidden submit button. Any change to form fields must stay in sync with the labels/placeholders defined in `leadMagnet.form.fields` in `site.ts`.
 
 ### Logo handling (`src/components/Logo.astro`)
 
