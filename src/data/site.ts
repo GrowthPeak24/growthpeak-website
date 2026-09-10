@@ -30,7 +30,8 @@ export const nav = [
 ] as const;
 
 export const hero = {
-  eyebrow: 'Local SEO • GBP • Web Design',
+  // Rendered as the glowing cyan badge above the hero headline.
+  eyebrow: 'Helping Local Businesses Reach Their Digital Peak',
   title: 'Get Found by Local Customers Ready to Buy',
   highlight: 'Ready to Buy',
   // Hard cap: 20 words. Keep it short enough to read in one glance.
@@ -51,81 +52,127 @@ export const hero = {
 export const services = {
   title: 'Everything You Need to Dominate Local Search',
   subtitle:
-    'Three focused services that work together to put your business in front of nearby customers and turn those clicks into booked jobs.',
+    'Three services that compound: get found, convert the click, then let automation work the lead while you work the job.',
   items: [
     {
-      icon: 'search',
-      name: 'Local SEO',
-      blurb:
-        'Rank at the top of local search results, so nearby customers call you before they call anyone else.',
-      bullets: [
-        'Local keyword & competitor research',
-        'On-page & technical SEO optimization',
-        'Citation building & local link outreach',
-        'Transparent monthly ranking reports',
-      ],
-    },
-    {
       icon: 'map-pin',
-      name: 'Google Business Profile Optimization',
+      name: 'Local SEO & Google Business Profile Optimization',
+      span: 3,
       blurb:
-        'Turn your Google Business Profile into your #1 lead source with a fully optimized, review-rich listing.',
+        'Rank in the Map Pack so nearby customers call you before they call anyone else.',
       bullets: [
-        'Complete profile setup & optimization',
-        'Map Pack ranking strategy',
-        'Review generation & response system',
-        'Posts, photos & Q&A management',
+        'Complete Google Business Profile buildout',
+        'Map Pack & local keyword strategy',
+        'Citation building & local link outreach',
+        'Review generation and response system',
       ],
     },
     {
-      icon: 'layout',
-      name: 'Web Design',
+      icon: 'server',
+      name: 'High-Performance Web Development & Managed Hosting',
+      span: 3,
       blurb:
-        'Websites that load instantly, look great on any phone, and turn visitors into customers.',
+        'Sites that load instantly, convert on mobile, and stay online without you thinking about it.',
       bullets: [
-        'Conversion-focused design & copy',
-        'Lightning-fast, SEO-ready builds',
-        'Mobile-first & fully responsive',
-        'Lead capture & click-to-call built in',
+        'Conversion-focused, mobile-first builds',
+        'Core Web Vitals tuned for speed',
+        'Managed hosting, SSL & daily backups',
+        'Ongoing updates and uptime monitoring',
+      ],
+    },
+    {
+      icon: 'bot',
+      name: 'AI Chat Widgets & Automated Lead Workflows',
+      span: 6,
+      blurb:
+        'An AI assistant that answers, qualifies, and follows up the moment a lead lands, day or night.',
+      bullets: [
+        'AI chat widget trained on your services',
+        'Instant replies to after-hours enquiries',
+        '24/7 lead capture and qualification',
+        'Booking and quote requests handled automatically',
+        'Automated follow-up via email & SMS',
+        'CRM handoff so no lead goes cold',
       ],
     },
   ],
 };
 
 // ---------------------------------------------------------------------------
-// RESULTS
-// TODO(mock data): every figure below is illustrative, NOT a real client result.
-// Publishing invented performance claims is a false-advertising risk. Replace
-// with verified numbers (and keep the client's permission on file) or remove
-// the <Results /> section from src/pages/index.astro before launch.
+// PROOF
+// Deliberately NOT client results. Every metric below is a standard we control
+// and can honour on day one, so nothing here is an unverifiable performance
+// claim (see the RESULTS note below for why that distinction matters here).
+// The ticker lists platforms we work in - not client logos, which is the trap
+// the removed trustStrip fell into.
 // ---------------------------------------------------------------------------
-export const results = {
-  title: 'What Growth Looks Like in the First 90 Days',
+export const proof = {
+  title: 'The Standard We Hold Ourselves To',
   subtitle:
-    'A snapshot of the outcomes we build toward: more visibility, more calls, and a site that converts.',
-  disclaimer: 'Illustrative figures. Replace with verified client results before launch.',
-  stats: [
-    { value: '3.4x', label: 'More calls from Google Maps', detail: 'Typical lift once a profile is fully optimized and reviewed.' },
-    { value: '#1', label: 'Map Pack position targeted', detail: 'The goal for your primary service keyword in your core area.' },
-    { value: '92', label: 'Average PageSpeed score', detail: 'What we build to on mobile, because speed moves rankings.' },
-    { value: '30d', label: 'First visible movement', detail: 'How quickly profile visibility usually starts to shift.' },
-  ],
-  cases: [
+    'No invented case-study numbers. These are the commitments every engagement starts with.',
+  metrics: [
     {
-      industry: 'Home services',
-      headline: 'From invisible to the top three in the Map Pack',
-      text: 'A rebuilt Google Business Profile plus local citations moved a plumbing company into the Map Pack for its main service area.',
-      metric: '+184%',
-      metricLabel: 'direction requests',
+      value: 90,
+      suffix: '+',
+      label: 'Mobile PageSpeed target',
+      detail: 'What every build we ship is measured against.',
     },
     {
-      industry: 'Dental practice',
-      headline: 'A faster site that books more appointments',
-      text: 'A conversion-focused rebuild with click-to-call and online booking turned existing traffic into a steady stream of appointments.',
-      metric: '+61%',
-      metricLabel: 'form submissions',
+      value: 24,
+      suffix: 'h',
+      label: 'Reply time on weekdays',
+      detail: 'You get a human answer, not a ticket number.',
+    },
+    {
+      value: 0,
+      label: 'Long-term contracts',
+      detail: 'Month to month. We re-earn it every cycle.',
+    },
+    {
+      value: 100,
+      suffix: '%',
+      label: 'Plain-English reporting',
+      detail: 'Rankings, calls and leads. No vanity metrics.',
     },
   ],
+  ticker: [
+    'Google Business Profile',
+    'Google Search Console',
+    'Google Analytics 4',
+    'Core Web Vitals',
+    'Google Maps',
+    'Schema.org',
+    'PageSpeed Insights',
+    'Local Citations',
+  ],
+  deliverables: [
+    {
+      icon: 'layout',
+      title: '100% Mobile Responsive',
+      text: 'Every build is designed mobile-first and checked at phone, tablet and desktop widths before it ships.',
+    },
+    {
+      icon: 'bolt',
+      title: 'Sub-Second Page Loads',
+      text: 'The load-time target we build to, measured on mobile against Core Web Vitals.',
+    },
+    {
+      icon: 'bot',
+      title: '24/7 AI Chat Lead Capture',
+      text: 'An AI widget answers, qualifies and logs enquiries around the clock, including after hours.',
+    },
+    {
+      icon: 'map-pin',
+      title: 'Google Business Profile Standard',
+      text: 'Categories, services, photos, posts and review handling configured to a fixed optimization checklist.',
+    },
+  ],
+  roi: {
+    modelLabel: 'Interactive Estimate Model',
+    title: 'Run the Numbers Before You Talk to Us',
+    subtitle:
+      'Move the sliders to your own figures and see what a lift in local visibility would actually be worth to your business.',
+  },
 };
 
 export const whyUs = {
@@ -157,25 +204,41 @@ export const whyUs = {
 };
 
 export const process = {
-  title: 'Your Path to Page One',
-  subtitle: 'A proven process that takes you from first audit to a steady stream of leads.',
-  // Verb-first labels. Step numbers are intentionally gone as a design device.
+  title: 'Your 3-Step Launch Roadmap',
+  subtitle:
+    'Three phases, no mystery. Each one has a defined output you can hold us to before the next begins.',
+  // Verb-first labels. Step numbers are a design device in Process.astro, not
+  // part of the copy. `detail` is revealed by the expandable roadmap island.
   steps: [
     {
-      title: 'Audit',
-      text: 'We analyze your website, Google Business Profile, and local rankings to find your biggest growth opportunities.',
+      title: 'Audit & Strategy',
+      text: 'We analyse your site, Google Business Profile and local rankings, then hand you a prioritised roadmap.',
+      detail: [
+        'Local ranking and Map Pack position snapshot',
+        'Google Business Profile health check',
+        'Competitor and local keyword research',
+        'Prioritised action plan, highest impact first',
+      ],
     },
     {
-      title: 'Strategize',
-      text: 'You get a tailored roadmap that puts the highest-impact actions first.',
+      title: 'Build & Deploy',
+      text: 'We optimise the profile, build or rebuild the site, and put the automation live.',
+      detail: [
+        'Profile optimisation against the full checklist',
+        'Mobile-first build tuned for Core Web Vitals',
+        'AI chat widget and lead workflows connected',
+        'Managed hosting, SSL and backups configured',
+      ],
     },
     {
-      title: 'Build',
-      text: 'We optimize your profile, improve your site, and build your local authority.',
-    },
-    {
-      title: 'Report',
-      text: 'You watch rankings, calls, and leads climb, with clear monthly reports showing exactly what we did.',
+      title: 'Peak Optimization',
+      text: 'We keep tuning against real data and report on rankings, calls and leads in plain English.',
+      detail: [
+        'Ongoing citation and local authority building',
+        'Review generation and response cadence',
+        'Monthly plain-English performance reporting',
+        'Continuous conversion and speed tuning',
+      ],
     },
   ],
 };

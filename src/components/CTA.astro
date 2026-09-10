@@ -2,9 +2,9 @@
 import Icon from './Icon.astro';
 import { finalCta } from '../data/site';
 ---
-<section class="section bg-white">
+<section class="section bg-brand-deep">
   <div class="container">
-    <div class="relative overflow-hidden rounded-2xl bg-hero-gradient px-8 py-14 text-white lg:px-14 lg:py-16">
+    <div class="relative overflow-hidden rounded-2xl border border-brand-cyan/20 bg-brand-abyss px-8 py-14 text-white shadow-glow-lg lg:px-14 lg:py-16">
       <div class="pointer-events-none absolute inset-0" aria-hidden="true">
         <div class="absolute -right-20 -top-24 h-80 w-80 rounded-full bg-brand-cyan/20 blur-3xl"></div>
         <div class="absolute -bottom-24 -left-20 h-80 w-80 rounded-full bg-brand-blue/25 blur-3xl"></div>
@@ -16,7 +16,7 @@ import { finalCta } from '../data/site';
           <h2 class="section-title text-white" data-reveal data-reveal-index="0">
             {finalCta.title}
           </h2>
-          <p class="mt-5 max-w-[52ch] text-lg leading-relaxed text-slate-200" data-reveal data-reveal-index="1">
+          <p class="mt-5 max-w-[52ch] text-lg leading-relaxed text-slate-300" data-reveal data-reveal-index="1">
             {finalCta.subtitle}
           </p>
         </div>
@@ -28,7 +28,7 @@ import { finalCta } from '../data/site';
               <Icon name="arrow" class="w-5 h-5" />
             </a>
           </span>
-          <p class="mt-4 font-ui text-sm text-slate-300">{finalCta.reassurance}</p>
+          <p class="mt-4 font-ui text-sm text-slate-400">{finalCta.reassurance}</p>
         </div>
       </div>
     </div>

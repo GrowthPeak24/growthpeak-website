@@ -1,0 +1,23 @@
+---
+import RoiEstimator from './ui/roi-estimator.tsx';
+import { proof } from '../data/site';
+---
+<section id="roi" class="section relative scroll-mt-24 bg-brand-navy">
+  <!-- Ambient cyan bloom, matched to the hero so the page reads as one surface. -->
+  <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+    <div class="absolute left-1/2 top-0 h-[26rem] w-[46rem] -translate-x-1/2 rounded-full bg-brand-blue/10 blur-3xl"></div>
+  </div>
+
+  <div class="container relative">
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 class="section-title" data-reveal data-reveal-index="0">{proof.roi.title}</h2>
+      <p class="section-lede mx-auto text-center" data-reveal data-reveal-index="1">
+        {proof.roi.subtitle}
+      </p>
+    </div>
+
+    <div class="mt-12" data-reveal data-reveal-index="2">
+      <RoiEstimator modelLabel={proof.roi.modelLabel} client:visible />
+    </div>
+  </div>
+</section>
