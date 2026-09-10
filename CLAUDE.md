@@ -66,7 +66,7 @@ Rules that keep this from regressing:
 - **Nothing above the fold is an island.** The hero background is `GridBeams.astro` — pure CSS keyframes, zero JS — precisely because an earlier React version pulled React and framer-motion onto the LCP critical path. Ship decoration as CSS; reserve React for state and pointer maths.
 - **Never convert the lead form to React.** `LeadMagnet.astro`'s form is deliberately vanilla so its native `action`/`method` fallback keeps working without JS. Restyle its container, never its mechanism.
 - Pin versions: `@astrojs/react` **3.x** and React **18** — v4 / React 19 require Astro 5, the same trap documented for `@astrojs/sitemap` below.
-- Islands are lazy, so the ~97 kB gz of React + framer-motion only downloads once a visitor scrolls past the hero. Adding an island above the fold forfeits that.
+- Islands are lazy, so the ~102 kB gz of React + framer-motion only downloads once a visitor scrolls past the hero. Adding an island above the fold forfeits that.
 - `launch-roadmap.tsx` carries a real disclosure contract: an `<ol>` of `<li>`, each toggle wrapped in an `<h3>` and carrying `aria-expanded` + `aria-controls`, each panel `role="region"` with `aria-labelledby` pointing back at its button, and the step number `aria-hidden` (the `<ol>` already conveys order). Keep all of it if the visuals change.
 
 ### 21st.dev component provenance
