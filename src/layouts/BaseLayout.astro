@@ -20,7 +20,7 @@ const { title, description, includeFaqSchema } = Astro.props;
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <meta name="theme-color" content="#0b2545" />
+    <meta name="theme-color" content="#0B132B" />
     <Seo title={title} description={description} includeFaqSchema={includeFaqSchema} />
     <!-- Set before first paint so revealed elements never flash their visible
          state. Anything without JS keeps the fully-visible baseline. -->
@@ -71,13 +71,20 @@ const { title, description, includeFaqSchema } = Astro.props;
 
   // --- Cursor spotlight -----------------------------------------------------
   if (finePointer.matches) {
-    document.querySelectorAll<HTMLElement>('.spotlight').forEach((card) => {
-      card.addEventListener('pointermove', (event) => {
+    // Delegated rather than bound per-card: the bento and metric cards are
+    // rendered by React islands that mount after this script runs, so a
+    // querySelectorAll pass at load time would miss them entirely.
+    document.addEventListener(
+      'pointermove',
+      (event) => {
+        const card = (event.target as Element | null)?.closest?.<HTMLElement>('.spotlight');
+        if (!card) return;
         const rect = card.getBoundingClientRect();
         card.style.setProperty('--mx', `${event.clientX - rect.left}px`);
         card.style.setProperty('--my', `${event.clientY - rect.top}px`);
-      });
-    });
+      },
+      { passive: true },
+    );
   }
 
   // --- Magnetic CTAs --------------------------------------------------------

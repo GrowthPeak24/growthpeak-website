@@ -6,16 +6,16 @@ import { nav, hero } from '../data/site';
      scrolled past. Lets us elevate the header without a scroll listener. -->
 <div id="header-sentinel" class="absolute top-0 h-px w-px" aria-hidden="true"></div>
 
-<div id="mobile-menu-backdrop" class="lg:hidden hidden fixed inset-x-0 top-16 bottom-0 z-40 bg-brand-navy/50" aria-hidden="true"></div>
+<div id="mobile-menu-backdrop" class="lg:hidden hidden fixed inset-x-0 top-16 bottom-0 z-40 bg-brand-abyss/70 backdrop-blur-sm" aria-hidden="true"></div>
 
-<header id="site-header" class="fixed top-0 inset-x-0 z-50 bg-white border-b border-slate-100 transition-shadow">
+<header id="site-header" class="fixed top-0 inset-x-0 z-50 border-b border-white/10 bg-brand-abyss/80 backdrop-blur-xl transition-shadow">
   <nav class="container flex items-center justify-between h-16 lg:h-20" aria-label="Primary">
-    <Logo />
+    <Logo variant="light" />
 
-    <ul class="hidden lg:flex items-center gap-7 xl:gap-9 font-ui font-medium text-brand-navy whitespace-nowrap">
+    <ul class="hidden lg:flex items-center gap-7 xl:gap-9 font-ui font-medium text-slate-300 whitespace-nowrap">
       {nav.map((item) => (
         <li>
-          <a href={item.href} class="relative text-sm hover:text-brand-blue transition-colors after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-brand-cyan hover:after:w-full after:transition-all">
+          <a href={item.href} class="relative text-sm transition-colors hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-brand-cyan after:shadow-[0_0_10px_0_rgba(0,229,255,0.9)] hover:after:w-full after:transition-all">
             {item.label}
           </a>
         </li>
@@ -31,7 +31,7 @@ import { nav, hero } from '../data/site';
     <button
       id="menu-toggle"
       type="button"
-      class="lg:hidden inline-flex items-center justify-center w-11 h-11 -mr-2 text-brand-navy"
+      class="lg:hidden inline-flex items-center justify-center w-11 h-11 -mr-2 text-white"
       aria-label="Open menu"
       aria-expanded="false"
       aria-controls="mobile-menu"
@@ -43,11 +43,11 @@ import { nav, hero } from '../data/site';
   </nav>
 
   <!-- Mobile menu -->
-  <div id="mobile-menu" class="lg:hidden hidden relative border-t border-slate-100 bg-white">
+  <div id="mobile-menu" class="lg:hidden hidden relative border-t border-white/10 bg-brand-abyss">
     <ul class="container flex flex-col py-4 font-ui font-medium">
       {nav.map((item) => (
         <li>
-          <a href={item.href} class="block py-3 text-brand-navy hover:text-brand-blue" data-menu-link>
+          <a href={item.href} class="block py-3 text-slate-300 hover:text-brand-cyan" data-menu-link>
             {item.label}
           </a>
         </li>

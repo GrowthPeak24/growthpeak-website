@@ -1,0 +1,37 @@
+---
+// Hero background. Deliberately NOT a React island: this sits in the LCP
+// section, and mounting it as one pulled React + framer-motion onto the
+// critical path for decoration alone. The beams are plain CSS keyframes, so
+// this ships zero JavaScript and animates off the main thread.
+//
+// To swap in a 21st.dev hero background later, replace this import in
+// Hero.astro with the installed component and mount it `client:idle`.
+const BEAMS = [
+  { x: 12, duration: 7, delay: 0, height: 12 },
+  { x: 28, duration: 9, delay: 1.8, height: 8 },
+  { x: 54, duration: 6.5, delay: 0.9, height: 14 },
+  { x: 73, duration: 10, delay: 2.6, height: 9 },
+  { x: 89, duration: 8, delay: 1.2, height: 11 },
+];
+
+const MASK =
+  'radial-gradient(ellipse 70% 60% at 50% 40%, #000 40%, transparent 100%)';
+---
+<div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+  <!-- Grid, faded out toward the edges so it never fights the copy. -->
+  <div class="bg-grid absolute inset-0" style={`mask-image:${MASK};-webkit-mask-image:${MASK};`}></div>
+
+  <!-- Ambient cyan bloom behind the headline. -->
+  <div class="absolute -top-32 left-1/2 h-[38rem] w-[38rem] -translate-x-1/2 rounded-full bg-brand-cyan/10 blur-3xl"></div>
+  <div class="absolute bottom-[-14rem] right-[-8rem] h-[30rem] w-[30rem] rounded-full bg-brand-blue/15 blur-3xl"></div>
+
+  {BEAMS.map((beam) => (
+    <span
+      class="absolute top-0 w-px animate-beam-fall bg-gradient-to-b from-transparent via-brand-glow to-transparent"
+      style={`left:${beam.x}%;height:${beam.height}rem;animation-duration:${beam.duration}s;animation-delay:${beam.delay}s;`}
+    ></span>
+  ))}
+
+  <!-- Bottom fade into the next section. -->
+  <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-brand-navy"></div>
+</div>

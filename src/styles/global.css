@@ -15,24 +15,30 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    color-scheme: dark;
   }
 
   body {
-    @apply font-body text-brand-navy bg-white antialiased;
+    @apply font-body text-slate-300 bg-brand-navy antialiased;
   }
 
   h1,
   h2,
   h3,
   h4 {
-    @apply font-heading text-brand-navy;
+    @apply font-heading text-white;
     text-wrap: balance;
   }
 
-  /* brand-blue rather than brand-cyan: cyan on white is ~1.7:1 and fails the
-     3:1 non-text contrast minimum for focus indicators. */
+  /* On the dark ground, cyan is ~10.3:1 against #0B132B, so it comfortably
+     clears the 3:1 non-text minimum and can now carry the focus ring (it
+     could not on the old white surfaces, where it measured ~1.7:1). */
   :focus-visible {
-    @apply outline-none ring-2 ring-brand-blue ring-offset-2 ring-offset-white rounded-sm;
+    @apply outline-none ring-2 ring-brand-cyan ring-offset-2 ring-offset-brand-navy rounded-sm;
+  }
+
+  ::selection {
+    @apply bg-brand-cyan/30 text-white;
   }
 }
 
@@ -41,16 +47,17 @@
     @apply inline-flex items-center justify-center gap-2 font-ui font-semibold rounded-full px-7 py-3.5 text-base transition-all duration-200 focus-visible:ring-offset-transparent;
   }
 
+  /* Gradient fill (tech blue -> electric cyan) is the single primary action. */
   .btn-primary {
-    @apply btn bg-brand-cyan text-brand-navy shadow-[0_8px_20px_-6px_rgba(0,212,255,0.6)] hover:-translate-y-0.5 hover:shadow-[0_14px_28px_-8px_rgba(0,212,255,0.7)];
+    @apply btn bg-brand-gradient text-brand-abyss shadow-[0_8px_24px_-6px_rgba(0,229,255,0.55)] hover:-translate-y-0.5 hover:shadow-[0_16px_36px_-8px_rgba(0,229,255,0.75)];
   }
 
   .btn-secondary {
-    @apply btn border-2 border-white/70 text-white hover:bg-white hover:text-brand-navy;
+    @apply btn border border-white/25 bg-white/5 text-white backdrop-blur-sm hover:border-brand-cyan/60 hover:bg-white/10 hover:text-white;
   }
 
   .btn-outline {
-    @apply btn border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white;
+    @apply btn border border-brand-cyan/60 text-brand-cyan hover:bg-brand-cyan hover:text-brand-abyss;
   }
 
   .section {
@@ -58,7 +65,7 @@
   }
 
   .eyebrow {
-    @apply font-ui font-semibold uppercase tracking-[0.2em] text-sm text-brand-blue;
+    @apply font-ui font-semibold uppercase tracking-[0.2em] text-sm text-brand-cyan;
   }
 
   /* Section heading rhythm. One scale for the whole page. */
@@ -67,7 +74,27 @@
   }
 
   .section-lede {
-    @apply mt-4 text-lg text-slate-600 leading-relaxed max-w-[58ch];
+    @apply mt-4 text-lg text-slate-400 leading-relaxed max-w-[58ch];
+  }
+
+  /* Glassmorphism surface: the repeated panel treatment across the dark page. */
+  .glass {
+    @apply relative rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl;
+  }
+
+  /* Adds a persistent cyan edge-glow to a .glass panel. */
+  .glass-glow {
+    @apply border-brand-cyan/25 shadow-glow;
+  }
+
+  /* Small cyan pill used for the hero badge. */
+  .badge-glow {
+    @apply inline-flex items-center gap-2 rounded-full border border-brand-cyan/30 bg-brand-cyan/10 px-4 py-1.5 font-ui text-xs font-semibold tracking-wide text-brand-cyan backdrop-blur-sm sm:text-sm;
+  }
+
+  /* Headline highlight: gradient text, used once per page in the hero. */
+  .text-gradient {
+    @apply bg-brand-gradient bg-clip-text text-transparent;
   }
 }
 
@@ -77,6 +104,14 @@
    pointer effects write CSS custom properties instead of React/JS style writes.
    --------------------------------------------------------------------------- */
 @layer utilities {
+  /* Static grid ground for dark sections. Pure CSS, no canvas, no JS. */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgba(0, 210, 255, 0.07) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 210, 255, 0.07) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
   /* Scroll reveal. Hidden state is only applied once JS confirms support, so
      the page stays fully readable with JS disabled. */
   html.js [data-reveal] {
@@ -93,7 +128,7 @@
     transform: none;
   }
 
-  /* Cursor spotlight for service / result cards. --mx/--my are written by the
+  /* Cursor spotlight for service / metric cards. --mx/--my are written by the
      pointermove handler; the gradient itself is pure CSS. */
   .spotlight {
     position: relative;
@@ -109,7 +144,7 @@
     transition: opacity 0.3s ease;
     background: radial-gradient(
       22rem circle at var(--mx, 50%) var(--my, 50%),
-      rgba(24, 139, 246, 0.1),
+      rgba(0, 210, 255, 0.16),
       transparent 65%
     );
     pointer-events: none;
@@ -125,7 +160,7 @@
   /* Touch devices get an honest tap state instead of a phantom hover. */
   @media (hover: none) {
     .spotlight:active {
-      background-color: theme('colors.brand.light');
+      background-color: rgba(0, 210, 255, 0.08);
     }
   }
 
@@ -138,6 +173,54 @@
 
   .magnetic:active {
     transform: translate3d(var(--magnet-x, 0px), var(--magnet-y, 0px), 0) scale(0.98);
+  }
+
+  /* Range input for the ROI estimator. The filled portion is driven by the
+     --roi-percent custom property written by the React component. */
+  .roi-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 0.375rem;
+    border-radius: 9999px;
+    background: linear-gradient(
+      to right,
+      #0077b6 0%,
+      #00e5ff var(--roi-percent, 50%),
+      rgba(255, 255, 255, 0.12) var(--roi-percent, 50%),
+      rgba(255, 255, 255, 0.12) 100%
+    );
+    cursor: pointer;
+  }
+
+  .roi-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 1.25rem;
+    width: 1.25rem;
+    border-radius: 9999px;
+    background: #ffffff;
+    border: 3px solid #00d2ff;
+    box-shadow: 0 0 14px -2px rgba(0, 229, 255, 0.9);
+  }
+
+  .roi-slider::-moz-range-thumb {
+    height: 1.25rem;
+    width: 1.25rem;
+    border-radius: 9999px;
+    background: #ffffff;
+    border: 3px solid #00d2ff;
+    box-shadow: 0 0 14px -2px rgba(0, 229, 255, 0.9);
+  }
+
+  .roi-slider::-moz-range-track {
+    height: 0.375rem;
+    border-radius: 9999px;
+    background: transparent;
+  }
+
+  /* Marquee pauses on hover so a reader can actually look at a logo. */
+  .marquee-track:hover {
+    animation-play-state: paused;
   }
 }
 

@@ -11,7 +11,7 @@ const socials = [
   { key: 'x', label: 'X', href: site.social.x },
 ].filter((s) => s.href);
 ---
-<footer class="bg-brand-footer text-slate-300">
+<footer class="border-t border-white/10 bg-brand-abyss text-slate-400">
   <div class="container py-16 grid gap-12 md:grid-cols-2 lg:grid-cols-4">
     <div class="lg:col-span-2 max-w-sm">
       <Logo variant="light" />
@@ -23,7 +23,7 @@ const socials = [
           {socials.map((s) => (
             <a
               href={s.href}
-              class="grid place-items-center w-10 h-10 rounded-full bg-white/5 hover:bg-brand-cyan hover:text-brand-navy transition-colors"
+              class="grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-white/5 transition-colors hover:border-brand-cyan hover:bg-brand-cyan hover:text-brand-abyss"
               aria-label={s.label}
               target="_blank"
               rel="noopener noreferrer"
@@ -70,7 +70,7 @@ const socials = [
   <div class="border-t border-white/10">
     <div class="container py-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-400">
       <p>&copy; {year} {site.name}. All rights reserved.</p>
-      <p>Local SEO • Google Business Profile • Web Design</p>
+      <p>Local SEO • Web Development • AI Lead Automation</p>
     </div>
   </div>
 </footer>

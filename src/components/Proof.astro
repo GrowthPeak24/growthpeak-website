@@ -1,0 +1,71 @@
+---
+import Icon from './Icon.astro';
+import MetricCounters from './ui/metric-counter.tsx';
+import { proof } from '../data/site';
+
+// Ticker is duplicated once; the CSS animation translates the track by exactly
+// -50%, so the second half lands where the first started. aria-hidden on the
+// clone keeps screen readers from reading the list twice.
+const tickerHalves = [false, true];
+---
+<section id="proof" class="section relative scroll-mt-24 bg-brand-abyss">
+  <div class="container relative">
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 class="section-title" data-reveal data-reveal-index="0">{proof.title}</h2>
+      <p class="section-lede mx-auto text-center" data-reveal data-reveal-index="1">
+        {proof.subtitle}
+      </p>
+    </div>
+
+    <div class="mt-14" data-reveal data-reveal-index="2">
+      <MetricCounters metrics={proof.metrics} client:visible />
+    </div>
+    <!-- Operational guarantees: concrete deliverables we control, standing in
+         for the social proof this site deliberately does not fake. -->
+    <div class="mt-16 border-t border-white/10 pt-14 lg:mt-20">
+      <h3 class="text-center font-heading text-2xl font-extrabold tracking-tight text-white lg:text-3xl" data-reveal data-reveal-index="0">
+        System &amp; Performance Guarantees
+      </h3>
+      <ul class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {proof.deliverables.map((item, i) => (
+          <li
+            class="glass spotlight p-7 transition-colors duration-300 hover:border-brand-cyan/30"
+            data-reveal
+            data-reveal-index={i}
+          >
+            <span class="inline-grid h-11 w-11 place-items-center rounded-xl border border-brand-cyan/25 bg-brand-cyan/10 text-brand-cyan">
+              <Icon name={item.icon} class="h-5 w-5" />
+            </span>
+            <h4 class="mt-5 font-heading text-base font-bold leading-snug text-white">
+              {item.title}
+            </h4>
+            <p class="mt-2 text-sm leading-relaxed text-slate-400">{item.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+  <!-- Platform ticker. Pure CSS marquee: zero JavaScript ships for this. -->
+  <div class="relative mt-16 lg:mt-20" data-reveal data-reveal-index="3">
+    <p class="container mb-6 text-center font-ui text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
+      The platforms we work in every day
+    </p>
+    <div
+      class="group relative flex overflow-hidden"
+      style="mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);"
+    >
+      <div class="marquee-track flex w-max animate-marquee">
+        {tickerHalves.map((isClone) => (
+          <ul class="flex shrink-0 items-center gap-6 pr-6" aria-hidden={isClone ? 'true' : undefined}>
+            {proof.ticker.map((item) => (
+              <li class="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-6 py-3 font-ui text-sm font-semibold text-slate-400 backdrop-blur-sm transition-colors duration-300 hover:border-brand-cyan/40 hover:text-brand-cyan">
+                {item}
+              </li>
+            ))}
+          </ul>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
