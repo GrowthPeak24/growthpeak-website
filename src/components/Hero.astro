@@ -1,90 +1,107 @@
 ---
 import Icon from './Icon.astro';
-import GridBeams from './GridBeams.astro';
-import { hero } from '../data/site';
+import AccentTitle from './AccentTitle.astro';
+import HeroRibbon from './HeroRibbon.astro';
+import { hero, proof } from '../data/site';
 
-const titleParts = hero.highlight
-  ? hero.title.split(hero.highlight)
-  : [hero.title];
+// Ticker is duplicated once; the CSS animation translates the track by exactly
+// -50%, so the second half lands where the first started. aria-hidden on the
+// clone keeps screen readers from reading the list twice.
+const tickerHalves = [false, true];
 ---
-<!-- Asymmetric 7/5 split. min-h uses dvh minus the fixed header so the hero
-     fills the viewport without the iOS address-bar jump h-screen causes. -->
+<!-- Centred single column over a code-drawn light ribbon. min-h uses dvh minus
+     the fixed header so the hero fills the viewport without the iOS
+     address-bar jump h-screen causes. -->
 <section
-  class="relative overflow-hidden bg-hero-gradient text-white
-         min-h-[calc(100dvh-4rem)] lg:min-h-[calc(100dvh-5rem)] flex items-center"
+  class="relative flex flex-col overflow-hidden bg-hero-gradient text-white
+         min-h-[calc(100dvh-4rem)] lg:min-h-[calc(100dvh-5rem)]"
 >
-  <GridBeams />
+  <HeroRibbon />
 
-  <div class="container relative w-full py-12 lg:py-20">
-    <div class="grid items-center gap-12 lg:grid-cols-12 lg:gap-10 xl:gap-16">
-      <!-- Copy: 7 columns, left-aligned, deliberately off-centre -->
-      <div class="lg:col-span-7">
-        <p class="badge-glow" data-reveal data-reveal-index="0">
-          <span class="relative flex h-2 w-2" aria-hidden="true">
-            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-glow opacity-75"></span>
-            <span class="relative inline-flex h-2 w-2 rounded-full bg-brand-glow"></span>
+  <div class="container relative flex flex-1 flex-col items-center pt-14 text-center lg:pt-20">
+    <p class="badge-split" data-reveal data-reveal-index="0">
+      <span class="badge-split-chip">{hero.eyebrowTag}</span>
+      {hero.eyebrow}
+    </p>
+
+    <h1
+      class="mt-7 max-w-4xl text-[2.375rem] font-semibold leading-[1.06] tracking-[-0.03em] text-white sm:text-5xl lg:text-6xl xl:text-[4.25rem]"
+      data-reveal
+      data-reveal-index="1"
+    >
+      <AccentTitle text={hero.title} accent={hero.accent} gradient />
+    </h1>
+
+    <p
+      class="mt-6 max-w-[46ch] text-lg leading-relaxed text-slate-300 xl:text-xl"
+      data-reveal
+      data-reveal-index="2"
+    >
+      {hero.subtitle}
+    </p>
+
+    <div
+      class="mt-9 flex w-full flex-col items-center gap-4 sm:w-auto sm:flex-row sm:gap-7"
+      data-reveal
+      data-reveal-index="3"
+    >
+      <span class="magnetic inline-flex w-full sm:w-auto">
+        <a href={hero.primaryCta.href} class="btn-primary w-full sm:w-auto">
+          {hero.primaryCta.label}
+          <Icon name="arrow" class="h-5 w-5" />
+        </a>
+      </span>
+      <a
+        href={hero.secondaryCta.href}
+        class="group inline-flex items-center gap-1.5 px-1 py-2 font-ui font-semibold text-white/80 transition-colors hover:text-white"
+      >
+        {hero.secondaryCta.label}
+        <Icon name="arrow" class="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+      </a>
+    </div>
+
+    <!-- Trust row: icon tiles split by hairline dividers, Equinox-style. -->
+    <ul
+      class="mt-12 flex flex-col items-start gap-4 font-ui text-sm text-slate-300 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-0 sm:divide-x sm:divide-white/10 lg:mt-14"
+      data-reveal
+      data-reveal-index="4"
+    >
+      {hero.trustSignals.map((signal) => (
+        <li class="flex items-center gap-3 sm:px-6">
+          <span class="inline-grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-white/10 bg-white/[0.05] text-brand-cyan backdrop-blur-sm">
+            <Icon name={signal.icon} class="h-4 w-4" />
           </span>
-          {hero.eyebrow}
-        </p>
+          {signal.label}
+        </li>
+      ))}
+    </ul>
 
-        <h1
-          class="mt-6 font-extrabold text-white text-[2.125rem] sm:text-[2.75rem] xl:text-5xl leading-[1.08] tracking-tight text-balance"
-          data-reveal
-          data-reveal-index="1"
-        >
-          {titleParts[0]}
-          {hero.highlight && <span class="text-gradient">{hero.highlight}</span>}
-          {titleParts[1]}
-        </h1>
+    <!-- Room for the ribbon to sweep below the copy. -->
+    <div class="h-[clamp(9rem,20vw,17rem)] shrink-0" aria-hidden="true"></div>
+  </div>
 
-        <p
-          class="mt-6 text-lg xl:text-xl text-slate-300 leading-relaxed max-w-[46ch]"
-          data-reveal
-          data-reveal-index="2"
-        >
-          {hero.subtitle}
-        </p>
-
-        <div class="mt-9 flex flex-col sm:flex-row sm:items-center gap-4" data-reveal data-reveal-index="3">
-          <span class="magnetic inline-flex">
-            <a href={hero.primaryCta.href} class="btn-primary w-full sm:w-auto">
-              {hero.primaryCta.label}
-              <Icon name="arrow" class="w-5 h-5" />
-            </a>
-          </span>
-          <a
-            href={hero.secondaryCta.href}
-            class="font-ui font-semibold text-white/80 hover:text-white underline decoration-brand-cyan/50 decoration-2 underline-offset-[6px] hover:decoration-brand-cyan transition-colors px-1 py-2 text-center sm:text-left"
-          >
-            {hero.secondaryCta.label}
-          </a>
-        </div>
-
-        <ul
-          class="mt-8 flex flex-wrap gap-x-6 gap-y-3 font-ui text-sm text-slate-400 lg:mt-10"
-          data-reveal
-          data-reveal-index="4"
-        >
-          {hero.trustSignals.map((signal) => (
-            <li class="flex items-center gap-2.5">
-              <Icon name="check" class="w-4 h-4 text-brand-green shrink-0" />
-              {signal}
-            </li>
+  <!-- Platform strip: tools we work in, never client logos (see CLAUDE.md).
+       Pure CSS marquee, zero JavaScript. -->
+  <div class="relative border-t border-white/10 bg-brand-abyss/50 backdrop-blur-md">
+    <div class="container flex flex-col items-center gap-4 py-6 lg:flex-row lg:gap-10">
+      <p class="shrink-0 text-center font-ui text-xs leading-snug text-slate-400 lg:max-w-[11rem] lg:text-left">
+        Built on the platforms you already use
+      </p>
+      <div
+        class="relative flex w-full overflow-hidden"
+        style="mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);"
+      >
+        <div class="marquee-track flex w-max animate-marquee">
+          {tickerHalves.map((isClone) => (
+            <ul class="flex shrink-0 items-center gap-10 pr-10" aria-hidden={isClone ? 'true' : undefined}>
+              {proof.ticker.map((item) => (
+                <li class="whitespace-nowrap font-heading text-base font-semibold tracking-tight text-white/70">
+                  {item}
+                </li>
+              ))}
+            </ul>
           ))}
-        </ul>
-      </div>
-
-      <!-- Visual: 5 columns, bleeds slightly wider than its track -->
-      <div class="lg:col-span-5" data-reveal data-reveal-index="2">
-        <img
-          src="/assets/hero-visual.png"
-          alt="Local ranking dashboard showing a top Google Maps listing, a rising search-visibility chart, and a #1 ranking badge"
-          class="w-full h-auto max-w-[34rem] mx-auto rounded-2xl border border-white/10 shadow-[0_30px_80px_-30px_rgba(0,229,255,0.45)] lg:max-w-none lg:scale-105 origin-left"
-          width="1599"
-          height="1194"
-          loading="eager"
-          fetchpriority="high"
-        />
+        </div>
       </div>
     </div>
   </div>

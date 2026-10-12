@@ -1,0 +1,40 @@
+---
+import Icon from './Icon.astro';
+import AccentTitle from './AccentTitle.astro';
+import { leaks } from '../data/site';
+---
+<!-- Problem-first section: each card is a question about the visitor's own
+     business, answered by the system that closes that leak. Pure Astro, no
+     island - it sits directly under the hero. -->
+<section id="leaks" class="section bg-brand-abyss scroll-mt-24">
+  <div class="container">
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 class="section-title" data-reveal data-reveal-index="0">
+        <AccentTitle text={leaks.title} accent={leaks.accent} />
+      </h2>
+      <p class="section-lede mx-auto" data-reveal data-reveal-index="1">{leaks.subtitle}</p>
+    </div>
+
+    <ul class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {leaks.items.map((item, i) => (
+        <li
+          class="glass spotlight flex flex-col p-7 transition-colors duration-300 hover:border-brand-cyan/30"
+          data-reveal
+          data-reveal-index={i}
+        >
+          <span class="icon-tile">
+            <Icon name={item.icon} class="h-5 w-5" />
+          </span>
+          <h3 class="mb-6 mt-5 font-heading text-lg font-semibold leading-snug text-white">
+            {item.question}
+          </h3>
+          <p class="mt-auto flex items-center gap-2 border-t border-white/10 pt-4 font-ui text-sm font-semibold text-brand-cyan">
+            <span class="sr-only">The fix:</span>
+            <Icon name="arrow" class="h-4 w-4 shrink-0" />
+            {item.fix}
+          </p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

@@ -21,6 +21,8 @@ export default {
         heading: ['Montserrat', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         body: ['Lato', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         ui: ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        // One italic serif phrase per heading, never body copy.
+        accent: ['"Instrument Serif"', 'ui-serif', 'Georgia', 'serif'],
       },
       container: {
         center: true,
@@ -63,6 +65,11 @@ export default {
           '85%': { opacity: '1' },
           '100%': { transform: 'translateY(110vh)', opacity: '0' },
         },
+        // Hero light ribbon: a slow sway, transform-only so it stays composited.
+        'ribbon-drift': {
+          '0%': { transform: 'translate3d(-2%, 0, 0) rotate(-1deg)' },
+          '100%': { transform: 'translate3d(2%, -3%, 0) rotate(1deg)' },
+        },
         'pulse-glow': {
           '0%, 100%': { opacity: '0.4' },
           '50%': { opacity: '1' },
@@ -73,6 +80,7 @@ export default {
         marquee: 'marquee var(--marquee-duration, 40s) linear infinite',
         'beam-fall': 'beam-fall 8s linear infinite',
         'pulse-glow': 'pulse-glow 3.5s ease-in-out infinite',
+        'ribbon-drift': 'ribbon-drift 14s ease-in-out infinite alternate',
       },
     },
   },

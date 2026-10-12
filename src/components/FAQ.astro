@@ -1,11 +1,12 @@
 ---
+import AccentTitle from './AccentTitle.astro';
 import { faq } from '../data/site';
 ---
 <section id="faq" class="section bg-brand-navy scroll-mt-24">
   <div class="container">
     <div class="grid gap-10 lg:grid-cols-12 lg:gap-16">
       <div class="lg:col-span-5">
-        <h2 class="section-title" data-reveal data-reveal-index="0">{faq.title}</h2>
+        <h2 class="section-title" data-reveal data-reveal-index="0"><AccentTitle text={faq.title} accent={faq.accent} /></h2>
         <p class="section-lede" data-reveal data-reveal-index="1">{faq.subtitle}</p>
       </div>
 

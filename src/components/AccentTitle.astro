@@ -1,0 +1,16 @@
+---
+// Renders a heading's text with one phrase set in the italic serif accent.
+// Used inside the heading element, so each caller keeps its own tag/classes.
+// `gradient` is reserved for the hero: the page carries one gradient phrase.
+interface Props {
+  text: string;
+  accent?: string;
+  gradient?: boolean;
+}
+const { text, accent, gradient = false } = Astro.props;
+
+const index = accent ? text.indexOf(accent) : -1;
+const before = index >= 0 ? text.slice(0, index) : text;
+const after = index >= 0 && accent ? text.slice(index + accent.length) : '';
+---
+{before}{index >= 0 && <span class:list={['accent', gradient && 'text-gradient pr-[0.08em]']}>{accent}</span>}{after}

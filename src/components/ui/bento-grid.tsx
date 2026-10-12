@@ -12,6 +12,11 @@ import {
   Check,
   Gauge,
   MapPin,
+  Megaphone,
+  PhoneIncoming,
+  Receipt,
+  RefreshCw,
+  Rocket,
   Search,
   Server,
   Workflow,
@@ -28,6 +33,11 @@ const ICONS: Record<string, LucideIcon> = {
   server: Server,
   bot: Bot,
   workflow: Workflow,
+  'phone-incoming': PhoneIncoming,
+  refresh: RefreshCw,
+  receipt: Receipt,
+  megaphone: Megaphone,
+  rocket: Rocket,
 };
 
 export interface BentoItem {
@@ -102,10 +112,10 @@ function BentoCard({ item }: { item: BentoItem }) {
 
       <div className={cn(isWide && 'lg:flex lg:items-start lg:gap-12')}>
         <div className={cn(isWide && 'lg:max-w-sm lg:shrink-0')}>
-          <span className="inline-grid h-12 w-12 place-items-center rounded-xl border border-brand-cyan/25 bg-brand-cyan/10 text-brand-cyan">
+          <span className="icon-tile">
             <Icon className="h-6 w-6" strokeWidth={1.75} aria-hidden="true" />
           </span>
-          <h3 className="mt-6 font-heading text-xl font-bold text-white lg:text-2xl">
+          <h3 className="mt-6 font-heading text-xl font-semibold tracking-[-0.01em] text-white lg:text-2xl">
             {item.name}
           </h3>
           <p className="mt-3 leading-relaxed text-slate-400">{item.blurb}</p>
