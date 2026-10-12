@@ -10,14 +10,14 @@ import { proof } from '../data/site';
   </div>
 
   <div class="container relative">
-    <div class="mx-auto max-w-2xl text-center">
+    <div class="max-w-2xl sm:mx-auto sm:text-center">
       <h2 class="section-title" data-reveal data-reveal-index="0"><AccentTitle text={proof.roi.title} accent={proof.roi.accent} /></h2>
-      <p class="section-lede mx-auto text-center" data-reveal data-reveal-index="1">
+      <p class="section-lede sm:mx-auto" data-reveal data-reveal-index="1">
         {proof.roi.subtitle}
       </p>
     </div>
 
-    <div class="mt-12" data-reveal data-reveal-index="2">
+    <div class="mt-12 lg:mt-14" data-reveal data-reveal-index="2">
       <RoiEstimator modelLabel={proof.roi.modelLabel} client:visible />
     </div>
   </div>

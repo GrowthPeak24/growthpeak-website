@@ -337,7 +337,9 @@ export const process = {
 };
 
 export const leadMagnet = {
-  eyebrow: 'Free, No Obligation',
+  // Same two-part pill as the hero: solid chip, then the reassurance text.
+  eyebrowTag: 'Free',
+  eyebrow: 'No obligation, no long-term contract',
   title: 'Get Your Free Lead Leak Audit',
   accent: 'Lead Leak Audit',
   subtitle:

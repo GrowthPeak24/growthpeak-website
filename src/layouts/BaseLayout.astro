@@ -3,6 +3,11 @@ import '../styles/global.css';
 import Seo from '../components/Seo.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+// The two faces the hero headline renders in. Preloading them stops the h1
+// painting in a fallback and then reflowing when the webfont swaps in. Vite
+// hashes these to the same asset the @fontsource CSS references.
+import headingFont from '@fontsource/montserrat/files/montserrat-latin-600-normal.woff2?url';
+import accentFont from '@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2?url';
 
 interface Props {
   title?: string;
@@ -21,6 +26,8 @@ const { title, description, includeFaqSchema } = Astro.props;
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#0B132B" />
+    <link rel="preload" href={headingFont} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={accentFont} as="font" type="font/woff2" crossorigin />
     <Seo title={title} description={description} includeFaqSchema={includeFaqSchema} />
     <!-- Set before first paint so revealed elements never flash their visible
          state. Anything without JS keeps the fully-visible baseline. -->

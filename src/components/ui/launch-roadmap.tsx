@@ -51,7 +51,7 @@ export function LaunchRoadmap({ steps }: { steps: readonly RoadmapStep[] }) {
                 >
                   <span
                     className={cn(
-                      'mt-0.5 inline-grid h-9 w-9 shrink-0 place-items-center rounded-full border font-heading text-sm font-extrabold transition-colors',
+                      'mt-0.5 inline-grid h-9 w-9 shrink-0 place-items-center rounded-full border font-heading text-sm font-semibold transition-colors',
                       isOpen
                         ? 'border-brand-cyan/40 bg-brand-cyan/15 text-brand-cyan'
                         : 'border-white/15 bg-white/5 text-slate-400',
@@ -62,10 +62,10 @@ export function LaunchRoadmap({ steps }: { steps: readonly RoadmapStep[] }) {
                   </span>
 
                   <span className="flex-1">
-                    <span className="block font-heading text-xl font-extrabold tracking-tight text-white lg:text-2xl">
+                    <span className="block font-heading text-xl font-semibold tracking-[-0.01em] text-white lg:text-2xl">
                       {step.title}
                     </span>
-                    <span className="mt-2 block text-sm leading-relaxed text-slate-400">
+                    <span className="mt-2 block font-body text-sm leading-relaxed text-slate-400">
                       {step.text}
                     </span>
                   </span>

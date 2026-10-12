@@ -6,20 +6,20 @@ import { proof } from '../data/site';
 ---
 <section id="proof" class="section relative scroll-mt-24 bg-brand-abyss">
   <div class="container relative">
-    <div class="mx-auto max-w-2xl text-center">
+    <div class="max-w-2xl sm:mx-auto sm:text-center">
       <h2 class="section-title" data-reveal data-reveal-index="0"><AccentTitle text={proof.title} accent={proof.accent} /></h2>
-      <p class="section-lede mx-auto text-center" data-reveal data-reveal-index="1">
+      <p class="section-lede sm:mx-auto" data-reveal data-reveal-index="1">
         {proof.subtitle}
       </p>
     </div>
 
-    <div class="mt-14" data-reveal data-reveal-index="2">
+    <div class="mt-12 lg:mt-14" data-reveal data-reveal-index="2">
       <MetricCounters metrics={proof.metrics} client:visible />
     </div>
     <!-- Operational guarantees: concrete deliverables we control, standing in
          for the social proof this site deliberately does not fake. -->
     <div class="mt-16 border-t border-white/10 pt-14 lg:mt-20">
-      <h3 class="text-center font-heading text-2xl font-semibold tracking-[-0.02em] text-white lg:text-3xl" data-reveal data-reveal-index="0">
+      <h3 class="font-heading text-2xl sm:text-center font-semibold tracking-[-0.02em] text-white lg:text-3xl" data-reveal data-reveal-index="0">
         System &amp; Performance Guarantees
       </h3>
       <ul class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
