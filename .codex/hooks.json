@@ -5,8 +5,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"$(git rev-parse --show-toplevel)/.codex/hooks/check-claude-md.cjs\"",
-            "commandWindows": "node .codex/hooks/check-claude-md.cjs",
+            "command": "node \"$(git rev-parse --show-toplevel)/.codex/hooks/check-agents-md.cjs\"",
+            "commandWindows": "node .codex/hooks/check-agents-md.cjs",
             "timeout": 15
           }
         ]

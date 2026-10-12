@@ -1,16 +1,17 @@
 #!/usr/bin/env node
-// Stop hook: nags Claude to update CLAUDE.md when source files have changed
-// more recently than CLAUDE.md itself, so the doc doesn't silently go stale.
+// Stop hook: nags Codex to update AGENTS.md when source files have changed
+// more recently than AGENTS.md itself, so the doc doesn't silently go stale.
+// (Claude's equivalent lives in .claude/hooks/ and watches CLAUDE.md.)
 //
 // This cannot verify "tested" on its own, it only detects file changes.
-// The reason text asks Claude to confirm the change works before touching docs.
+// The reason text asks Codex to confirm the change works before touching docs.
 
 const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..', '..');
-const CLAUDE_MD = path.join(ROOT, 'CLAUDE.md');
-const STATE_FILE = path.join(__dirname, '.claude-md-state.json');
+const AGENTS_MD = path.join(ROOT, 'AGENTS.md');
+const STATE_FILE = path.join(__dirname, '.agents-md-state.json');
 
 const WATCH_PATHS = [
   'src',
@@ -68,11 +69,11 @@ function main() {
     process.exit(0);
   }
 
-  let claudeMdMtime;
+  let agentsMdMtime;
   try {
-    claudeMdMtime = fs.statSync(CLAUDE_MD).mtimeMs;
+    agentsMdMtime = fs.statSync(AGENTS_MD).mtimeMs;
   } catch {
-    process.exit(0); // No CLAUDE.md to keep in sync.
+    process.exit(0); // No AGENTS.md to keep in sync.
   }
 
   let currentMaxSrcMtime = 0;
@@ -81,7 +82,7 @@ function main() {
   }
 
   const state = readState();
-  const isStale = currentMaxSrcMtime > claudeMdMtime;
+  const isStale = currentMaxSrcMtime > agentsMdMtime;
   const alreadyNotified = currentMaxSrcMtime <= state.lastNotifiedMtime;
 
   if (isStale && !alreadyNotified) {
@@ -89,7 +90,7 @@ function main() {
     console.log(JSON.stringify({
       decision: 'block',
       reason:
-        'Source files (src/, tailwind.config.mjs, astro.config.mjs, package.json, or vercel.json) changed since CLAUDE.md was last updated. Before ending this turn: confirm the change is implemented and verified, then update CLAUDE.md if it now describes something inaccurate. If CLAUDE.md already covers this change correctly, no edit is needed, just finish your turn.',
+        'Source files (src/, tailwind.config.mjs, astro.config.mjs, package.json, or vercel.json) changed since AGENTS.md was last updated. Before ending this turn: confirm the change is implemented and verified, then update AGENTS.md if it now describes something inaccurate. If AGENTS.md already covers this change correctly, no edit is needed, just finish your turn.',
     }));
   }
 
