@@ -19,24 +19,24 @@ All copy (headlines, services, FAQ, contact details, form labels) lives in a sin
 
 Update these real details before launch: `site.email`, `site.phone`, `site.social.*`.
 
-## Lead magnet form (Web3Forms)
+## Lead magnet form (Cenvyro CRM)
 
-The audit form posts to [Web3Forms](https://web3forms.com) — no backend required. Submissions are emailed to you instantly.
+The audit form posts to `/api/contact`, a Vercel Function (`api/contact.js`) that validates the lead and forwards it as JSON to the Cenvyro CRM webhook.
 
-1. Get a free access key at https://web3forms.com (enter the email that should receive leads).
-2. Copy `.env.example` to `.env` and set:
+1. Copy `.env.example` to `.env` and set:
    ```
-   PUBLIC_WEB3FORMS_KEY=your-access-key
+   CENVYRO_WEBHOOK_URL=your-cenvyro-webhook-url
    ```
-3. On Vercel, add the same key as an Environment Variable named `PUBLIC_WEB3FORMS_KEY`.
+2. On Vercel, add the same value as an Environment Variable named `CENVYRO_WEBHOOK_URL`. Leave off the `PUBLIC_` prefix, because it's a server-only secret.
+3. `npm run dev` does not run the function. Use `vercel dev` to test the form end-to-end locally.
 
-The form includes a honeypot spam trap and works with async submit + a graceful error state.
+The form includes a honeypot spam trap, async submit with a graceful error state, and a no-JS fallback (the function returns a plain confirmation page).
 
 ## Deploy to Vercel
 
 1. Push this folder to a Git repo (GitHub/GitLab).
 2. Import it in Vercel — it auto-detects Astro (Framework preset: Astro).
-3. Add the `PUBLIC_WEB3FORMS_KEY` env var.
+3. Add the `CENVYRO_WEBHOOK_URL` env var.
 4. Attach the custom domain `growthpeakdigital.com`.
 
 ## Brand tokens
