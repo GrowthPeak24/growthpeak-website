@@ -1,5 +1,6 @@
 ---
 import RoiEstimator from './ui/roi-estimator.tsx';
+import AccentTitle from './AccentTitle.astro';
 import { proof } from '../data/site';
 ---
 <section id="roi" class="section relative scroll-mt-24 bg-brand-navy">
@@ -10,7 +11,7 @@ import { proof } from '../data/site';
 
   <div class="container relative">
     <div class="mx-auto max-w-2xl text-center">
-      <h2 class="section-title" data-reveal data-reveal-index="0">{proof.roi.title}</h2>
+      <h2 class="section-title" data-reveal data-reveal-index="0"><AccentTitle text={proof.roi.title} accent={proof.roi.accent} /></h2>
       <p class="section-lede mx-auto text-center" data-reveal data-reveal-index="1">
         {proof.roi.subtitle}
       </p>

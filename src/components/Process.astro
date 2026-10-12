@@ -1,12 +1,13 @@
 ---
 import LaunchRoadmap from './ui/launch-roadmap.tsx';
+import AccentTitle from './AccentTitle.astro';
 import { process } from '../data/site';
 ---
 <section id="process" class="section bg-brand-deep scroll-mt-24">
   <div class="container">
     <div class="grid gap-6 lg:grid-cols-12 lg:items-end">
       <h2 class="section-title lg:col-span-6" data-reveal data-reveal-index="0">
-        {process.title}
+        <AccentTitle text={process.title} accent={process.accent} />
       </h2>
       <p class="section-lede mt-0 lg:col-span-6 lg:mb-1" data-reveal data-reveal-index="1">
         {process.subtitle}

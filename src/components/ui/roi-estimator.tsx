@@ -2,14 +2,10 @@
 
 import { useId, useMemo, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Calculator, TrendingUp } from 'lucide-react';
+import { Calculator, TrendingDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-const UPLIFTS = [
-  { label: '1.5x', value: 1.5 },
-  { label: '2x', value: 2 },
-  { label: '3x', value: 3 },
-] as const;
+const decimal = new Intl.NumberFormat('en-US', { maximumFractionDigits: 1 });
 
 const currency = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -74,18 +70,18 @@ export function RoiEstimator({
   modelLabel?: string;
 }) {
   const [customerValue, setCustomerValue] = useState(750);
-  const [monthlyCustomers, setMonthlyCustomers] = useState(8);
-  const [uplift, setUplift] = useState<number>(2);
+  const [missedEnquiries, setMissedEnquiries] = useState(10);
+  const [closeRate, setCloseRate] = useState(30);
   const prefersReducedMotion = useReducedMotion();
 
-  const { extraCustomers, monthlyGain, annualGain } = useMemo(() => {
-    const extra = Math.round(monthlyCustomers * (uplift - 1));
+  const { lostCustomers, monthlyLoss, annualLoss } = useMemo(() => {
+    const lost = missedEnquiries * (closeRate / 100);
     return {
-      extraCustomers: extra,
-      monthlyGain: extra * customerValue,
-      annualGain: extra * customerValue * 12,
+      lostCustomers: lost,
+      monthlyLoss: Math.round(lost * customerValue),
+      annualLoss: Math.round(lost * customerValue * 12),
     };
-  }, [customerValue, monthlyCustomers, uplift]);
+  }, [customerValue, missedEnquiries, closeRate]);
 
   return (
     <div className={cn('glass glass-glow overflow-hidden p-7 lg:p-10', className)}>
@@ -94,7 +90,7 @@ export function RoiEstimator({
           <Calculator className="h-5 w-5" strokeWidth={1.75} aria-hidden="true" />
         </span>
         <h3 className="font-heading text-xl font-bold text-white">
-          What would better local visibility be worth?
+          What are missed leads costing you?
         </h3>
       </div>
 
@@ -110,49 +106,22 @@ export function RoiEstimator({
             format={(value) => currency.format(value)}
           />
           <Slider
-            label="Customers you win from Google each month today"
+            label="Enquiries missed or answered too late each month"
             min={1}
             max={50}
             step={1}
-            value={monthlyCustomers}
-            onChange={setMonthlyCustomers}
+            value={missedEnquiries}
+            onChange={setMissedEnquiries}
           />
-
-          <fieldset>
-            <legend className="font-ui text-sm font-semibold text-slate-300">
-              Visibility uplift you&rsquo;re aiming for
-            </legend>
-            <div className="mt-3 grid grid-cols-3 gap-2 rounded-full border border-white/10 bg-white/[0.04] p-1">
-              {UPLIFTS.map((option) => {
-                const active = option.value === uplift;
-                return (
-                  <button
-                    key={option.label}
-                    type="button"
-                    onClick={() => setUplift(option.value)}
-                    aria-pressed={active}
-                    className={cn(
-                      'relative rounded-full px-4 py-2 font-ui text-sm font-semibold transition-colors',
-                      active ? 'text-brand-abyss' : 'text-slate-300 hover:text-white',
-                    )}
-                  >
-                    {active && (
-                      <motion.span
-                        layoutId="roi-uplift-pill"
-                        className="absolute inset-0 rounded-full bg-brand-gradient"
-                        transition={
-                          prefersReducedMotion
-                            ? { duration: 0 }
-                            : { type: 'spring', stiffness: 380, damping: 30 }
-                        }
-                      />
-                    )}
-                    <span className="relative">{option.label}</span>
-                  </button>
-                );
-              })}
-            </div>
-          </fieldset>
+          <Slider
+            label="How many enquiries you close when you do reply"
+            suffix="%"
+            min={5}
+            max={80}
+            step={5}
+            value={closeRate}
+            onChange={setCloseRate}
+          />
         </div>
 
         {/* Output panel */}
@@ -161,34 +130,34 @@ export function RoiEstimator({
             {modelLabel}
           </p>
           <p className="mt-5 font-ui text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
-            Modelled additional revenue per year
+            Modelled revenue slipping away per year
           </p>
           <motion.p
-            key={annualGain}
+            key={annualLoss}
             initial={prefersReducedMotion ? false : { opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             className="mt-3 font-heading text-4xl font-extrabold text-gradient lg:text-5xl"
           >
-            {currency.format(annualGain)}
+            {currency.format(annualLoss)}
           </motion.p>
 
           <dl className="mt-8 grid grid-cols-2 gap-4 border-t border-white/10 pt-6 text-left">
             <div>
               <dt className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-                Extra customers / mo
+                Customers lost / mo
               </dt>
               <dd className="mt-1 flex items-center gap-1.5 font-heading text-xl font-bold text-white">
-                <TrendingUp className="h-4 w-4 text-brand-green" aria-hidden="true" />+
-                {extraCustomers}
+                <TrendingDown className="h-4 w-4 text-brand-cyan" aria-hidden="true" />
+                {decimal.format(lostCustomers)}
               </dd>
             </div>
             <div>
               <dt className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-                Extra revenue / mo
+                Revenue lost / mo
               </dt>
               <dd className="mt-1 font-heading text-xl font-bold text-white">
-                {currency.format(monthlyGain)}
+                {currency.format(monthlyLoss)}
               </dd>
             </div>
           </dl>
@@ -199,9 +168,10 @@ export function RoiEstimator({
           claim about results we have produced. Keep this disclaimer visible. */}
       <p className="mt-8 border-t border-white/10 pt-5 text-xs leading-relaxed text-slate-500">
         <strong className="font-semibold text-slate-400">{modelLabel}.</strong> Output is
-        arithmetic on the figures you enter above &mdash; extra customers &times; your average
-        customer value. These are not verified historical client outcomes, not a projection
-        from any past campaign, and not a guarantee of future performance.
+        arithmetic on the figures you enter above &mdash; missed enquiries &times; your close
+        rate &times; your average customer value. These are not verified historical client
+        outcomes, not a projection from any past campaign, and not a guarantee of what any
+        system will recover.
       </p>
     </div>
   );

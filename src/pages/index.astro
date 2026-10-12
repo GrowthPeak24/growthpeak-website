@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
+import Leaks from '../components/Leaks.astro';
 import Services from '../components/Services.astro';
 import Proof from '../components/Proof.astro';
 import WhyUs from '../components/WhyUs.astro';
@@ -11,9 +12,10 @@ import FAQ from '../components/FAQ.astro';
 import CTA from '../components/CTA.astro';
 ---
 <!-- Section surfaces alternate deliberately so no two neighbours share a
-     ground: gradient → navy → abyss → navy → deep → navy → abyss → navy → deep. -->
+     ground: gradient → abyss → navy → abyss → navy → deep → navy → abyss → navy → deep. -->
 <BaseLayout includeFaqSchema={true}>
   <Hero />
+  <Leaks />
   <Services />
   <Proof />
   <WhyUs />

@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import AccentTitle from './AccentTitle.astro';
 import { whyUs } from '../data/site';
 ---
 <section id="why-us" class="section bg-brand-navy scroll-mt-24">
@@ -7,7 +8,7 @@ import { whyUs } from '../data/site';
     <div class="grid gap-12 lg:grid-cols-12 lg:gap-16">
       <!-- Sticky-free asymmetric header column -->
       <div class="lg:col-span-5">
-        <h2 class="section-title" data-reveal data-reveal-index="0">{whyUs.title}</h2>
+        <h2 class="section-title" data-reveal data-reveal-index="0"><AccentTitle text={whyUs.title} accent={whyUs.accent} /></h2>
         <p class="section-lede" data-reveal data-reveal-index="1">{whyUs.subtitle}</p>
       </div>
 
@@ -16,7 +17,7 @@ import { whyUs } from '../data/site';
         <div class="grid gap-x-12 gap-y-10 sm:grid-cols-2">
           {whyUs.points.map((point, i) => (
             <div class="border-t border-white/10 pt-6" data-reveal data-reveal-index={i}>
-              <h3 class="flex items-center gap-3 text-lg font-bold leading-tight text-white">
+              <h3 class="flex items-center gap-3 text-lg font-semibold leading-tight text-white">
                 <Icon name={point.icon} class="h-5 w-5 shrink-0 text-brand-cyan" />
                 {point.title}
               </h3>

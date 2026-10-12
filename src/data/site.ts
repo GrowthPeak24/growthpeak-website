@@ -7,9 +7,9 @@ export const site = {
   name: 'GrowthPeak Digital',
   domain: 'growthpeakdigital.com',
   url: 'https://growthpeakdigital.com',
-  tagline: 'Local SEO, Google Business Profile & Web Design',
+  tagline: 'Lead Capture Systems, Automation & Local SEO',
   description:
-    'GrowthPeak Digital helps local businesses rank higher on Google and turn that visibility into calls, leads, and paying customers.',
+    'GrowthPeak Digital builds systems that help small businesses catch every lead, cut hours of admin, and get paid faster, plus the local SEO and websites that get them found.',
   // Update these with real details before launch.
   email: 'hello@growthpeakdigital.com',
   phone: '',
@@ -23,6 +23,7 @@ export const site = {
 } as const;
 
 export const nav = [
+  { label: 'Leaks', href: '#leaks' },
   { label: 'Services', href: '#services' },
   { label: 'Why Us', href: '#why-us' },
   { label: 'Process', href: '#process' },
@@ -31,33 +32,122 @@ export const nav = [
 
 export const hero = {
   // Rendered as the glowing cyan badge above the hero headline.
-  eyebrow: 'Helping Local Businesses Reach Their Digital Peak',
-  title: 'Get Found by Local Customers Ready to Buy',
-  highlight: 'Ready to Buy',
+  eyebrow: 'Systems That Work While You Work',
+  // Solid chip at the start of the two-part hero badge.
+  eyebrowTag: '24/7',
+  title: 'We Build Systems That Catch Every Lead',
+  // Italic serif phrase; in the hero it also carries the page's one gradient.
+  accent: 'Catch Every Lead',
   // Hard cap: 20 words. Keep it short enough to read in one glance.
   subtitle:
-    'We put local businesses at the top of the Map Pack and turn those clicks into booked jobs.',
-  primaryCta: { label: 'Get My Free Audit', href: '#lead-magnet' },
+    'Get found on Google, answer every enquiry in seconds, and get paid faster, without hiring another person.',
+  primaryCta: { label: 'Find My Lead Leaks', href: '#lead-magnet' },
   // Secondary is a different intent (learn) so it never competes with the primary CTA.
   secondaryCta: { label: 'See how it works', href: '#process' },
   trustSignals: [
-    'Local SEO specialists',
-    'Google Business Profile experts',
-    'Conversion-focused web design',
+    { icon: 'target', label: 'Built around how your business runs' },
+    { icon: 'handshake', label: 'Month to month, no lock-in' },
+    { icon: 'chart', label: 'Plain-English reporting' },
+  ],
+};
+
+// ---------------------------------------------------------------------------
+// LEAKS
+// Problem-first framing: each card asks a question the owner can answer about
+// their own business, then names the system that fixes it. Questions, not
+// industry statistics, on purpose - most "missed call" figures in circulation
+// come from vendors selling call tools and can't be verified.
+// ---------------------------------------------------------------------------
+export const leaks = {
+  title: 'Where Small Businesses Quietly Lose Money',
+  accent: 'Lose Money',
+  subtitle:
+    "Most businesses don't have a marketing problem. They have leaks. See how many of these sound familiar.",
+  items: [
+    {
+      icon: 'phone',
+      question: 'How many calls went to voicemail while you were on a job?',
+      fix: 'Missed-call text back',
+    },
+    {
+      icon: 'clock',
+      question: 'How long does a web enquiry wait before someone replies?',
+      fix: 'Instant lead response',
+    },
+    {
+      icon: 'message',
+      question: 'How many quotes went out and never got chased?',
+      fix: 'Automatic follow-up',
+    },
+    {
+      icon: 'refresh',
+      question: 'When did your past customers last hear from you?',
+      fix: 'Customer reactivation',
+    },
+    {
+      icon: 'star',
+      question: 'How many happy customers would leave a review if someone asked?',
+      fix: 'Review requests',
+    },
+    {
+      icon: 'receipt',
+      question: 'How many evenings go into chasing invoices by hand?',
+      fix: 'Invoicing & payment reminders',
+    },
   ],
 };
 
 // Eyebrows are deliberately rationed across the page (hero + lead magnet only)
 // so they read as accents rather than a repeating template.
 export const services = {
-  title: 'Everything You Need to Dominate Local Search',
+  title: 'Systems That Get You Found, Booked and Paid',
+  accent: 'Booked and Paid',
   subtitle:
-    'Three services that compound: get found, convert the click, then let automation work the lead while you work the job.',
+    'Every system fixes one leak. Together they run the busywork so you can run the business.',
   items: [
     {
-      icon: 'map-pin',
-      name: 'Local SEO & Google Business Profile Optimization',
+      icon: 'phone-incoming',
+      name: 'Lead Capture System',
+      span: 6,
+      blurb:
+        'Never lose another enquiry. Every call, form and message gets an answer in seconds, day or night, even when you are elbow-deep in a job.',
+      bullets: [
+        'Missed-call text back, sent instantly',
+        'Instant replies to web enquiries, 24/7',
+        'Leads qualified before they reach you',
+        'Bookings and quote requests handled automatically',
+        'Every lead logged in your CRM',
+        'Hand-off to you the moment a human is needed',
+      ],
+    },
+    {
+      icon: 'refresh',
+      name: 'Follow-Up & Reactivation System',
       span: 3,
+      blurb:
+        'Quotes get chased and past customers come back, without you having to remember to do it.',
+      bullets: [
+        'Automatic quote follow-up by email & SMS',
+        'Past-customer reactivation campaigns',
+        'Review requests after every job',
+      ],
+    },
+    {
+      icon: 'receipt',
+      name: 'Invoicing & Payment System',
+      span: 3,
+      blurb:
+        'Get paid faster with no awkward chasing. Invoices go out on time and reminders follow up politely until they are paid.',
+      bullets: [
+        'Invoices sent automatically when work is done',
+        'Polite payment reminders on a schedule',
+        'Pay-by-link so customers can pay in one tap',
+      ],
+    },
+    {
+      icon: 'map-pin',
+      name: 'Local SEO & Google Business Profile',
+      span: 2,
       blurb:
         'Rank in the Map Pack so nearby customers call you before they call anyone else.',
       bullets: [
@@ -68,31 +158,28 @@ export const services = {
       ],
     },
     {
-      icon: 'server',
-      name: 'High-Performance Web Development & Managed Hosting',
-      span: 3,
+      icon: 'megaphone',
+      name: 'Social Media Management & Posting',
+      span: 2,
+      blurb:
+        'Stay visible without stopping work to post. Your profiles stay active and on-brand every week.',
+      bullets: [
+        'Content planned and written for you',
+        'Consistent posting on a set schedule',
+        'Profiles kept current and on-brand',
+      ],
+    },
+    {
+      icon: 'rocket',
+      name: 'Websites, Hosting & Launch Pages',
+      span: 2,
       blurb:
         'Sites that load instantly, convert on mobile, and stay online without you thinking about it.',
       bullets: [
         'Conversion-focused, mobile-first builds',
-        'Core Web Vitals tuned for speed',
         'Managed hosting, SSL & daily backups',
+        'Scroll-animated launch pages for product brands',
         'Ongoing updates and uptime monitoring',
-      ],
-    },
-    {
-      icon: 'bot',
-      name: 'AI Chat Widgets & Automated Lead Workflows',
-      span: 6,
-      blurb:
-        'An AI assistant that answers, qualifies, and follows up the moment a lead lands, day or night.',
-      bullets: [
-        'AI chat widget trained on your services',
-        'Instant replies to after-hours enquiries',
-        '24/7 lead capture and qualification',
-        'Booking and quote requests handled automatically',
-        'Automated follow-up via email & SMS',
-        'CRM handoff so no lead goes cold',
       ],
     },
   ],
@@ -108,6 +195,7 @@ export const services = {
 // ---------------------------------------------------------------------------
 export const proof = {
   title: 'The Standard We Hold Ourselves To',
+  accent: 'Hold Ourselves To',
   subtitle:
     'No invented case-study numbers. These are the commitments every engagement starts with.',
   metrics: [
@@ -132,7 +220,7 @@ export const proof = {
       value: 100,
       suffix: '%',
       label: 'Plain-English reporting',
-      detail: 'Rankings, calls and leads. No vanity metrics.',
+      detail: 'Calls caught, leads booked, invoices paid. No vanity metrics.',
     },
   ],
   ticker: [
@@ -141,6 +229,8 @@ export const proof = {
     'Google Analytics 4',
     'Core Web Vitals',
     'Google Maps',
+    'Facebook',
+    'Instagram',
     'Schema.org',
     'PageSpeed Insights',
     'Local Citations',
@@ -157,9 +247,9 @@ export const proof = {
       text: 'The load-time target we build to, measured on mobile against Core Web Vitals.',
     },
     {
-      icon: 'bot',
-      title: '24/7 AI Chat Lead Capture',
-      text: 'An AI widget answers, qualifies and logs enquiries around the clock, including after hours.',
+      icon: 'phone',
+      title: 'Every Enquiry Answered in Seconds',
+      text: 'Calls, forms and messages get a reply straight away and land in one place, including after hours.',
     },
     {
       icon: 'map-pin',
@@ -169,31 +259,33 @@ export const proof = {
   ],
   roi: {
     modelLabel: 'Interactive Estimate Model',
-    title: 'Run the Numbers Before You Talk to Us',
+    title: 'What Are Missed Leads Costing You?',
+    accent: 'Costing You?',
     subtitle:
-      'Move the sliders to your own figures and see what a lift in local visibility would actually be worth to your business.',
+      "Put in your own numbers. See what the enquiries you miss or answer too late add up to over a year.",
   },
 };
 
 export const whyUs = {
-  title: 'A Growth Partner Built Around Your Business',
+  title: "We Fix Problems. We Don't Sell Software.",
+  accent: "We Don't Sell Software.",
   subtitle:
-    'We keep it simple: real results, straight communication, and decisions that protect your bottom line.',
+    "You don't need another app to learn. You need the leaks closed, so the business makes more and takes less of your evening.",
   points: [
     {
       icon: 'target',
-      title: 'Local-First Focus',
-      text: 'We only work with local businesses, so every tactic is built to win the Map Pack and nearby search results.',
-    },
-    {
-      icon: 'chart',
-      title: 'Results You Can Measure',
-      text: 'Every month you get a plain-English report on your rankings, calls, and leads. No vanity metrics to wade through.',
+      title: 'We Start With the Leak, Not the Tool',
+      text: 'First we find where time and money are slipping away. Then we build only what fixes it, nothing you have to babysit.',
     },
     {
       icon: 'bolt',
-      title: 'Speed & Performance',
-      text: 'We build for Core Web Vitals and mobile first, because a fast site ranks higher and converts more visitors.',
+      title: 'Built to Run Without You',
+      text: "After hours, on weekends, while you're mid-job. The systems keep answering, following up and invoicing so you stop being the bottleneck.",
+    },
+    {
+      icon: 'chart',
+      title: 'Results in Plain English',
+      text: 'Every month you see calls caught, leads booked and invoices paid. No dashboards to decode.',
     },
     {
       icon: 'handshake',
@@ -205,37 +297,38 @@ export const whyUs = {
 
 export const process = {
   title: 'Your 3-Step Launch Roadmap',
+  accent: 'Launch Roadmap',
   subtitle:
     'Three phases, no mystery. Each one has a defined output you can hold us to before the next begins.',
   // Verb-first labels. Step numbers are a design device in Process.astro, not
   // part of the copy. `detail` is revealed by the expandable roadmap island.
   steps: [
     {
-      title: 'Audit & Strategy',
-      text: 'We analyse your site, Google Business Profile and local rankings, then hand you a prioritised roadmap.',
+      title: 'Find the Leaks',
+      text: 'We look at how customers find you, how enquiries reach you, and where they drop off, then hand you a prioritised plan.',
       detail: [
         'Local ranking and Map Pack position snapshot',
         'Google Business Profile health check',
-        'Competitor and local keyword research',
-        'Prioritised action plan, highest impact first',
+        'Map of how calls, forms and messages are handled today',
+        'Prioritised action plan, biggest leak first',
       ],
     },
     {
-      title: 'Build & Deploy',
-      text: 'We optimise the profile, build or rebuild the site, and put the automation live.',
+      title: 'Build the Systems',
+      text: 'We set up the systems that close your leaks, optimise your profile, and build or rebuild the site.',
       detail: [
+        'Lead capture, follow-up and invoicing systems switched on',
         'Profile optimisation against the full checklist',
         'Mobile-first build tuned for Core Web Vitals',
-        'AI chat widget and lead workflows connected',
         'Managed hosting, SSL and backups configured',
       ],
     },
     {
-      title: 'Peak Optimization',
-      text: 'We keep tuning against real data and report on rankings, calls and leads in plain English.',
+      title: 'Tune & Report',
+      text: 'We keep tuning against real data and report on calls, leads and payments in plain English.',
       detail: [
-        'Ongoing citation and local authority building',
-        'Review generation and response cadence',
+        'Follow-up and reminder timing adjusted to what works',
+        'Ongoing citation and review building',
         'Monthly plain-English performance reporting',
         'Continuous conversion and speed tuning',
       ],
@@ -245,21 +338,22 @@ export const process = {
 
 export const leadMagnet = {
   eyebrow: 'Free, No Obligation',
-  title: 'Claim Your Free Local SEO & Google Business Profile Audit',
+  title: 'Get Your Free Lead Leak Audit',
+  accent: 'Lead Leak Audit',
   subtitle:
-    "See exactly where you rank, what's holding you back, and the fastest wins to get more local customers. We'll dig into your profile, website, and competitors, then send you a personalized action plan.",
+    "Find out where customers, hours and money are slipping through the cracks. We'll look at your Google presence, your website, and how enquiries reach you, then send a plain-English action plan.",
   benefits: [
-    'Your current local ranking snapshot',
+    'Where you rank on Google Maps',
     'Google Business Profile health check',
-    'Website speed & conversion review',
-    'A prioritized list of quick wins',
+    'How enquiries reach you and what happens next',
+    'The leaks costing you most, fixed first',
   ],
   form: {
-    subject: 'New Free Audit Request | GrowthPeak Digital',
-    submitLabel: 'Get My Free Audit',
+    subject: 'New Lead Leak Audit Request | GrowthPeak Digital',
+    submitLabel: 'Find My Lead Leaks',
     successTitle: 'Request received!',
     successMessage:
-      "Thanks, we've got your details and will send your personalized audit shortly. Keep an eye on your inbox.",
+      "Thanks, we've got your details and will send your Lead Leak Audit shortly. Keep an eye on your inbox.",
     fields: {
       name: { label: 'Full Name', placeholder: 'Jane Smith' },
       email: { label: 'Email Address', placeholder: 'you@business.com' },
@@ -271,41 +365,43 @@ export const leadMagnet = {
 
 export const faq = {
   title: 'Frequently Asked Questions',
+  accent: 'Questions',
   subtitle: 'Everything you need to know before getting started.',
   items: [
     {
+      q: 'Do I need to understand AI or tech to use this?',
+      a: "No. Some of what we build runs on AI behind the scenes, but you never have to touch it. What you see is the result: missed callers texted back, jobs booked, invoices paid.",
+    },
+    {
+      q: "Will my customers feel like they're talking to a robot?",
+      a: "Messages are written in your business's voice, and anything the system can't handle is passed straight to you or your team. The goal is a faster reply, not a colder one.",
+    },
+    {
+      q: 'Can this work with the tools I already use?',
+      a: "Usually, yes. We connect to the phone, calendar, CRM and invoicing tools you already rely on where we can, and only suggest a switch when what you have can't do the job.",
+    },
+    {
       q: 'How long until I see results from local SEO?',
       a: 'Most clients see early movement in Google Business Profile visibility within 30 to 60 days, with real ranking and lead gains typically building over the next 3 to 6 months. Local SEO compounds, so the results keep growing the longer you stick with it.',
-    },
-    {
-      q: 'What exactly is Google Business Profile optimization?',
-      a: 'Your Google Business Profile (formerly Google My Business) is the listing that shows up on Google Maps and in the local Map Pack. We optimize everything on it: categories, services, photos, posts, and reviews, so you rank higher and get more calls, direction requests, and clicks to your website.',
-    },
-    {
-      q: 'Do you build the website, or just optimize it?',
-      a: 'Both. We build new sites from scratch and improve existing ones. Either way, every build loads fast, works on mobile, and is designed to turn visitors into leads.',
     },
     {
       q: 'Are there long-term contracts?',
       a: 'No lock-in. We earn your business every month with real, measurable results. You can adjust or pause your plan as your needs change.',
     },
     {
-      q: 'How do you report on progress?',
-      a: 'Every month you get a report covering your rankings, Google Business Profile performance, and the leads you generated, written in plain English.',
-    },
-    {
       q: 'How much does it cost?',
-      a: 'It depends on your goals and how competitive your market is. Start with a free audit, and we\u2019ll recommend a plan that fits your budget.',
+      a: 'It depends on which leaks you need closed and how competitive your market is. Start with a free Lead Leak Audit, and we’ll recommend a plan that fits your budget.',
     },
   ],
 };
 
 export const finalCta = {
-  title: 'Ready to Peak Your Local Growth?',
+  title: 'Ready to Stop the Leaks?',
+  accent: 'Stop the Leaks?',
   subtitle:
-    'Let\u2019s get your business in front of more local customers. Start with a free audit and see the opportunity before you commit to anything.',
+    'Start with a free Lead Leak Audit and see where time and money are slipping away before you commit to anything.',
   // Single CTA on purpose: the page has one conversion goal, so the closing
   // section does not offer a competing second action.
-  primaryCta: { label: 'Get My Free Audit', href: '#lead-magnet' },
+  primaryCta: { label: 'Find My Lead Leaks', href: '#lead-magnet' },
   reassurance: 'Free, no obligation, and no long-term contract.',
 };

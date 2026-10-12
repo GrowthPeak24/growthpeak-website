@@ -10,23 +10,34 @@ import { nav, hero } from '../data/site';
 
 <header id="site-header" class="fixed top-0 inset-x-0 z-50 border-b border-white/10 bg-brand-abyss/80 backdrop-blur-xl transition-shadow">
   <nav class="container flex items-center justify-between h-16 lg:h-20" aria-label="Primary">
-    <Logo variant="light" />
+    <!-- Logo and nav sit together on the left; status and CTA on the right. -->
+    <div class="flex items-center gap-10 xl:gap-12">
+      <Logo variant="light" />
 
-    <ul class="hidden lg:flex items-center gap-7 xl:gap-9 font-ui font-medium text-slate-300 whitespace-nowrap">
-      {nav.map((item) => (
-        <li>
-          <a href={item.href} class="relative text-sm transition-colors hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-brand-cyan after:shadow-[0_0_10px_0_rgba(0,229,255,0.9)] hover:after:w-full after:transition-all">
-            {item.label}
-          </a>
-        </li>
-      ))}
-    </ul>
+      <ul class="hidden lg:flex items-center gap-7 xl:gap-8 font-ui font-medium text-slate-300 whitespace-nowrap">
+        {nav.map((item) => (
+          <li>
+            <a href={item.href} class="relative text-sm transition-colors hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-brand-cyan after:shadow-[0_0_10px_0_rgba(0,229,255,0.9)] hover:after:w-full after:transition-all">
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
 
-    <span class="magnetic hidden lg:inline-flex">
-      <a href={hero.primaryCta.href} class="btn-primary !py-2.5 !px-6 text-sm whitespace-nowrap">
-        {hero.primaryCta.label}
-      </a>
-    </span>
+    <div class="hidden lg:flex items-center gap-6">
+      <!-- Restates the weekday reply commitment from proof.metrics; not a live
+           presence indicator. -->
+      <p class="hidden xl:flex items-center gap-2 font-ui text-xs font-medium text-slate-300">
+        <span class="h-1.5 w-1.5 rounded-full bg-brand-glow shadow-[0_0_8px_1px_rgba(0,229,255,0.8)]" aria-hidden="true"></span>
+        Weekday replies within 24h
+      </p>
+      <span class="magnetic inline-flex">
+        <a href={hero.primaryCta.href} class="btn-primary !py-2 !px-5 text-sm whitespace-nowrap">
+          {hero.primaryCta.label}
+        </a>
+      </span>
+    </div>
 
     <button
       id="menu-toggle"
