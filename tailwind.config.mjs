@@ -38,48 +38,28 @@ export default {
         'brand-gradient': 'linear-gradient(135deg, #0077B6 0%, #00E5FF 100%)',
         'hero-gradient':
           'linear-gradient(135deg, #020B1A 0%, #0A2540 55%, #0B132B 100%)',
-        'grid-fade':
-          'radial-gradient(ellipse 60% 50% at 50% 0%, #000 60%, transparent 100%)',
       },
       boxShadow: {
-        card: '0 10px 30px -12px rgba(2, 11, 26, 0.6)',
         'card-hover': '0 22px 45px -16px rgba(0, 210, 255, 0.25)',
         glow: '0 0 0 1px rgba(0, 210, 255, 0.25), 0 0 32px -8px rgba(0, 229, 255, 0.45)',
         'glow-lg':
           '0 0 0 1px rgba(0, 210, 255, 0.4), 0 0 64px -12px rgba(0, 229, 255, 0.6)',
       },
       keyframes: {
-        'fade-up': {
-          '0%': { opacity: '0', transform: 'translateY(16px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
-        },
         marquee: {
           from: { transform: 'translateX(0)' },
           // -50% is exact because the track holds two identical halves, each
           // carrying its own trailing gap as padding.
           to: { transform: 'translateX(-50%)' },
         },
-        'beam-fall': {
-          '0%': { transform: 'translateY(-30vh)', opacity: '0' },
-          '10%': { opacity: '1' },
-          '85%': { opacity: '1' },
-          '100%': { transform: 'translateY(110vh)', opacity: '0' },
-        },
         // Hero light ribbon: a slow sway, transform-only so it stays composited.
         'ribbon-drift': {
           '0%': { transform: 'translate3d(-2%, 0, 0) rotate(-1deg)' },
           '100%': { transform: 'translate3d(2%, -3%, 0) rotate(1deg)' },
         },
-        'pulse-glow': {
-          '0%, 100%': { opacity: '0.4' },
-          '50%': { opacity: '1' },
-        },
       },
       animation: {
-        'fade-up': 'fade-up 0.6s ease-out both',
         marquee: 'marquee var(--marquee-duration, 40s) linear infinite',
-        'beam-fall': 'beam-fall 8s linear infinite',
-        'pulse-glow': 'pulse-glow 3.5s ease-in-out infinite',
         'ribbon-drift': 'ribbon-drift 14s ease-in-out infinite alternate',
       },
     },

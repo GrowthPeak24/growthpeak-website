@@ -8,14 +8,14 @@ import { leaks } from '../data/site';
      island - it sits directly under the hero. -->
 <section id="leaks" class="section bg-brand-abyss scroll-mt-24">
   <div class="container">
-    <div class="mx-auto max-w-2xl text-center">
+    <div class="max-w-2xl sm:mx-auto sm:text-center">
       <h2 class="section-title" data-reveal data-reveal-index="0">
         <AccentTitle text={leaks.title} accent={leaks.accent} />
       </h2>
-      <p class="section-lede mx-auto" data-reveal data-reveal-index="1">{leaks.subtitle}</p>
+      <p class="section-lede sm:mx-auto" data-reveal data-reveal-index="1">{leaks.subtitle}</p>
     </div>
 
-    <ul class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    <ul class="mt-12 grid gap-5 sm:grid-cols-2 lg:mt-14 lg:grid-cols-3">
       {leaks.items.map((item, i) => (
         <li
           class="glass spotlight flex flex-col p-7 transition-colors duration-300 hover:border-brand-cyan/30"

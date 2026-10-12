@@ -53,7 +53,7 @@ export function MetricCounters({
         >
           <dt className="sr-only">{metric.label}</dt>
           <dd>
-            <span className="block font-heading text-4xl font-extrabold text-gradient lg:text-5xl">
+            <span className="block font-heading text-4xl font-bold tabular-nums tracking-[-0.02em] text-white lg:text-5xl">
               <CounterValue metric={metric} />
             </span>
             <span className="mt-3 block font-ui text-sm font-semibold text-white">

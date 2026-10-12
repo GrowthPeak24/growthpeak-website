@@ -16,9 +16,12 @@ const f = leadMagnet.form.fields;
     <div class="grid gap-12 lg:grid-cols-12 lg:items-start lg:gap-16">
       <!-- Left: pitch -->
       <div class="lg:col-span-5">
-        <p class="eyebrow text-brand-cyan">{leadMagnet.eyebrow}</p>
+        <p class="badge-split">
+          <span class="badge-split-chip">{leadMagnet.eyebrowTag}</span>
+          {leadMagnet.eyebrow}
+        </p>
         <!-- One step down from the page title scale: this headline is long. -->
-        <h2 class="section-title mt-4 text-white lg:text-4xl"><AccentTitle text={leadMagnet.title} accent={leadMagnet.accent} /></h2>
+        <h2 class="section-title mt-6 text-white lg:text-4xl"><AccentTitle text={leadMagnet.title} accent={leadMagnet.accent} /></h2>
         <p class="mt-5 max-w-[52ch] text-lg leading-relaxed text-slate-400">{leadMagnet.subtitle}</p>
         <ul class="mt-9 space-y-4 border-t border-white/10 pt-8">
           {leadMagnet.benefits.map((benefit) => (
@@ -33,7 +36,7 @@ const f = leadMagnet.form.fields;
       <!-- Right: form card -->
       <div class="glass glass-glow p-7 text-white transition-shadow duration-300 hover:shadow-glow-lg lg:col-span-7 lg:p-10">
         <form id="lead-form" action="/api/contact" method="POST" class="space-y-4" aria-labelledby="lead-form-heading">
-          <p id="lead-form-heading" class="border-b border-white/10 pb-5 font-ui text-sm font-semibold uppercase tracking-[0.14em] text-brand-cyan">
+          <p id="lead-form-heading" class="border-b border-white/10 pb-5 font-heading text-lg font-semibold tracking-[-0.01em] text-white">
             Request your audit
           </p>
 
@@ -44,25 +47,25 @@ const f = leadMagnet.form.fields;
           <div>
             <label for="name" class="mb-1.5 block font-ui text-sm font-semibold text-slate-300">{f.name.label}</label>
             <input type="text" id="name" name="name" required placeholder={f.name.placeholder}
-              class="w-full rounded-lg border border-white/15 bg-white/[0.06] px-4 py-3 text-white placeholder:text-slate-500 outline-none transition focus:border-brand-cyan focus:bg-white/[0.09] focus:ring-2 focus:ring-brand-cyan/40 focus:ring-offset-0" />
+              class="w-full rounded-lg border border-white/15 bg-white/[0.06] px-4 py-3 text-white placeholder:text-slate-400 outline-none transition focus:border-brand-cyan focus:bg-white/[0.09] focus:ring-2 focus:ring-brand-cyan/40 focus:ring-offset-0" />
           </div>
 
           <div>
             <label for="email" class="mb-1.5 block font-ui text-sm font-semibold text-slate-300">{f.email.label}</label>
             <input type="email" id="email" name="email" required placeholder={f.email.placeholder}
-              class="w-full rounded-lg border border-white/15 bg-white/[0.06] px-4 py-3 text-white placeholder:text-slate-500 outline-none transition focus:border-brand-cyan focus:bg-white/[0.09] focus:ring-2 focus:ring-brand-cyan/40 focus:ring-offset-0" />
+              class="w-full rounded-lg border border-white/15 bg-white/[0.06] px-4 py-3 text-white placeholder:text-slate-400 outline-none transition focus:border-brand-cyan focus:bg-white/[0.09] focus:ring-2 focus:ring-brand-cyan/40 focus:ring-offset-0" />
           </div>
 
           <div class="grid sm:grid-cols-2 gap-4">
             <div>
               <label for="business" class="mb-1.5 block font-ui text-sm font-semibold text-slate-300">{f.business.label}</label>
               <input type="text" id="business" name="business" placeholder={f.business.placeholder}
-                class="w-full rounded-lg border border-white/15 bg-white/[0.06] px-4 py-3 text-white placeholder:text-slate-500 outline-none transition focus:border-brand-cyan focus:bg-white/[0.09] focus:ring-2 focus:ring-brand-cyan/40 focus:ring-offset-0" />
+                class="w-full rounded-lg border border-white/15 bg-white/[0.06] px-4 py-3 text-white placeholder:text-slate-400 outline-none transition focus:border-brand-cyan focus:bg-white/[0.09] focus:ring-2 focus:ring-brand-cyan/40 focus:ring-offset-0" />
             </div>
             <div>
               <label for="website" class="mb-1.5 block font-ui text-sm font-semibold text-slate-300">{f.website.label}</label>
               <input type="text" id="website" name="website" placeholder={f.website.placeholder}
-                class="w-full rounded-lg border border-white/15 bg-white/[0.06] px-4 py-3 text-white placeholder:text-slate-500 outline-none transition focus:border-brand-cyan focus:bg-white/[0.09] focus:ring-2 focus:ring-brand-cyan/40 focus:ring-offset-0" />
+                class="w-full rounded-lg border border-white/15 bg-white/[0.06] px-4 py-3 text-white placeholder:text-slate-400 outline-none transition focus:border-brand-cyan focus:bg-white/[0.09] focus:ring-2 focus:ring-brand-cyan/40 focus:ring-offset-0" />
             </div>
           </div>
 
@@ -72,7 +75,7 @@ const f = leadMagnet.form.fields;
           </button>
 
           <p id="form-error" class="hidden text-center text-sm text-red-400" role="alert"></p>
-          <p class="text-center text-xs text-slate-500">We respect your privacy. No spam, ever.</p>
+          <p class="text-center text-xs text-slate-400">We respect your privacy. No spam, ever.</p>
         </form>
 
         <!-- Success state. role=status + aria-live=polite so the announcement
@@ -82,7 +85,7 @@ const f = leadMagnet.form.fields;
           <div class="grid place-items-center w-14 h-14 rounded-full bg-brand-green/15 text-brand-green mx-auto">
             <Icon name="check" class="w-8 h-8" />
           </div>
-          <h3 id="lead-success-title" tabindex="-1" class="mt-4 text-xl font-bold text-white outline-none">{leadMagnet.form.successTitle}</h3>
+          <h3 id="lead-success-title" tabindex="-1" class="mt-4 text-xl font-semibold text-white outline-none">{leadMagnet.form.successTitle}</h3>
           <p class="mt-2 text-slate-400">{leadMagnet.form.successMessage}</p>
         </div>
       </div>

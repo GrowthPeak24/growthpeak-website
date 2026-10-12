@@ -1,7 +1,5 @@
-@import '@fontsource/montserrat/400.css';
 @import '@fontsource/montserrat/600.css';
 @import '@fontsource/montserrat/700.css';
-@import '@fontsource/montserrat/800.css';
 @import '@fontsource/lato/400.css';
 @import '@fontsource/lato/700.css';
 @import '@fontsource/poppins/500.css';
@@ -53,20 +51,8 @@
     @apply btn bg-brand-gradient text-brand-abyss shadow-[0_8px_24px_-6px_rgba(0,229,255,0.55)] hover:-translate-y-0.5 hover:shadow-[0_16px_36px_-8px_rgba(0,229,255,0.75)];
   }
 
-  .btn-secondary {
-    @apply btn border border-white/25 bg-white/5 text-white backdrop-blur-sm hover:border-brand-cyan/60 hover:bg-white/10 hover:text-white;
-  }
-
-  .btn-outline {
-    @apply btn border border-brand-cyan/60 text-brand-cyan hover:bg-brand-cyan hover:text-brand-abyss;
-  }
-
   .section {
     @apply py-20 lg:py-28;
-  }
-
-  .eyebrow {
-    @apply font-ui font-semibold uppercase tracking-[0.2em] text-sm text-brand-cyan;
   }
 
   /* Section heading rhythm. One scale for the whole page. */
@@ -86,9 +72,11 @@
   }
 
   /* Panel surface used across the page: deep-blue fill that is lighter at the
-     top, a faint cyan edge, a lit top rim and a soft blue drop glow. */
+     top, a faint cyan edge, a lit top rim and a soft blue drop glow. No
+     backdrop-filter: these panels sit on near-flat grounds where a blur is
+     invisible but still costs a GPU pass per panel while scrolling. */
   .glass {
-    @apply relative rounded-2xl border border-brand-cyan/15 backdrop-blur-xl;
+    @apply relative rounded-2xl border border-brand-cyan/15;
     background-image: linear-gradient(
       180deg,
       rgba(0, 119, 182, 0.16) 0%,
@@ -140,14 +128,6 @@
    pointer effects write CSS custom properties instead of React/JS style writes.
    --------------------------------------------------------------------------- */
 @layer utilities {
-  /* Static grid ground for dark sections. Pure CSS, no canvas, no JS. */
-  .bg-grid {
-    background-image:
-      linear-gradient(to right, rgba(0, 210, 255, 0.07) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(0, 210, 255, 0.07) 1px, transparent 1px);
-    background-size: 56px 56px;
-  }
-
   /* Scroll reveal. Hidden state is only applied once JS confirms support, so
      the page stays fully readable with JS disabled. */
   html.js [data-reveal] {
@@ -212,40 +192,56 @@
   }
 
   /* Range input for the ROI estimator. The filled portion is driven by the
-     --roi-percent custom property written by the React component. */
+     --roi-percent custom property written by the React component. The input
+     box is a full 44px touch target; the visible 6px line is a background
+     sized and centred inside it, so the hit area never shrinks to the line. */
   .roi-slider {
     -webkit-appearance: none;
     appearance: none;
-    height: 0.375rem;
-    border-radius: 9999px;
+    height: 2.75rem;
     background: linear-gradient(
-      to right,
-      #0077b6 0%,
-      #00e5ff var(--roi-percent, 50%),
-      rgba(255, 255, 255, 0.12) var(--roi-percent, 50%),
-      rgba(255, 255, 255, 0.12) 100%
-    );
+        to right,
+        #0077b6 0%,
+        #00e5ff var(--roi-percent, 50%),
+        rgba(255, 255, 255, 0.12) var(--roi-percent, 50%),
+        rgba(255, 255, 255, 0.12) 100%
+      )
+      center / 100% 0.375rem no-repeat;
     cursor: pointer;
+    touch-action: pan-y;
   }
 
   .roi-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    height: 1.25rem;
-    width: 1.25rem;
+    height: 1.5rem;
+    width: 1.5rem;
     border-radius: 9999px;
     background: #ffffff;
     border: 3px solid #00d2ff;
-    box-shadow: 0 0 14px -2px rgba(0, 229, 255, 0.9);
+    box-shadow: 0 2px 12px -2px rgba(0, 229, 255, 0.9);
   }
 
   .roi-slider::-moz-range-thumb {
-    height: 1.25rem;
-    width: 1.25rem;
+    height: 1.5rem;
+    width: 1.5rem;
     border-radius: 9999px;
     background: #ffffff;
     border: 3px solid #00d2ff;
-    box-shadow: 0 0 14px -2px rgba(0, 229, 255, 0.9);
+    box-shadow: 0 2px 12px -2px rgba(0, 229, 255, 0.9);
+  }
+
+  /* Touch screens get a larger thumb to land on. */
+  @media (pointer: coarse) {
+    .roi-slider::-webkit-slider-thumb {
+      height: 1.75rem;
+      width: 1.75rem;
+    }
+
+    .roi-slider::-moz-range-thumb {
+      height: 1.75rem;
+      width: 1.75rem;
+    }
   }
 
   .roi-slider::-moz-range-track {
