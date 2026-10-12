@@ -19,31 +19,25 @@ const tickerHalves = [false, true];
   <HeroRibbon />
 
   <div class="container relative flex flex-1 flex-col items-center pt-14 text-center lg:pt-20">
-    <p class="badge-split" data-reveal data-reveal-index="0">
+    <p class="badge-split">
       <span class="badge-split-chip">{hero.eyebrowTag}</span>
       {hero.eyebrow}
     </p>
 
     <h1
       class="mt-7 max-w-4xl text-[2.375rem] font-semibold leading-[1.06] tracking-[-0.03em] text-white sm:text-5xl lg:text-6xl xl:text-[4.25rem]"
-      data-reveal
-      data-reveal-index="1"
     >
       <AccentTitle text={hero.title} accent={hero.accent} gradient />
     </h1>
 
     <p
       class="mt-6 max-w-[46ch] text-lg leading-relaxed text-slate-300 xl:text-xl"
-      data-reveal
-      data-reveal-index="2"
     >
       {hero.subtitle}
     </p>
 
     <div
       class="mt-9 flex w-full flex-col items-center gap-4 sm:w-auto sm:flex-row sm:gap-7"
-      data-reveal
-      data-reveal-index="3"
     >
       <span class="magnetic inline-flex w-full sm:w-auto">
         <a href={hero.primaryCta.href} class="btn-primary w-full sm:w-auto">
@@ -63,8 +57,6 @@ const tickerHalves = [false, true];
     <!-- Trust row: icon tiles split by hairline dividers, Equinox-style. -->
     <ul
       class="mt-12 flex flex-col items-center gap-4 font-ui text-sm text-slate-300 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-0 sm:divide-x sm:divide-white/10 lg:mt-14"
-      data-reveal
-      data-reveal-index="4"
     >
       {hero.trustSignals.map((signal) => (
         <li class="flex items-center gap-3 sm:px-6">

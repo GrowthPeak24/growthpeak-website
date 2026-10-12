@@ -238,18 +238,18 @@ export const proof = {
   deliverables: [
     {
       icon: 'layout',
-      title: '100% Mobile Responsive',
+      title: 'Mobile-First Build Standard',
       text: 'Every build is designed mobile-first and checked at phone, tablet and desktop widths before it ships.',
     },
     {
       icon: 'bolt',
-      title: 'Sub-Second Page Loads',
+      title: 'Sub-Second Load Target',
       text: 'The load-time target we build to, measured on mobile against Core Web Vitals.',
     },
     {
       icon: 'phone',
-      title: 'Every Enquiry Answered in Seconds',
-      text: 'Calls, forms and messages get a reply straight away and land in one place, including after hours.',
+      title: 'Instant-Reply Target',
+      text: 'Calls, forms and messages are set up to get an automatic reply within seconds and land in one place, including after hours.',
     },
     {
       icon: 'map-pin',
@@ -384,7 +384,7 @@ export const faq = {
     },
     {
       q: 'How long until I see results from local SEO?',
-      a: 'Most clients see early movement in Google Business Profile visibility within 30 to 60 days, with real ranking and lead gains typically building over the next 3 to 6 months. Local SEO compounds, so the results keep growing the longer you stick with it.',
+      a: 'Local SEO is gradual, and the timeline depends on your market, your competitors and where your profile starts. We track your Google Business Profile visibility from the first week and report on it monthly in plain English, so you can see what is moving and what we are working on next.',
     },
     {
       q: 'Are there long-term contracts?',
