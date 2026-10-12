@@ -3,15 +3,8 @@ import Icon from './Icon.astro';
 import { leadMagnet } from '../data/site';
 
 const f = leadMagnet.form.fields;
-// Web3Forms access key from env. Falls back to a placeholder so the build works
-// before a key is added; replace via .env (PUBLIC_WEB3FORMS_KEY) before launch.
-const PLACEHOLDER_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY';
-const ACCESS_KEY = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? PLACEHOLDER_KEY;
-if (ACCESS_KEY === PLACEHOLDER_KEY) {
-  console.warn(
-    '[LeadMagnet] PUBLIC_WEB3FORMS_KEY is not set. The lead form will render but every submission will fail in production. Configure it in .env (local) and in the deploy environment (e.g., Vercel project env vars) before launch.',
-  );
-}
+// Submissions go to the /api/contact Vercel Function (api/contact.js), which
+// forwards them to the Cenvyro CRM using the server-only CENVYRO_WEBHOOK_URL.
 ---
 <section id="lead-magnet" class="section relative overflow-hidden bg-brand-abyss text-white scroll-mt-24">
   <div class="pointer-events-none absolute inset-0" aria-hidden="true">
@@ -38,14 +31,12 @@ if (ACCESS_KEY === PLACEHOLDER_KEY) {
 
       <!-- Right: form card -->
       <div class="glass glass-glow p-7 text-white transition-shadow duration-300 hover:shadow-glow-lg lg:col-span-7 lg:p-10">
-        <form id="lead-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-4" aria-labelledby="lead-form-heading">
+        <form id="lead-form" action="/api/contact" method="POST" class="space-y-4" aria-labelledby="lead-form-heading">
           <p id="lead-form-heading" class="border-b border-white/10 pb-5 font-ui text-sm font-semibold uppercase tracking-[0.14em] text-brand-cyan">
             Request your audit
           </p>
 
-          <input type="hidden" name="access_key" value={ACCESS_KEY} />
           <input type="hidden" name="subject" value={leadMagnet.form.subject} />
-          <input type="hidden" name="from_name" value="GrowthPeak Digital Website" />
           <!-- Honeypot spam trap -->
           <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
 
