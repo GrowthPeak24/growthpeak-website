@@ -16,7 +16,10 @@ function CounterValue({ metric }: { metric: Metric }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: '-15% 0px' });
   const prefersReducedMotion = useReducedMotion();
-  const [display, setDisplay] = useState(prefersReducedMotion ? metric.value : 0);
+  // Start at the real value so the server-rendered HTML (no JS, crawlers, a
+  // failed island load, reduced motion) never publishes "0%" / "0h". The
+  // effect below restarts the count from 0 once the metric scrolls into view.
+  const [display, setDisplay] = useState(metric.value);
 
   useEffect(() => {
     if (!inView || prefersReducedMotion) return;
