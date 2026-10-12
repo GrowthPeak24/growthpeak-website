@@ -41,10 +41,17 @@ The form includes a honeypot spam trap, async submit with a graceful error state
 
 ## Brand tokens
 
-Defined in `tailwind.config.mjs`: `brand.green #37ca37`, `brand.blue #188bf6`, `brand.cyan #00d4ff`, `brand.navy #0b2545`, `brand.light #f8fafc`, `brand.footer #050e1f`. Fonts: Montserrat (headings), Lato (body), Poppins (UI).
+Defined in `tailwind.config.mjs`:
 
-## To add before launch
+- Surfaces, darkest to lightest: `brand.abyss #020B1A`, `brand.navy #0B132B`, `brand.deep #0A2540`.
+- Accents: `brand.cyan #00D2FF` (the single UI accent), `brand.glow #00E5FF` (glows, gradient end), `brand.blue #0077B6` (gradient start).
+- `brand.green #37ca37` (checkmarks only) and `brand.light #f8fafc` (text).
 
-- `public/og-image.jpg` — 1200×630 social share image (currently referenced but not included).
-- Real logo asset if you have one (current logo is a styled text mark in `src/components/Logo.astro`).
-- Contact details + social links in `src/data/site.ts`.
+Fonts: Montserrat (headings), Lato (body), Poppins (UI), Instrument Serif italic (one accent phrase per heading).
+
+## Before launch
+
+- Contact details and social links in `src/data/site.ts` (`site.email`, `site.phone`, `site.social.*`).
+- `CENVYRO_WEBHOOK_URL` set in Vercel and in your local `.env`.
+
+The social share image (`public/og-image.jpg`, 1200×630) and the logo artwork (`public/assets/logo*.png`, see `CLAUDE.md` for how the dark-ground versions are generated) are already in place.

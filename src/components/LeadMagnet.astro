@@ -46,25 +46,25 @@ const f = leadMagnet.form.fields;
 
           <div>
             <label for="name" class="mb-1.5 block font-ui text-sm font-semibold text-slate-300">{f.name.label}</label>
-            <input type="text" id="name" name="name" required placeholder={f.name.placeholder}
+            <input type="text" id="name" name="name" autocomplete="name" required placeholder={f.name.placeholder}
               class="w-full rounded-lg border border-white/15 bg-white/[0.06] px-4 py-3 text-white placeholder:text-slate-400 outline-none transition focus:border-brand-cyan focus:bg-white/[0.09] focus:ring-2 focus:ring-brand-cyan/40 focus:ring-offset-0" />
           </div>
 
           <div>
             <label for="email" class="mb-1.5 block font-ui text-sm font-semibold text-slate-300">{f.email.label}</label>
-            <input type="email" id="email" name="email" required placeholder={f.email.placeholder}
+            <input type="email" id="email" name="email" autocomplete="email" required placeholder={f.email.placeholder}
               class="w-full rounded-lg border border-white/15 bg-white/[0.06] px-4 py-3 text-white placeholder:text-slate-400 outline-none transition focus:border-brand-cyan focus:bg-white/[0.09] focus:ring-2 focus:ring-brand-cyan/40 focus:ring-offset-0" />
           </div>
 
           <div class="grid sm:grid-cols-2 gap-4">
             <div>
               <label for="business" class="mb-1.5 block font-ui text-sm font-semibold text-slate-300">{f.business.label}</label>
-              <input type="text" id="business" name="business" placeholder={f.business.placeholder}
+              <input type="text" id="business" name="business" autocomplete="organization" placeholder={f.business.placeholder}
                 class="w-full rounded-lg border border-white/15 bg-white/[0.06] px-4 py-3 text-white placeholder:text-slate-400 outline-none transition focus:border-brand-cyan focus:bg-white/[0.09] focus:ring-2 focus:ring-brand-cyan/40 focus:ring-offset-0" />
             </div>
             <div>
               <label for="website" class="mb-1.5 block font-ui text-sm font-semibold text-slate-300">{f.website.label}</label>
-              <input type="text" id="website" name="website" placeholder={f.website.placeholder}
+              <input type="text" id="website" name="website" autocomplete="url" inputmode="url" placeholder={f.website.placeholder}
                 class="w-full rounded-lg border border-white/15 bg-white/[0.06] px-4 py-3 text-white placeholder:text-slate-400 outline-none transition focus:border-brand-cyan focus:bg-white/[0.09] focus:ring-2 focus:ring-brand-cyan/40 focus:ring-offset-0" />
             </div>
           </div>
