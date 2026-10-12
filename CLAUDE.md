@@ -114,7 +114,13 @@ The panel is styled with `.glass .glass-glow` (frosted surface + cyan edge glow)
 
 ### Logo handling (`src/components/Logo.astro`)
 
-Both variants render the same artwork from `/public/assets/logo.png`. `variant="dark"` (default, for light backgrounds) renders it directly — since the dark rebrand **nothing on the page uses it**, because there are no light surfaces left; both the header and the footer pass `variant="light"`. It is kept for any future light surface. `variant="light"` wraps it in a small white rounded card, since the artwork has an opaque white background and navy tones that would read as an accidental white rectangle directly on a dark surface. If replacing the logo asset, both variants pick it up automatically since neither hardcodes colors from it.
+`variant="dark"` (default, for light backgrounds) renders the original artwork `/public/assets/logo.png` (opaque white ground, navy wordmark). Since the dark rebrand **nothing on the page uses it**; it is kept for any future light surface.
+
+`variant="light"` is what the header and footer use, and it has **no white card** — it renders artwork recoloured for dark grounds, so it sits directly on the navy bar:
+- **Header** (`<Logo variant="light" />`): a lockup of `/public/assets/logo-mark-light.png` (the mountain only, `alt=""`) plus the name as live text — "GrowthPeak" white, "Digital" brand cyan, Montserrat semibold. The stacked artwork is not used here because at header height its "DIGITAL" line would shrink to ~6px.
+- **Footer** (`<Logo variant="light" stacked />`): the full stacked artwork, `/public/assets/logo-light.png`, at `w-44`.
+
+Both light PNGs are generated with ffmpeg from the transparent source `src/assets/brand/logo-transparent-source.png` (500×500; not shipped — nothing imports it): rows ≥370 ("DIGITAL") → brand cyan `#00D2FF`, rows 300–369 ("GROWTH PEAK") → `#F8FAFC`, and in the mountain, navy pixels (`b<115 && g<75`) → brand blue `#0077B6`; alpha is preserved so edges stay anti-aliased. The mark is cropped to the mountain (x 99–404, y 48–289) and scaled to 144px tall; the stacked logo is trimmed to the artwork and scaled to 440px wide. If the logo artwork changes, regenerate both from a new transparent source the same way — they are not derived at build time.
 
 `public/favicon.ico` (16/32/48px, embedded-PNG multi-res ICO), `public/favicon.png` (32×32), and `public/apple-touch-icon.png` (180×180) are all crops of just the mountain-peak mark (no wordmark) from `/public/assets/logo.png`, padded onto a solid white square. There is no `favicon.svg` — a generic placeholder icon previously shipped there was removed since it didn't match the brand mark and could take precedence over the real logo in browsers that prefer SVG favicons. If the logo artwork changes, regenerate these crops manually — they aren't derived automatically at build time. Referenced via `<link rel="icon">`/`<link rel="apple-touch-icon">` tags in `BaseLayout.astro`.
 
