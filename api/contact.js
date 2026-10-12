@@ -10,19 +10,38 @@
 // function alongside the static output. `npm run dev` does not serve it — use
 // `vercel dev` to exercise it locally.
 
-const FIELD_LIMITS = { name: 120, email: 254, business: 160, website: 300, subject: 200 };
+const FIELD_LIMITS = { name: 120, email: 254, business: 160, website: 300 };
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// Set here rather than taken from the form, so a submitter cannot put arbitrary
+// text into the subject line of the CRM record or its notification emails.
+const SUBJECT = 'New Lead Leak Audit Request | GrowthPeak Digital';
+// Any scheme other than http(s) (javascript:, data:, …) could become a live link
+// wherever the CRM renders the website field, so such values are dropped. No
+// dots allowed in the scheme part, so "yourbusiness.com:8080" is not mistaken
+// for one.
+const UNSAFE_SCHEME_RE = /^(?!https?:)[a-z][a-z0-9+-]*:/i;
 
 export async function POST(request) {
   // JS submits ask for JSON; the no-JS native form post gets an HTML page back.
   const wantsJson = (request.headers.get('accept') ?? '').includes('application/json');
   const reply = (status, success, message) =>
     wantsJson
-      ? Response.json({ success, message }, { status })
+      ? Response.json({ success, message }, { status, headers: { 'Cache-Control': 'no-store' } })
       : new Response(htmlPage(success, message), {
           status,
-          headers: { 'Content-Type': 'text/html; charset=utf-8' },
+          headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' },
         });
+
+  // Cross-site check: browsers send Origin on every form POST, so a mismatch
+  // means another site is posting into this form. A missing Origin (curl, old
+  // clients) is let through: it is trivially spoofed, so rejecting it would
+  // risk real leads without stopping a determined bot. Rate limiting belongs in
+  // the Vercel firewall, not here, since function instances share no memory.
+  const origin = request.headers.get('origin');
+  const host = request.headers.get('x-forwarded-host') ?? request.headers.get('host');
+  if (origin !== null && !sameHost(origin, host)) {
+    return reply(403, false, 'This form can only be submitted from our website.');
+  }
 
   let form;
   try {
@@ -40,8 +59,9 @@ export async function POST(request) {
     email: field('email'),
     business: field('business'),
     website: field('website'),
-    subject: field('subject'),
+    subject: SUBJECT,
   };
+  if (UNSAFE_SCHEME_RE.test(lead.website)) lead.website = '';
 
   if (!lead.name || !EMAIL_RE.test(lead.email)) {
     return reply(400, false, 'Please provide your name and a valid email address.');
@@ -63,17 +83,30 @@ export async function POST(request) {
         submittedAt: new Date().toISOString(),
       }),
       signal: AbortSignal.timeout(10_000),
+      // The webhook is a fixed endpoint, so a redirect is unexpected: fail rather
+      // than follow it somewhere else with the lead data.
+      redirect: 'error',
     });
     if (!res.ok) {
       console.error(`[api/contact] Cenvyro webhook responded ${res.status}.`);
       return reply(502, false, 'We could not send your request.');
     }
   } catch (err) {
-    console.error('[api/contact] Cenvyro webhook request failed:', err);
+    // Log the error type only. A malformed CENVYRO_WEBHOOK_URL makes fetch throw
+    // "Failed to parse URL from <url>", which would write the secret to the logs.
+    console.error('[api/contact] Cenvyro webhook request failed:', err?.name, err?.cause?.code ?? err?.code ?? '');
     return reply(502, false, 'We could not send your request.');
   }
 
   return reply(200, true, 'Thanks — your request has been received.');
+}
+
+function sameHost(origin, host) {
+  try {
+    return Boolean(host) && new URL(origin).host === host;
+  } catch {
+    return false; // "null" (sandboxed or privacy-redirected contexts) or garbage
+  }
 }
 
 // Minimal confirmation page for visitors without JavaScript, matching the dark theme.
