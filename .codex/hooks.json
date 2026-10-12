@@ -5,7 +5,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node 'C:\\Users\\User\\Desktop\\Growthpeak Digital Website\\.codex\\hooks\\check-claude-md.cjs'",
+            "command": "node \"$(git rev-parse --show-toplevel)/.codex/hooks/check-claude-md.cjs\"",
+            "commandWindows": "node .codex/hooks/check-claude-md.cjs",
             "timeout": 15
           }
         ]
