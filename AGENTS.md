@@ -15,7 +15,7 @@ There is no test suite, linter, or type-check script configured. `tsconfig.json`
 
 ## Architecture
 
-This is a single-page **Astro + Tailwind CSS** static marketing site (output: `"static"`, no SSR adapter). It deploys as static HTML to Vercel — `vercel.json` only sets response headers/caching, it does not configure a server runtime.
+This is a single-page **Astro + Tailwind CSS** static marketing site (output: `"static"`, no SSR adapter). It deploys as static HTML to Vercel — `vercel.json` only sets response headers/caching and one rewrite (`/sitemap.xml`, see *Sitemap URLs*), it does not configure a server runtime.
 
 It is **not** a Next.js app. There is no App Router, no SSR, no `src/pages/api`, and no database — briefs that assume those are describing a different project. The one piece of server code is the lead form's Vercel Function, `api/contact.js` (see *Lead magnet form* below), which Vercel deploys on its own alongside the static output. React exists only as an *island* layer (see below); `'use client'` is meaningless in Astro pages and only appears at the top of `.tsx` island files as a portability marker.
 
