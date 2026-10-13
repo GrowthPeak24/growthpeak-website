@@ -15,8 +15,8 @@ export const site = {
   phone: '',
   serviceArea: 'United States',
   social: {
-    facebook: '',
-    instagram: '',
+    facebook: 'https://www.facebook.com/growthpeakdigital',
+    instagram: 'https://www.instagram.com/growthpeakdigital/',
     linkedin: '',
     x: '',
   },

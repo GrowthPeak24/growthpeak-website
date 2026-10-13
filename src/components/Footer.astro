@@ -10,6 +10,8 @@ const socials = [
   { key: 'linkedin', label: 'LinkedIn', href: site.social.linkedin },
   { key: 'x', label: 'X', href: site.social.x },
 ].filter((s) => s.href);
+// Keys that have a glyph in Icon.astro; anything else falls back to its initial.
+const iconKeys = ['facebook', 'instagram'];
 ---
 <footer class="border-t border-white/10 bg-brand-abyss text-slate-400">
   <div class="container py-16 grid gap-12 md:grid-cols-2 lg:grid-cols-4">
@@ -24,11 +26,15 @@ const socials = [
             <a
               href={s.href}
               class="grid h-11 w-11 place-items-center rounded-full border border-white/10 bg-white/5 transition-colors hover:border-brand-cyan hover:bg-brand-cyan hover:text-brand-abyss"
-              aria-label={s.label}
+              aria-label={`${site.name} on ${s.label} (opens in a new tab)`}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <span class="text-xs font-ui font-semibold">{s.label.charAt(0)}</span>
+              {iconKeys.includes(s.key) ? (
+                <Icon name={s.key} class="h-5 w-5" />
+              ) : (
+                <span class="text-xs font-ui font-semibold">{s.label.charAt(0)}</span>
+              )}
             </a>
           ))}
         </div>
