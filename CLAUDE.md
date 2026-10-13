@@ -132,6 +132,10 @@ Both light PNGs are generated with ffmpeg from the transparent source `src/asset
 
 `@astrojs/sitemap` is pinned to the exact version `3.2.1` (no `^` range) in `package.json`. Newer versions (3.7.x+) depend on the `astro:routes:resolved` integration hook, which only exists in Astro 5 — installing a newer sitemap version against this project's Astro 4.x will crash `astro build` with `Cannot read properties of undefined (reading 'reduce')`. Do not loosen this version pin without also upgrading Astro to v5.
 
+### Sitemap URLs
+
+`@astrojs/sitemap` writes `sitemap-index.xml` and `sitemap-0.xml` only; it never emits `sitemap.xml`, so that path would 404. `vercel.json` therefore rewrites `/sitemap.xml` to `/sitemap-index.xml` (a rewrite, not a redirect, so crawlers get a 200), and `robots.txt` advertises `sitemap-index.xml` directly. `site` in `astro.config.mjs` is the apex `https://growthpeakdigital.com`, and every sitemap `<loc>`, canonical and `og:url` is built from it, so keep the Vercel primary domain and `site` on the same host (Search Console flags sitemap URLs that redirect as "Page with redirect").
+
 ### Hero sizing constraint
 
 The header is `position: fixed` at `h-16 lg:h-20`, and `<main>` compensates with `pt-16 lg:pt-20`. The hero therefore uses `min-h-[calc(100dvh-4rem)] lg:min-h-[calc(100dvh-5rem)]` — **not** `h-screen`, which jumps when the iOS Safari address bar collapses. If you change the header height, update all three values together. The hero is a centred single column; its headline is tuned to wrap to two lines from `lg` up (`max-w-4xl`, up to `xl:text-[4.25rem]`), and to three on phones. A longer `hero.title` or a larger size will add a line.
