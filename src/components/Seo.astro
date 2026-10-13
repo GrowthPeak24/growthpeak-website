@@ -44,6 +44,10 @@ const faqSchema = {
     acceptedAnswer: { '@type': 'Answer', text: item.a },
   })),
 };
+
+// JSON.stringify leaves `<` alone, so a "</script>" anywhere in the copy would
+// close the tag early. Escaping it keeps the JSON valid and the tag intact.
+const toJsonLd = (data: object) => JSON.stringify(data).replace(/</g, '\\u003c');
 ---
 
 <title>{pageTitle}</title>
@@ -65,7 +69,7 @@ const faqSchema = {
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogImage} />
 
-<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+<script type="application/ld+json" set:html={toJsonLd(organizationSchema)} />
 {includeFaqSchema && (
-  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json" set:html={toJsonLd(faqSchema)} />
 )}

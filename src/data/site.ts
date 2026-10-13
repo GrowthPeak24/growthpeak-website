@@ -351,7 +351,7 @@ export const leadMagnet = {
     'The leaks costing you most, fixed first',
   ],
   form: {
-    subject: 'New Lead Leak Audit Request | GrowthPeak Digital',
+    // The CRM subject line is set server-side in api/contact.js, not here.
     submitLabel: 'Find My Lead Leaks',
     successTitle: 'Request received!',
     successMessage:
