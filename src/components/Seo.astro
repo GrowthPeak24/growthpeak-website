@@ -31,6 +31,8 @@ const organizationSchema = {
   telephone: site.phone || undefined,
   areaServed: site.serviceArea,
   priceRange: '$$',
+  // Official profiles, from site.social; empty entries are skipped.
+  sameAs: Object.values(site.social).filter(Boolean),
 };
 
 const faqSchema = {
