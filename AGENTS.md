@@ -134,7 +134,7 @@ Both light PNGs are generated with ffmpeg from the transparent source `src/asset
 
 ### Sitemap URLs
 
-`@astrojs/sitemap` writes `sitemap-index.xml` and `sitemap-0.xml` only; it never emits `sitemap.xml`, so that path would 404. `vercel.json` therefore rewrites `/sitemap.xml` to `/sitemap-index.xml` (a rewrite, not a redirect, so crawlers get a 200), and `robots.txt` advertises `sitemap-index.xml` directly. `site` in `astro.config.mjs` is the apex `https://growthpeakdigital.com`, and every sitemap `<loc>`, canonical and `og:url` is built from it, so keep the Vercel primary domain and `site` on the same host (Search Console flags sitemap URLs that redirect as "Page with redirect").
+`@astrojs/sitemap` writes `sitemap-index.xml` and `sitemap-0.xml` only; it never emits `sitemap.xml`, so that path would 404. `vercel.json` therefore rewrites `/sitemap.xml` to `/sitemap-index.xml` (a rewrite, not a redirect, so crawlers get a 200), and `robots.txt` advertises `https://growthpeakdigital.com/sitemap.xml`. A `vercel.json` header rule forces `Content-Type: application/xml; charset=UTF-8` on `/sitemap.xml`, `/sitemap-index.xml` and `/sitemap-0.xml` (Vercel's default omits the charset). The Vercel primary domain is the apex; `www` 308-redirects to it, and that redirect lives in the Vercel dashboard, not in `vercel.json`. `site` in `astro.config.mjs` is the apex `https://growthpeakdigital.com`, and every sitemap `<loc>`, canonical and `og:url` is built from it, so keep the Vercel primary domain and `site` on the same host (Search Console flags sitemap URLs that redirect as "Page with redirect").
 
 ### Hero sizing constraint
 
