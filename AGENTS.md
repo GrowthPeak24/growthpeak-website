@@ -15,7 +15,7 @@ There is no test suite, linter, or type-check script configured. `tsconfig.json`
 
 ## Architecture
 
-This is a single-page **Astro + Tailwind CSS** static marketing site (output: `"static"`, no SSR adapter). It deploys as static HTML to Vercel — `vercel.json` only sets response headers/caching and one rewrite (`/sitemap.xml`, see *Sitemap URLs*), it does not configure a server runtime.
+This is a single-page **Astro + Tailwind CSS** static marketing site (output: `"static"`, no SSR adapter). It deploys as static HTML to Vercel — `vercel.json` only sets response headers/caching, it does not configure a server runtime.
 
 Those headers include an enforced **Content-Security-Policy** that allows only same-origin resources (`'unsafe-inline'` for scripts and styles, because Astro islands and the hoisted scripts are inline; `data:` for images and fonts, because Vite inlines small font files). The site loads nothing third-party today. Adding any external script, font, image, analytics tag or fetch target means adding its origin to the matching directive, or the browser silently blocks it. `frame-ancestors 'none'` and `X-Frame-Options: DENY` stop the page being framed. `npm run preview` does not apply `vercel.json`, so check CSP changes on a Vercel preview deployment and its browser console.
 
@@ -136,7 +136,7 @@ Both light PNGs are generated with ffmpeg from the transparent source `src/asset
 
 ### Sitemap URLs
 
-`@astrojs/sitemap` writes `sitemap-index.xml` and `sitemap-0.xml` only; it never emits `sitemap.xml`, so that path would 404. `vercel.json` therefore rewrites `/sitemap.xml` to `/sitemap-index.xml` (a rewrite, not a redirect, so crawlers get a 200), and `robots.txt` advertises `https://growthpeakdigital.com/sitemap.xml`. A `vercel.json` header rule forces `Content-Type: application/xml; charset=UTF-8` on `/sitemap.xml`, `/sitemap-index.xml` and `/sitemap-0.xml` (Vercel's default omits the charset). The Vercel primary domain is the apex; `www` 308-redirects to it, and that redirect lives in the Vercel dashboard, not in `vercel.json`. `site` in `astro.config.mjs` is the apex `https://growthpeakdigital.com`, and every sitemap `<loc>`, canonical and `og:url` is built from it, so keep the Vercel primary domain and `site` on the same host (Search Console flags sitemap URLs that redirect as "Page with redirect").
+`@astrojs/sitemap` writes `sitemap-index.xml` and `sitemap-0.xml` only; it never emits `sitemap.xml`, so that path would 404. `astro.config.mjs` therefore carries a small `sitemapXml` integration that copies the generated index to `dist/sitemap.xml` at the end of the build, so `/sitemap.xml` is a real static file served directly (no rewrite or redirect; it must stay listed after `sitemap()` or the index won't exist yet, and the build fails loudly if it is missing), and `robots.txt` advertises `https://growthpeakdigital.com/sitemap.xml`. A `vercel.json` header rule forces `Content-Type: application/xml; charset=UTF-8` on `/sitemap.xml`, `/sitemap-index.xml` and `/sitemap-0.xml` (Vercel's default omits the charset). The Vercel primary domain is the apex; `www` 308-redirects to it, and that redirect lives in the Vercel dashboard, not in `vercel.json`. `site` in `astro.config.mjs` is the apex `https://growthpeakdigital.com`, and every sitemap `<loc>`, canonical and `og:url` is built from it, so keep the Vercel primary domain and `site` on the same host (Search Console flags sitemap URLs that redirect as "Page with redirect").
 
 ### Hero sizing constraint
 
