@@ -9,7 +9,7 @@ import { hero, proof } from '../data/site';
 // clone keeps screen readers from reading the list twice.
 const tickerHalves = [false, true];
 ---
-<!-- Centred single column over a code-drawn light ribbon. min-h uses dvh minus
+<!-- Centered single column over a code-drawn light ribbon. min-h uses dvh minus
      the fixed header so the hero fills the viewport without the iOS
      address-bar jump h-screen causes. -->
 <section
@@ -54,9 +54,14 @@ const tickerHalves = [false, true];
       </a>
     </div>
 
+    <!-- Who it is for, by trade, so a visitor can self-select at a glance. -->
+    <p class="mt-8 max-w-2xl font-ui text-sm leading-relaxed text-slate-400">
+      {hero.audience}
+    </p>
+
     <!-- Trust row: icon tiles split by hairline dividers, Equinox-style. -->
     <ul
-      class="mt-12 flex flex-col items-center gap-4 font-ui text-sm text-slate-300 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-0 sm:divide-x sm:divide-white/10 lg:mt-14"
+      class="mt-8 flex flex-col items-center gap-4 font-ui text-sm text-slate-300 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-0 sm:divide-x sm:divide-white/10 lg:mt-14"
     >
       {hero.trustSignals.map((signal) => (
         <li class="flex items-center gap-3 sm:px-6">

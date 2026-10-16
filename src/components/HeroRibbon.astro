@@ -1,10 +1,10 @@
 ---
-// Hero centrepiece: a glowing light ribbon sweeping under the headline.
+// Hero centerpiece: a glowing light ribbon sweeping under the headline.
 // Inline SVG + CSS keyframes only. Like the GridBeams background it replaced,
 // it sits in the LCP section, so it must never become a React island.
 //
 // Each sweep is its own <svg>, and the sway animates that whole element, not
-// shapes inside it. Animating an HTML-level box lets the browser rasterise the
+// shapes inside it. Animating an HTML-level box lets the browser rasterize the
 // feGaussianBlur glow once and move the cached layer; animating an inner <g>
 // would re-run the blur filter every frame. The sway is zeroed by the global
 // prefers-reduced-motion rule in global.css.
@@ -77,6 +77,6 @@ const SVG_CLASS =
     />
   </svg>
 
-  <!-- Bottom fade into the platform strip and the abyss-coloured Leaks section. -->
+  <!-- Bottom fade into the platform strip and the abyss-colored Leaks section. -->
   <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-brand-abyss"></div>
 </div>
