@@ -32,7 +32,7 @@ It is **not** a Next.js app. There is no App Router, no SSR, no `src/pages/api`,
 Two content rules are enforced deliberately and will look like bugs if "fixed" casually:
 
 - **Eyebrows are rationed.** Only `hero` and `leadMagnet` carry an `eyebrow` field. Leaks / Services / WhyUs / Process / FAQ / Proof / Roi intentionally have none, so the label reads as an accent rather than a repeating template. Both are rendered as the two-part `.badge-split` pill (a gradient chip holding `eyebrowTag`, then the eyebrow text); the old uppercase `.eyebrow` label class no longer exists.
-- **One CTA intent.** The primary CTA label is `Find My Lead Leaks` everywhere (header, hero, under the ROI estimator via `proof.roi.cta`, under the roadmap via `process.cta`, lead-magnet submit, final CTA). The hero's secondary CTA points at `#process` (a *learn* action), and `finalCta` has no secondary CTA at all, so nothing competes with the single conversion goal.
+- **One CTA intent.** The primary CTA label is `Get My Free Audit` everywhere (header, hero, under the ROI estimator via `proof.roi.cta`, under the roadmap via `process.cta`, lead-magnet submit, final CTA). The hero's secondary CTA points at `#process` (a *learn* action), and `finalCta` has no secondary CTA at all, so nothing competes with the single conversion goal.
 
 ### No unverified client proof, anywhere
 
