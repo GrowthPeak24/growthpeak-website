@@ -116,6 +116,23 @@
     @apply rounded-full bg-brand-gradient px-2.5 py-0.5 font-semibold text-brand-abyss;
   }
 
+  /* Long-form copy on the Privacy and Terms pages. Body measure stays ~65ch. */
+  .legal {
+    @apply max-w-[68ch] text-base leading-relaxed text-slate-300;
+  }
+  .legal h2 {
+    @apply mb-3 mt-10 text-xl font-semibold tracking-[-0.01em] text-white;
+  }
+  .legal p {
+    @apply mt-3;
+  }
+  .legal ul {
+    @apply mt-3 list-disc space-y-1.5 pl-6 marker:text-brand-cyan;
+  }
+  .legal a {
+    @apply text-brand-cyan underline underline-offset-2 hover:text-white;
+  }
+
   /* Headline highlight: gradient text, used once per page in the hero. */
   .text-gradient {
     @apply bg-brand-gradient bg-clip-text text-transparent;

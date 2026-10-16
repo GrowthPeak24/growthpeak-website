@@ -47,7 +47,7 @@ const iconKeys = ['facebook', 'instagram'];
         {nav.map((item) => (
           <li><a href={item.href} class="inline-flex min-h-11 items-center hover:text-brand-cyan transition-colors">{item.label}</a></li>
         ))}
-        <li><a href="#lead-magnet" class="inline-flex min-h-11 items-center hover:text-brand-cyan transition-colors">Free Lead Leak Audit</a></li>
+        <li><a href="/#lead-magnet" class="inline-flex min-h-11 items-center hover:text-brand-cyan transition-colors">Free Lead Leak Audit</a></li>
       </ul>
     </div>
 
@@ -55,7 +55,7 @@ const iconKeys = ['facebook', 'instagram'];
       <h3 class="font-heading font-semibold text-white text-sm uppercase tracking-wider">Services</h3>
       <ul class="mt-3 text-sm">
         {services.items.map((s) => (
-          <li><a href="#services" class="inline-flex min-h-11 items-center hover:text-brand-cyan transition-colors">{s.name}</a></li>
+          <li><a href="/#services" class="inline-flex min-h-11 items-center hover:text-brand-cyan transition-colors">{s.name}</a></li>
         ))}
       </ul>
       <div class="mt-6 text-sm">
@@ -76,6 +76,10 @@ const iconKeys = ['facebook', 'instagram'];
   <div class="border-t border-white/10">
     <div class="container py-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-400">
       <p>&copy; {year} {site.name}. All rights reserved.</p>
+      <nav aria-label="Legal" class="flex items-center gap-6">
+        <a href="/privacy" class="inline-flex min-h-11 items-center hover:text-brand-cyan transition-colors">Privacy Policy</a>
+        <a href="/terms" class="inline-flex min-h-11 items-center hover:text-brand-cyan transition-colors">Terms of Use</a>
+      </nav>
       <p>Local SEO • Websites • Lead &amp; Admin Systems</p>
     </div>
   </div>
