@@ -89,9 +89,9 @@ export function RoiEstimator({
         <span className="inline-grid h-10 w-10 place-items-center rounded-xl border border-brand-cyan/25 bg-brand-cyan/10 text-brand-cyan">
           <Calculator className="h-5 w-5" strokeWidth={1.75} aria-hidden="true" />
         </span>
-        <h3 className="font-heading text-xl font-semibold tracking-[-0.01em] text-white">
+        <p className="font-heading text-xl font-semibold tracking-[-0.01em] text-white">
           What are missed leads costing you?
-        </h3>
+        </p>
       </div>
 
       <div className="mt-8 grid gap-10 lg:grid-cols-2 lg:gap-12">
