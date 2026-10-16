@@ -29,7 +29,7 @@ const { class: className = '', variant = 'dark', stacked = false } = Astro.props
     class={`inline-flex items-center ${className}`}
     aria-label="GrowthPeak Digital home"
   >
-    <img src="/assets/logo-light.png" alt="GrowthPeak Digital" class="h-auto w-44" width="440" height="318" />
+    <img src="/assets/logo-light.png" alt="GrowthPeak Digital" class="h-auto w-44" width="440" height="318" loading="lazy" decoding="async" />
   </a>
 ) : (
   <a

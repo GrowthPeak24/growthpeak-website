@@ -24,11 +24,11 @@ export const site = {
 } as const;
 
 export const nav = [
-  { label: 'Leaks', href: '#leaks' },
-  { label: 'Services', href: '#services' },
-  { label: 'Why Us', href: '#why-us' },
-  { label: 'Process', href: '#process' },
-  { label: 'FAQ', href: '#faq' },
+  { label: 'Leaks', href: '/#leaks' },
+  { label: 'Services', href: '/#services' },
+  { label: 'Why Us', href: '/#why-us' },
+  { label: 'Process', href: '/#process' },
+  { label: 'FAQ', href: '/#faq' },
 ] as const;
 
 export const hero = {
@@ -48,9 +48,9 @@ export const hero = {
   // themselves in the page. Customers served by type, never client names.
   audience:
     'Plumbers, roofers, HVAC, electricians, landscapers, detailers, groomers, dental offices and more.',
-  primaryCta: { label: 'Get My Free Audit', href: '#lead-magnet' },
+  primaryCta: { label: 'Get My Free Audit', href: '/#lead-magnet' },
   // Secondary is a different intent (learn) so it never competes with the primary CTA.
-  secondaryCta: { label: 'See how it works', href: '#process' },
+  secondaryCta: { label: 'See how it works', href: '/#process' },
   trustSignals: [
     { icon: 'target', label: 'Built around how your business runs' },
     { icon: 'handshake', label: 'Month to month, no lock-in' },
@@ -178,7 +178,7 @@ export const services = {
     },
     {
       icon: 'rocket',
-      name: 'Websites, Hosting & Launch Pages',
+      name: 'Websites & Hosting',
       span: 2,
       blurb:
         'Sites that load instantly, convert on mobile, and stay online without you thinking about it.',
@@ -274,7 +274,7 @@ export const proof = {
     cta: {
       text: 'That is an estimate built from your own numbers. A free Lead Leak Audit shows where your real leaks are.',
       label: 'Get My Free Audit',
-      href: '#lead-magnet',
+      href: '/#lead-magnet',
     },
   },
 };
@@ -319,7 +319,7 @@ export const process = {
   cta: {
     text: 'Phase one starts with a free Lead Leak Audit, so you see where the leaks are before you commit to anything.',
     label: 'Get My Free Audit',
-    href: '#lead-magnet',
+    href: '/#lead-magnet',
   },
   // Verb-first labels. Step numbers are a design device in Process.astro, not
   // part of the copy. `detail` is revealed by the expandable roadmap island.
@@ -433,6 +433,6 @@ export const finalCta = {
     'Start with a free Lead Leak Audit and see where time and money are slipping away before you commit to anything.',
   // Single CTA on purpose: the page has one conversion goal, so the closing
   // section does not offer a competing second action.
-  primaryCta: { label: 'Get My Free Audit', href: '#lead-magnet' },
+  primaryCta: { label: 'Get My Free Audit', href: '/#lead-magnet' },
   reassurance: 'Free, no obligation, and no long-term contract.',
 };

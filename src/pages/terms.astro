@@ -1,0 +1,75 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { site } from '../data/site';
+---
+<LegalLayout
+  title="Terms of Use"
+  description="The terms for using the GrowthPeak Digital website, the free audit and the interactive estimate tool."
+  updated="October 16, 2026"
+>
+  <p>
+    These terms cover your use of this website. By using it, you agree to them. If you do not agree,
+    please do not use the site.
+  </p>
+
+  <h2>What this site is</h2>
+  <p>
+    This site describes the services {site.name} offers to local service businesses. The information on it is
+    general and may change. Nothing here is legal, tax or financial advice.
+  </p>
+
+  <h2>The free audit</h2>
+  <p>
+    The Lead Leak Audit is free and comes with no obligation. It is based on what you submit and on
+    information that is publicly available, such as your Google listing and website. It is a set of
+    recommendations, not a guarantee of any result.
+  </p>
+
+  <h2>The estimate tool</h2>
+  <p>
+    The cost estimator is an interactive model. It does arithmetic on the numbers you enter. It does
+    not predict your results, and it does not describe what any past client achieved.
+  </p>
+
+  <h2>No guarantee of results</h2>
+  <p>
+    Results from local SEO, automation and website work depend on your market, your competitors and
+    your business. We do not promise specific rankings, leads, revenue or timelines.
+  </p>
+
+  <h2>Paid work</h2>
+  <p>
+    If you hire us, the work is covered by a separate written agreement or order. These terms do not
+    replace it.
+  </p>
+
+  <h2>Using the site</h2>
+  <p>
+    Please do not misuse the site, attempt to break or overload it, or submit false or harmful
+    information through the form. Our content, including text, graphics and logos, belongs to
+    {site.name}. You may not copy or reuse it without our permission.
+  </p>
+
+  <h2>Links to other sites</h2>
+  <p>
+    The site links to third-party pages such as our social profiles. We do not control those sites
+    and are not responsible for them.
+  </p>
+
+  <h2>Disclaimers and liability</h2>
+  <p>
+    The site is provided "as is", without warranties of any kind. To the extent the law allows,
+    {site.name} is not liable for any loss that comes from using the site or relying on its content.
+  </p>
+
+  <h2>Changes</h2>
+  <p>
+    We may update these terms. The date at the top of this page shows when they last changed.
+    Continuing to use the site after a change means you accept the updated terms.
+  </p>
+
+  <h2>Contact</h2>
+  <p>
+    Questions about these terms? Email <a href={`mailto:${site.email}`}>{site.email}</a>.
+  </p>
+</LegalLayout>
