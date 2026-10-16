@@ -48,7 +48,7 @@ export const hero = {
   // themselves in the page. Customers served by type, never client names.
   audience:
     'Plumbers, roofers, HVAC, electricians, landscapers, detailers, groomers, dental offices and more.',
-  primaryCta: { label: 'Find My Lead Leaks', href: '#lead-magnet' },
+  primaryCta: { label: 'Get My Free Audit', href: '#lead-magnet' },
   // Secondary is a different intent (learn) so it never competes with the primary CTA.
   secondaryCta: { label: 'See how it works', href: '#process' },
   trustSignals: [
@@ -273,7 +273,7 @@ export const proof = {
     // missed leads. Same single CTA intent as the header, hero and final CTA.
     cta: {
       text: 'That is an estimate built from your own numbers. A free Lead Leak Audit shows where your real leaks are.',
-      label: 'Find My Lead Leaks',
+      label: 'Get My Free Audit',
       href: '#lead-magnet',
     },
   },
@@ -318,7 +318,7 @@ export const process = {
   // Same single CTA intent as the rest of the page, placed after the roadmap.
   cta: {
     text: 'Phase one starts with a free Lead Leak Audit, so you see where the leaks are before you commit to anything.',
-    label: 'Find My Lead Leaks',
+    label: 'Get My Free Audit',
     href: '#lead-magnet',
   },
   // Verb-first labels. Step numbers are a design device in Process.astro, not
@@ -381,7 +381,7 @@ export const leadMagnet = {
   reassurance: 'Free, no credit card, no contract. We reply within 24 hours on weekdays.',
   form: {
     // The CRM subject line is set server-side in api/contact.js, not here.
-    submitLabel: 'Find My Lead Leaks',
+    submitLabel: 'Get My Free Audit',
     successTitle: 'Request received!',
     successMessage:
       "Thanks, we've got your details. You'll hear from us within 24 hours on weekdays with your plain-English Lead Leak Audit. Keep an eye on your inbox, and your spam folder just in case.",
@@ -433,6 +433,6 @@ export const finalCta = {
     'Start with a free Lead Leak Audit and see where time and money are slipping away before you commit to anything.',
   // Single CTA on purpose: the page has one conversion goal, so the closing
   // section does not offer a competing second action.
-  primaryCta: { label: 'Find My Lead Leaks', href: '#lead-magnet' },
+  primaryCta: { label: 'Get My Free Audit', href: '#lead-magnet' },
   reassurance: 'Free, no obligation, and no long-term contract.',
 };
