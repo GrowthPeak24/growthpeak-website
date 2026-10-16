@@ -70,18 +70,18 @@ export function RoiEstimator({
   modelLabel?: string;
 }) {
   const [customerValue, setCustomerValue] = useState(750);
-  const [missedEnquiries, setMissedEnquiries] = useState(10);
+  const [missedInquiries, setMissedInquiries] = useState(10);
   const [closeRate, setCloseRate] = useState(30);
   const prefersReducedMotion = useReducedMotion();
 
   const { lostCustomers, monthlyLoss, annualLoss } = useMemo(() => {
-    const lost = missedEnquiries * (closeRate / 100);
+    const lost = missedInquiries * (closeRate / 100);
     return {
       lostCustomers: lost,
       monthlyLoss: Math.round(lost * customerValue),
       annualLoss: Math.round(lost * customerValue * 12),
     };
-  }, [customerValue, missedEnquiries, closeRate]);
+  }, [customerValue, missedInquiries, closeRate]);
 
   return (
     <div className={cn('glass glass-glow overflow-hidden p-7 lg:p-10', className)}>
@@ -106,15 +106,15 @@ export function RoiEstimator({
             format={(value) => currency.format(value)}
           />
           <Slider
-            label="Enquiries missed or answered too late each month"
+            label="Inquiries missed or answered too late each month"
             min={1}
             max={50}
             step={1}
-            value={missedEnquiries}
-            onChange={setMissedEnquiries}
+            value={missedInquiries}
+            onChange={setMissedInquiries}
           />
           <Slider
-            label="How many enquiries you close when you do reply"
+            label="How many inquiries you close when you do reply"
             suffix="%"
             min={5}
             max={80}
@@ -168,7 +168,7 @@ export function RoiEstimator({
           claim about results we have produced. Keep this disclaimer visible. */}
       <p className="mt-8 border-t border-white/10 pt-5 text-xs leading-relaxed text-slate-400">
         <strong className="font-semibold text-slate-400">{modelLabel}.</strong> Output is
-        arithmetic on the figures you enter above &mdash; missed enquiries &times; your close
+        arithmetic on the figures you enter above &mdash; missed inquiries &times; your close
         rate &times; your average customer value. These are not verified historical client
         outcomes, not a projection from any past campaign, and not a guarantee of what any
         system will recover.

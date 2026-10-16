@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro';
 import RoiEstimator from './ui/roi-estimator.tsx';
 import AccentTitle from './AccentTitle.astro';
 import { proof } from '../data/site';
@@ -19,6 +20,19 @@ import { proof } from '../data/site';
 
     <div class="mt-12 lg:mt-14" data-reveal data-reveal-index="2">
       <RoiEstimator modelLabel={proof.roi.modelLabel} client:visible />
+    </div>
+
+    <!-- Next step right after the visitor sees what missed leads cost them.
+         Same single CTA as the rest of the page; the estimator and its
+         disclaimer above are untouched. -->
+    <div class="mx-auto mt-10 flex max-w-2xl flex-col items-center gap-5 text-center" data-reveal data-reveal-index="3">
+      <p class="text-lg leading-relaxed text-slate-300">{proof.roi.cta.text}</p>
+      <span class="magnetic inline-flex">
+        <a href={proof.roi.cta.href} class="btn-primary">
+          {proof.roi.cta.label}
+          <Icon name="arrow" class="h-5 w-5" />
+        </a>
+      </span>
     </div>
   </div>
 </section>

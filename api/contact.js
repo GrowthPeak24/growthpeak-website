@@ -116,7 +116,7 @@ function htmlPage(success, message) {
     ? message
     : `${message} Please go back and try again, or email hello@growthpeakdigital.com.`;
   return `<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="en-US"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex"><title>${title} | GrowthPeak Digital</title></head>
 <body style="margin:0;min-height:100vh;display:grid;place-items:center;background:#0B132B;color:#fff;font-family:system-ui,sans-serif;padding:16px">
 <main style="max-width:32rem;text-align:center"><h1>${title}</h1><p style="color:#94a3b8">${detail}</p>

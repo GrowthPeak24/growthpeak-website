@@ -194,7 +194,7 @@
   /* Range input for the ROI estimator. The filled portion is driven by the
      --roi-percent custom property written by the React component. The input
      box is a full 44px touch target; the visible 6px line is a background
-     sized and centred inside it, so the hit area never shrinks to the line. */
+     sized and centered inside it, so the hit area never shrinks to the line. */
   .roi-slider {
     -webkit-appearance: none;
     appearance: none;
