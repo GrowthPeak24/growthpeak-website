@@ -29,6 +29,7 @@ const organizationSchema = {
   image: ogImage,
   email: site.email || undefined,
   telephone: site.phone || undefined,
+  founder: { '@type': 'Person', name: site.founder },
   areaServed: site.serviceArea,
   priceRange: '$$',
   // Official profiles, from site.social; empty entries are skipped.
