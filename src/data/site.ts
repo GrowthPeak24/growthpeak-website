@@ -12,7 +12,8 @@ export const site = {
     'GrowthPeak Digital builds systems that help local service businesses catch every lead, cut hours of admin, and get paid faster, plus the local SEO and websites that get them found.',
   // Update these with real details before launch.
   email: 'hello@growthpeakdigital.com',
-  phone: '',
+  phone: '+1-484-203-9724',
+  founder: 'Marlon Cotterell',
   serviceArea: 'United States',
   social: {
     facebook: 'https://www.facebook.com/growthpeakdigital',
@@ -88,7 +89,7 @@ export const leaks = {
     {
       icon: 'refresh',
       question: 'When did your past customers last hear from you?',
-      fix: 'Customer reactivation',
+      fix: 'Win back past customers',
     },
     {
       icon: 'star',
@@ -122,19 +123,19 @@ export const services = {
         'Instant replies to web inquiries, 24/7',
         'Leads qualified before they reach you',
         'Bookings and quote requests handled automatically',
-        'Every lead logged in your CRM',
+        'Every lead saved in one place you can see',
         'Hand-off to you the moment a human is needed',
       ],
     },
     {
       icon: 'refresh',
-      name: 'Follow-Up & Reactivation System',
+      name: 'Follow-Up & Win-Back System',
       span: 3,
       blurb:
         'Quotes get chased and past customers come back, without you having to remember to do it.',
       bullets: [
         'Automatic quote follow-up by email & SMS',
-        'Past-customer reactivation campaigns',
+        'Messages that win back past customers',
         'Review requests after every job',
       ],
     },
@@ -155,12 +156,12 @@ export const services = {
       name: 'Local SEO & Google Business Profile',
       span: 2,
       blurb:
-        'Rank in the Map Pack so nearby customers call you before they call anyone else.',
+        'Show up in the map results at the top of Google so nearby customers call you before they call anyone else.',
       bullets: [
-        'Complete Google Business Profile buildout',
-        'Map Pack & local keyword strategy',
-        'Citation building & local link outreach',
-        'Review generation and response system',
+        'Your Google Business Profile (your Google listing) fully set up',
+        'Targeting the searches nearby customers actually type',
+        'Correct listings across directories, plus links from local sites',
+        'A system to get more reviews and reply to them',
       ],
     },
     {
@@ -182,9 +183,9 @@ export const services = {
       blurb:
         'Sites that load instantly, convert on mobile, and stay online without you thinking about it.',
       bullets: [
-        'Conversion-focused, mobile-first builds',
-        'Managed hosting, SSL & daily backups',
-        'Ongoing updates and uptime monitoring',
+        'Sites built to turn visitors into calls, designed for phones first',
+        'Hosting, security certificate and daily backups handled for you',
+        'Ongoing updates and alerts if the site goes down',
       ],
     },
   ],
@@ -199,8 +200,8 @@ export const services = {
 // the removed trustStrip fell into.
 // ---------------------------------------------------------------------------
 export const proof = {
-  title: 'The Standard We Hold Ourselves To',
-  accent: 'Hold Ourselves To',
+  title: 'The Standard You Can Hold Us To',
+  accent: 'Hold Us To',
   subtitle:
     'No invented case-study numbers. These are the commitments every engagement starts with.',
   metrics: [
@@ -249,7 +250,7 @@ export const proof = {
     {
       icon: 'bolt',
       title: 'Sub-Second Load Target',
-      text: 'The load-time target we build to, measured on mobile against Core Web Vitals.',
+      text: "The load-time target we build to, measured on mobile with Google's Core Web Vitals speed tests.",
     },
     {
       icon: 'phone',
@@ -279,14 +280,16 @@ export const proof = {
 };
 
 export const whyUs = {
-  title: "We Fix Problems. We Don't Sell Software.",
-  accent: "We Don't Sell Software.",
+  title: 'You Need Leaks Closed, Not Another App',
+  accent: 'Not Another App',
   subtitle:
-    "You don't need another app to learn. You need the leaks closed, so the business makes more and takes less of your evening.",
+    "We find where time and money slip away and fix only that, so the business makes more and takes less of your evening.",
+  about:
+    `GrowthPeak Digital is run by ${site.founder}. We work remotely and serve businesses across the United States.`,
   points: [
     {
       icon: 'target',
-      title: 'We Start With the Leak, Not the Tool',
+      title: 'The Leak Comes First, Not the Tool',
       text: 'First we find where time and money are slipping away. Then we build only what fixes it, nothing you have to babysit.',
     },
     {
@@ -312,6 +315,12 @@ export const process = {
   accent: 'Launch Roadmap',
   subtitle:
     'Three phases, no mystery. Each one has a defined output you can hold us to before the next begins.',
+  // Same single CTA intent as the rest of the page, placed after the roadmap.
+  cta: {
+    text: 'Phase one starts with a free Lead Leak Audit, so you see where the leaks are before you commit to anything.',
+    label: 'Find My Lead Leaks',
+    href: '#lead-magnet',
+  },
   // Verb-first labels. Step numbers are a design device in Process.astro, not
   // part of the copy. `detail` is revealed by the expandable roadmap island.
   steps: [
@@ -319,7 +328,7 @@ export const process = {
       title: 'Find the Leaks',
       text: 'We look at how customers find you, how inquiries reach you, and where they drop off, then hand you a prioritized plan.',
       detail: [
-        'Local ranking and Map Pack position snapshot',
+        'A snapshot of where you show up in local Google results',
         'Google Business Profile health check',
         'Map of how calls, forms and messages are handled today',
         'Prioritized action plan, biggest leak first',
@@ -330,9 +339,9 @@ export const process = {
       text: 'We set up the systems that close your leaks, optimize your profile, and build or rebuild the site.',
       detail: [
         'Lead capture, follow-up and invoicing systems switched on',
-        'Profile optimization against the full checklist',
-        'Mobile-first build tuned for Core Web Vitals',
-        'Managed hosting, SSL and backups configured',
+        'Your Google profile tuned against our full checklist',
+        'A phone-first site build tuned to load fast',
+        'Hosting, security certificate and backups set up',
       ],
     },
     {
@@ -340,9 +349,9 @@ export const process = {
       text: 'We keep tuning against real data and report on calls, leads and payments in plain English.',
       detail: [
         'Follow-up and reminder timing adjusted to what works',
-        'Ongoing citation and review building',
+        'Ongoing directory listings and review requests',
         'Monthly plain-English performance reporting',
-        'Continuous conversion and speed tuning',
+        'Ongoing tuning for more calls and faster loading',
       ],
     },
   ],
@@ -400,7 +409,7 @@ export const faq = {
     },
     {
       q: 'Can this work with the tools I already use?',
-      a: "Usually, yes. We connect to the phone, calendar, CRM and invoicing tools you already rely on where we can, and only suggest a switch when what you have can't do the job.",
+      a: "Usually, yes. We connect to the phone, calendar, customer-tracking and invoicing tools you already rely on where we can, and only suggest a switch when what you have can't do the job.",
     },
     {
       q: 'How long until I see results from local SEO?',
